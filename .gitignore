@@ -1,3 +1,2 @@
-connection/db_sql.php
-connection/db.php
+connection/*
 .gitignore
