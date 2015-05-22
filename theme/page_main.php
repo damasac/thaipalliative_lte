@@ -267,8 +267,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        {$content}
+      <div class="content-wrapper">	
+	<section class="content">
+		{$content}
+	</section>
       </div><!-- /.content-wrapper -->
 
       <!-- Main Footer -->
