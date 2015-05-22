@@ -14,12 +14,14 @@
             Page Header
             <small>Optional description</small>
           </h1>
-          <p><?php echo $_SESSION['test']; ?></p>
+          
         </section>
 
         <!-- Main content -->
         <section class="content">
-
+            <pre>
+            <?php print_r($_SESSION); ?>
+            </pre>
           <!-- Your Page Content Here -->
 
         </section><!-- /.content -->
