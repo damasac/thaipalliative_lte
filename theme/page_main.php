@@ -224,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>dist/img/blank-avatar.png" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+              <p>User ::</p>
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -246,7 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		  
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class='fa fa-link'></i> <span>Page Link1</span></a></li>
+            <li class="active"><a href="../usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>Page Link2</span></a></li>
             <li class="treeview">
               <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
