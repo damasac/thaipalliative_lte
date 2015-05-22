@@ -244,9 +244,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
 		  
-            <li class="header">HEADER</li>
+            <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="../usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
+            <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><i class='fa fa-gear'></i> <span>Home</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>Page Link2</span></a></li>
             <li class="treeview">
               <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -255,6 +255,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="#">Link in level 2</a></li>
               </ul>
             </li>
+            
+            <li class="header">Setting Menu</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
+            <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-link'></i> <span>Logout</span></a></li>
+         
 			
 			<li class="header">Developer Zone</li>
             <!-- Optionally, you can add icons to the links -->
