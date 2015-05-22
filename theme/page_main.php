@@ -177,8 +177,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <li class="user-header">
                     <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>dist/img/blank-avatar.png" class="img-circle" alt="User Image" />
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                     User :: 
+                      <!--<small>Member since Nov. 2012</small>-->
                     </p>
                   </li>
                   <!-- Menu Body -->
