@@ -27,7 +27,6 @@
 
 
 <?php sb('js_and_css_footer');?>
-test
 <?php eb();?>
  
 <?php render($MasterPage);?>
