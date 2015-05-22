@@ -268,6 +268,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">	
+      <section class="content-header">
+        {$content_header}
+      </section>
 	<section class="content">
 		{$content}
 	</section>
