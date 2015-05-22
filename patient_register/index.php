@@ -9,8 +9,7 @@
 
 <?php sb('content_header');?>
           <h1>
-            Register
-            <small>ลงทะเบียน</small>
+            <small></small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,13 +20,22 @@
 <?php sb('content');?>
 <?php include "../connection/db.php"; ?>
         <!-- Main content -->
+        <div class="info-box">
+          <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text"><h4>ลงทะเบียน</h4></span>
+            <span class="info-box-text">
+                        <a class="btn btn-default" id="user" href="search.php">เพิ่ม</a>
+            </span>
+          </div>
+        </div>
         <div class="box">
           <div class="box-body">
-          <p class="text-right">
+          <!-- <p class="text-right">
           <a class="btn btn-app" href="search.php">
             <i class="fa fa-user-plus"></i> เพิ่ม
           </a>
-          </p>
+          </p> -->
             <div class="row">
               <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover">
@@ -66,8 +74,8 @@
 
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
-        $('#example2').dataTable({
+        $("#example2").dataTable();
+        $('#example1').dataTable({
           "bPaginate": true,
           "bLengthChange": false,
           "bFilter": false,
