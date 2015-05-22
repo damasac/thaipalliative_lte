@@ -7,6 +7,14 @@
     body { font-size: 140%; }
 </style>
 <?php eb();?>
+<?php sb('content_header');?>
+        <br>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li>
+          </ol>
+<?php eb();?>
 <?php sb('content');?>
 <?php include "../connection/db.php"; ?>
 <?php
