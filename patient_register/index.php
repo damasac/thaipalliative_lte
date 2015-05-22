@@ -25,7 +25,7 @@
           <div class="info-box-content">
             <span class="info-box-text"><h4>ลงทะเบียน</h4></span>
             <span class="info-box-text">
-                        <a class="btn btn-default" id="user" href="search.php">เพิ่ม</a>
+                        <a class="btn btn-default" id="user" href="search.php"><strong>เพิ่มข้อมูล</strong></a>
             </span>
           </div>
         </div>
