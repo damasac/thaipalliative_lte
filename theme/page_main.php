@@ -268,20 +268,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">	
+      <section class="content-header">
+        {$content_header}
+      </section>
 	<section class="content">
 		{$content}
 	</section>
       </div><!-- /.content-wrapper -->
-
-      <!-- Main Footer -->
-      <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-          Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-      </footer>
       
       <!-- Control Sidebar -->      
       <aside class="control-sidebar control-sidebar-dark">                
