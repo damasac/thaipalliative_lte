@@ -12,7 +12,6 @@ session_destroy();
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "_connection/db.php"; ?>
         <!-- Content Header (Page header) -->
         <meta http-equiv="refresh" content="3;URL=index.php">
         

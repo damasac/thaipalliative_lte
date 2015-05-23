@@ -10,13 +10,12 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "_connection/db.php"; ?>
 <!-- Content Header (Page header) -->
 <div id="container" class="cls-container">
 		
 		<!-- BACKGROUND IMAGE -->
 		<!--===================================================-->
-		<div id="bg-overlay" class="bg-img img-balloon"></div>
+		<div id="bg-overlay" style="background-image: url('login/img/bg-img-<?php echo rand(1,5); ?>.jpg');" class="bg-img "></div>
 		
 		
 		<!-- HEADER -->
