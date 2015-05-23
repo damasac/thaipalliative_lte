@@ -259,11 +259,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="header">Setting Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
-	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-link'></i> <span>Logout</span></a></li>
+	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>eform"><i class='fa fa-file-o'></i> <span>EZ Form</span></a></li>
          
+	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-link'></i> <span>Logout</span></a></li>
+
 	
 			
-			<li class="header">Developer Zone</li>
+		<li class="header">Developer Zone</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation"><i class='fa fa-link'></i> <span>Document</span></a></li>
             <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html"><i class='fa fa-link'></i> <span>Example</span></a></li>
