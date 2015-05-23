@@ -1,7 +1,7 @@
 <?php
 function formgenForEdit($dataField,$dataFormMain,$con){
 	 if($dataField["fieldtype"]=="text"){
-	    $formtext = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $formtext = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $formtext .= "<div id='editForm'>";
 	    $formtext .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formtext .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -13,7 +13,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    return $formtext;
 	 }
 	 else if($dataField["fieldtype"]=="textarea"){
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -24,7 +24,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    return $form;
 	 }else if($dataField["fieldtype"]=="radiobox"){
 
-	    $formradio = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $formradio = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 
 	    $formradio .= "<div id='editForm'>";
 	    $formradio .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
@@ -52,7 +52,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    
 	 }
 	 else if($dataField["fieldtype"]=="checkbox"){
-	    $formcheckbox = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $formcheckbox = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $formcheckbox .= "<div id='editForm'>";
 	    $formcheckbox .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formcheckbox .= "<button class='btn btn-default btn-xs' onclick=delFormFncMultiple('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -79,7 +79,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    
 	 }
 	else if($dataField["fieldtype"]=="select"){
-	    $formselect = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $formselect = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $formselect .= "<div id='editForm'>";
 	    $formselect .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formselect .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -96,7 +96,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    return $formselect;
 	    
 	 }else if($dataField["fieldtype"]=="date"){
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -107,7 +107,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    return $form;
 	 }
 	else if($dataField["fieldtype"]=="time"){
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -118,7 +118,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    return $form;
 	 }
 	else if($dataField["fieldtype"]=="datetime"){
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -128,13 +128,12 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    $form .= "</div>";
 	    return $form;
 	 }else if($dataField["fieldtype"]=="dbthailand"){
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
 	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
-
 	    $form .= "<div class='row'>";
 	    $form .= "<div class='col-lg-3'><select class='form-control'><option value=''>จังหวัด</option value=''></select></div>";
 	    $form .= "<div class='col-lg-3'><select class='form-control'><option value=''>อำเภอ</option value=''></select></div>";
@@ -144,7 +143,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    $form .= "</div></div>";
 	    return $form;
 	 }else if($dataField["fieldtype"]=="heading"){
-	     $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	     $form = "<div class='formItem' id='item_".$dataField["fieldid"]."'>";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -157,7 +156,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	    
 	    return $form;
 	 }else if($dataField["fieldtype"]=="radiotextbox"){
-	     $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	     $form = "<div class='formItem' id='item_".$dataField["fieldid"]."'>";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFncMultiple('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
@@ -176,10 +175,10 @@ function formgenForEdit($dataField,$dataFormMain,$con){
 	 }
 	 else if($dataField["fieldtype"]=="headsub"){
 	    
-	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
+	    $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' >";
 	    $form .= "<div id='editForm'>";
-	    //$form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
-	    //$form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
+	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
+	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
 	    $form .= "";
 	    $form .=  "<h3 style='padding-left:10px;'>".$dataField["fieldname"]."</h3>";

@@ -1,4 +1,3 @@
-
 <?php
     error_reporting(0);   
     include_once("../_connection/db_sql.php");
@@ -11,8 +10,7 @@
     $dataField = mysqli_fetch_assoc($queryField);
     $selectTable = mysqli_query($con,"SELECT `tablename` FROM `formmain` WHERE `formid`='".$dataField["formid"]."' ") or die(mysqli_error());
     $dataTable = mysqli_fetch_assoc($selectTable);
-
-    if($typeQuestion=="text"){
+     if($typeQuestion=="text"){
         ?>
 	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
@@ -86,9 +84,9 @@
 		</div>
             <?php
    }
-    if($typeQuestion=="textarea"){
-        ?>
-        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+   if($typeQuestion=="textarea"){
+    ?>
+            	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -159,11 +157,10 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
-    if($typeQuestion=="radiobox"){
-        ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+    <?php 
+   }if($typeQuestion=="radiobox"){
+    ?>
+                    	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -273,11 +270,10 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
+    <?php }
     if($typeQuestion=="checkbox"){
         ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+                        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
                         <code>Item id <?php echo $id;?></code>
 			<hr style="border:1px #AAAAAA solid;">
@@ -382,11 +378,9 @@
 
 		</div>
 
-        <?php 
-    }
-    if($typeQuestion=="select"){
-        ?>
-                <div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+        <?php }
+        if($typeQuestion=="select"){
+            ?>                <div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -475,10 +469,9 @@
 					</div>
 				    </div>
 			    </div>
-		</div>
 
-        <?php 
-    }
+        <?php }
+    
     if($typeQuestion=="date"){
         ?>
                 	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
@@ -566,11 +559,10 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
+        <?php }
     if($typeQuestion=="time"){
         ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+                        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -645,11 +637,10 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
-    if($typeQuestion=="datetime"){
+        <?Php }
+       if($typeQuestion=="datetime"){
         ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+                        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -726,12 +717,9 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
-?>
-<?php if($typeQuestion=="dbthailand"){
+        <?php } if($typeQuestion=="dbthailand"){
         ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+                        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -807,12 +795,9 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
-?>
-<?php if($typeQuestion=="heading"){
+        <?php } if($typeQuestion=="heading"){
         ?>
-                	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
+                        	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
                         <h4>แก้ไข</h4>
 			<hr style="border:1px #AAAAAA solid;">
 			    <div class="panel-heading" style="height: auto;">
@@ -883,10 +868,9 @@
 			    </div>
 		</div>
 
-        <?php 
-    }
-?>
-<script>
+        <?php }
+        ?>
+        <script>
 
     function editQuestion(fieldid) {
         if ($("#tumbonCheck").is(":checked")) {

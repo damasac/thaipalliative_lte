@@ -9,12 +9,16 @@
 
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
-         <button class="btn btn-primary">Hello</button>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
-          </ol>
+<?php
+$MenuType="MenuMain";
+$MenuSetting="listeform";
+include_once("inc_menu.php");
+?>
+<ol class="breadcrumb">
+<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+<li><a href="#">Examples</a></li>
+<li class="active">Blank page</li>
+</ol>
 <?php eb();?>
 
 <?php sb('content');?>

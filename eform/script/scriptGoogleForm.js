@@ -606,15 +606,16 @@
                 //code
         }
         ///////////////////////////////////////// EDIT FORM ITEM ///////////////////////////////////////////
-        function editFormFnc(id,typeQuestion,dbname,fieldvalue,numclick) {
+ function editFormFnc(id,typeQuestion,dbname,fieldvalue,numclick) {
                 //alert(id);
                 //alert(dbname);
+
                 if (numclick=='0') {
 
                         $("div[class='panel-body2']").not($("div[id='editpanel"+id+"']")).remove();
                         $("div[id='panel']").hide();
                         $(".formItem").show();
-                                      $.post("ajax-editquestion-loaddata.php",{
+                                      $.post("ajax-editquestion-loaddata2.php",{
                                               id:id,
                                               typeQuestion:typeQuestion
                                               },function(data){
@@ -629,7 +630,6 @@
         function insertP(data,id)
         {
               var a =  $("div[class='panel-body2']").length;
-	      alert(a);
               if (a==0) {
                 //code
                 $("#"+id).after(data);

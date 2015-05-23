@@ -12,7 +12,11 @@
 
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
-         <button class="btn btn-default">Hello</button>
+<?php
+$MenuType="MenuEform";
+$MenuSetting="listeform";
+	include("inc_menu.php");
+?>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Examples</a></li>
@@ -27,8 +31,7 @@
 	$sqlFormMain = "SELECT * FROM formmain WHERE formid='".$_GET["idFormMain"]."'";
 	$queryFormMain = mysqli_query($con,$sqlFormMain) or die(mysqli_error());
 	$dataFormMain = mysqli_fetch_assoc($queryFormMain);
-	$myMenuKey = "settingForm";
-	include("inc_menu.php");
+
 	
         ?>
 	<div class="panel panel-default">
