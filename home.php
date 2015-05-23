@@ -1,4 +1,4 @@
-<?php require_once 'theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> สวัสดีครับ <?php eb();?>
 
@@ -7,7 +7,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "connection/db.php"; ?>
+<?php include "_connection/db.php"; ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>

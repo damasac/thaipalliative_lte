@@ -1,16 +1,16 @@
-<?php require_once '../theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Register <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 
-<link rel="stylesheet" href="../plugins/js-select2/select2.css">
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 
-<link rel="stylesheet" href="../plugins/js/jquery.datetimepicker.css">
+<link rel="stylesheet" href="../_plugins/js/jquery.datetimepicker.css">
 <link rel="stylesheet" href="style/style.css">
 <?php eb();?>
 
-<?php include "../connection/db_sql.php"; ?>
+<?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
          <button class="btn btn-default">Hello</button>
           <ol class="breadcrumb">
@@ -142,11 +142,11 @@
 <?php sb('js_and_css_footer');?>
 
 
-<script src="../plugins/dataTables/jquery.dataTables.min.js"></script>
-<script src="../plugins/dataTables/dataTables.bootstrap.min.js"></script>
-<link href="../plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
-<script type="text/javascript" src="../plugins/js/jquery.datetimepicker.js"></script>
-<script type="text/javascript" src="../plugins/js-select2/select2.js"></script>
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
+<script type="text/javascript" src="../_plugins/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script language="javascript" src="script/scriptGoogleForm.js"></script>
 <script>

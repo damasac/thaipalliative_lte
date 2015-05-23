@@ -12,7 +12,7 @@ $pwd_login = sha1(md5($_POST['password']));
 //echo $user_login; exit;
 
 if(isset($user_login) and isset($pwd_login)) {
-    include_once "../connection/db.php";
+    include_once "../_connection/db.php";
 
     $sql="SELECT * FROM puser WHERE username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');

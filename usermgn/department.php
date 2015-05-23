@@ -1,4 +1,4 @@
-<?php require_once '../theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> User Setting <?php eb();?>
 
@@ -10,7 +10,7 @@
 </style>
 <?php eb();?>
 <?php sb('content');?>
-<?php include "../connection/db.php"; ?>
+<?php include "../_connection/db.php"; ?>
 <?php
     $MenuSetting = "department";
     include_once("menu_user.php");
@@ -89,11 +89,11 @@
 <script>
     
 </script>
-<script src="../plugins/treeview/script.js">" type="text/javascript"></script>
-<link href="../plugins/treeview/style.css" rel="stylesheet" type="text/css"/>
-<script src="../plugins/dataTables/jquery.dataTables.min.js"></script>
-<script src="../plugins/dataTables/dataTables.bootstrap.min.js"></script>
-<link href="../plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
+<script src="../_plugins/treeview/script.js">" type="text/javascript"></script>
+<link href="../_plugins/treeview/style.css" rel="stylesheet" type="text/css"/>
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <?php eb();?>
  
 <?php render($MasterPage);?>

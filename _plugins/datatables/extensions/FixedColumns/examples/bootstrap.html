@@ -5,36 +5,41 @@
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
 
-	<title>Responsive example - Bootstrap styling</title>
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="../../css/dataTables.responsive.css">
-	<link rel="stylesheet" type="text/css" href="../../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../../examples/resources/demo.css">
+	<title>FixedColumns example - Bootstrap</title>
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/_bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
 	<style type="text/css" class="init">
 
-	body { font-size: 140% }
+	body { font-size: 140%; }
 
-	table.dataTable th,
-	table.dataTable td {
-		white-space: nowrap;
+	/* Ensure that the demo table scrolls */
+	th, td { white-space: nowrap; }
+	div.dataTables_wrapper {
+		width: 800px;
+		margin: 0 auto;
 	}
 
 	</style>
-	<script type="text/javascript" language="javascript" src="../../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../../media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../../js/dataTables.responsive.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../../examples/resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/dataTables.fixedColumns.js"></script>
+	<script type="text/javascript" language="javascript" src="../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
-
 $(document).ready(function() {
-	$('#example').DataTable();
+	var table = $('#example').DataTable( {
+		scrollY:        "300px",
+		scrollX:        true,
+		scrollCollapse: true,
+		paging:         false
+	} );
+	new $.fn.dataTable.FixedColumns( table );
 } );
-
 
 
 	</script>
@@ -43,20 +48,20 @@ $(document).ready(function() {
 <body class="dt-example">
 	<div class="container">
 		<section>
-			<h1>Responsive example <span>Bootstrap styling</span></h1>
+			<h1>FixedColumns example <span>Bootstrap</span></h1>
 
 			<div class="info">
-				<p>This example shows DataTables and the Responsive extension being used with the <a href="http://getbootstrap.com">Bootstrap</a> framework providing the styling.
-				The <a href="//datatables.net/manual/styling/bootstrap">DataTables / Bootstrap integration files</a> prove seamless integration for DataTables to be used in a
-				Bootstrap page.</p>
+				<p>When displaying a table which scrolls along the x-axis, it can sometimes be useful to the end user for the left most column to be fixed in place, if it shows
+				grouping, index or similar information. This is basically the same idea as 'freeze columns' in Excel. This can be achieved with the FixedColumns plug-in for
+				DataTables, as shown below.</p>
 
-				<p>Note that the <code>dt-responsive</code> class is used to indicate to the extension that it should be enabled on this page, as <code>responsive</code> <a href=
-				"http://getbootstrap.com/css/#tables-responsive">has special meaning in Bootstrap</a>. The <a href=
-				"//datatables.net/extensions/responsive/reference/option/responsive"><code class="option" title=
-				"Responsive initialisation option">responsive<span>R</span></code></a> option could also be used if required.</p>
+				<p>Note that FixedColumns is suitable only for use with the scrolling features in <a href="http://datatables.net">DataTables</a>. If you want to achieve a similar
+				effect without scrolling enabled, please checkout <a href="http://datatables.net/plug-ins">FixedHeader</a>, also for DataTables.</p>
+
+				<p>FixedColumns is initialised using the constructor <code>new $.fn.dataTable.FixedColumns();</code> - shown below.</p>
 			</div>
 
-			<table id="example" class="table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
+			<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>First name</th>
@@ -713,16 +718,22 @@ $(document).ready(function() {
 			<div class="tabs">
 				<div class="js">
 					<p>The Javascript shown below is used to initialise the table shown in this example:</p><code class="multiline language-js">$(document).ready(function() {
-	$('#example').DataTable();
+	var table = $('#example').DataTable( {
+		scrollY:        &quot;300px&quot;,
+		scrollX:        true,
+		scrollCollapse: true,
+		paging:         false
+	} );
+	new $.fn.dataTable.FixedColumns( table );
 } );</code>
 
 					<p>In addition to the above code, the following Javascript library files are loaded for use in this example:</p>
 
 					<ul>
-						<li><a href="../../../../media/js/jquery.js">../../../../media/js/jquery.js</a></li>
-						<li><a href="../../../../media/js/jquery.dataTables.js">../../../../media/js/jquery.dataTables.js</a></li>
-						<li><a href="../../js/dataTables.responsive.js">../../js/dataTables.responsive.js</a></li>
-						<li><a href="../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.js">../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.js</a></li>
+						<li><a href="../../../media/js/jquery.js">../../../media/js/jquery.js</a></li>
+						<li><a href="../../../media/js/jquery.dataTables.js">../../../media/js/jquery.dataTables.js</a></li>
+						<li><a href="../js/dataTables.fixedColumns.js">../js/dataTables.fixedColumns.js</a></li>
+						<li><a href="../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.js">../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.js</a></li>
 					</ul>
 				</div>
 
@@ -733,20 +744,21 @@ $(document).ready(function() {
 				<div class="css">
 					<div>
 						<p>This example uses a little bit of additional CSS beyond what is loaded from the library files (below), in order to correctly display the table. The
-						additional CSS used is shown below:</p><code class="multiline language-css">body { font-size: 140% }
+						additional CSS used is shown below:</p><code class="multiline language-css">body { font-size: 140%; }
 
-	table.dataTable th,
-	table.dataTable td {
-		white-space: nowrap;
+	/* Ensure that the demo table scrolls */
+	th, td { white-space: nowrap; }
+	div.dataTables_wrapper {
+		width: 800px;
+		margin: 0 auto;
 	}</code>
 					</div>
 
 					<p>The following CSS library files are loaded for use in this example to provide the styling of the table:</p>
 
 					<ul>
-						<li><a href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css</a></li>
-						<li><a href="../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.css">../../../Plugins/integration/bootstrap/3/dataTables.bootstrap.css</a></li>
-						<li><a href="../../css/dataTables.responsive.css">../../css/dataTables.responsive.css</a></li>
+						<li><a href="//maxcdn.bootstrapcdn.com/_bootstrap/3.3.2/css/bootstrap.min.css">//maxcdn.bootstrapcdn.com/_bootstrap/3.3.2/css/bootstrap.min.css</a></li>
+						<li><a href="../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.css">../../Plugins/integration/_bootstrap/3/dataTables.bootstrap.css</a></li>
 					</ul>
 				</div>
 
@@ -773,45 +785,21 @@ $(document).ready(function() {
 
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="../initialisation/index.html">Basic initialisation</a></h3>
-						<ul class="toc">
-							<li><a href="../initialisation/className.html">Class name</a></li>
-							<li><a href="../initialisation/option.html">Configuration option</a></li>
-							<li><a href="../initialisation/new.html">`new` constructor</a></li>
-							<li><a href="../initialisation/ajax.html">Ajax data</a></li>
-							<li><a href="../initialisation/default.html">Default initialisation</a></li>
-						</ul>
-					</div>
-
-					<div class="toc-group">
-						<h3><a href="./index.html">Styling</a></h3>
+						<h3><a href="./index.html">Examples</a></h3>
 						<ul class="toc active">
-							<li class="active"><a href="./bootstrap.html">Bootstrap styling</a></li>
-							<li><a href="./foundation.html">Foundation styling</a></li>
-							<li><a href="./scrolling.html">Vertical scrolling</a></li>
-							<li><a href="./compact.html">Compact styling</a></li>
-						</ul>
-					</div>
-
-					<div class="toc-group">
-						<h3><a href="../display-control/index.html">Display control</a></h3>
-						<ul class="toc">
-							<li><a href="../display-control/auto.html">Automatic column hiding</a></li>
-							<li><a href="../display-control/classes.html">Class control</a></li>
-							<li><a href="../display-control/init-classes.html">Assigned class control</a></li>
-							<li><a href="../display-control/fixedHeader.html">With FixedHeader</a></li>
-							<li><a href="../display-control/complexHeader.html">Complex headers (rowspan / colspan)</a></li>
-						</ul>
-					</div>
-
-					<div class="toc-group">
-						<h3><a href="../child-rows/index.html">Child rows</a></h3>
-						<ul class="toc">
-							<li><a href="../child-rows/disable-child-rows.html">Disable child rows</a></li>
-							<li><a href="../child-rows/column-control.html">Column controlled child rows</a></li>
-							<li><a href="../child-rows/right-column.html">Column control - right</a></li>
-							<li><a href="../child-rows/whole-row-control.html">Whole row child row control</a></li>
-							<li><a href="../child-rows/custom-renderer.html">Custom child row renderer</a></li>
+							<li><a href="./left_right_columns.html">Left and right fixed columns</a></li>
+							<li><a href="./simple.html">Basic initialisation</a></li>
+							<li><a href="./two_columns.html">Multiple fixed columns</a></li>
+							<li><a href="./right_column.html">Right column only</a></li>
+							<li><a href="./rowspan.html">Complex headers</a></li>
+							<li><a href="./colvis.html">ColVis integration</a></li>
+							<li><a href="./server-side-processing.html">Server-side processing</a></li>
+							<li><a href="./css_size.html">CSS row sizing</a></li>
+							<li><a href="./size_fixed.html">Assigned column width</a></li>
+							<li><a href="./size_fluid.html">Fluid column width</a></li>
+							<li><a href="./col_filter.html">Individual column filtering</a></li>
+							<li class="active"><a href="./bootstrap.html">Bootstrap</a></li>
+							<li><a href="./index_column.html">Index column</a></li>
 						</ul>
 					</div>
 				</div>

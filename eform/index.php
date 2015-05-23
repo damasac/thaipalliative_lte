@@ -1,13 +1,13 @@
-<?php require_once '../theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Register <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <?php eb();?>
 
-<?php include "../connection/db_sql.php"; ?>
+<?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
          <button class="btn btn-primary">Hello</button>
           <ol class="breadcrumb">
@@ -18,7 +18,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-	<script type="text/javascript" src="<?php echo SYSTEM_WEBPATH_ROOT?>/lib/bootstrap/bootstrap.js"></script>
+	<script type="text/javascript" src="<?php echo SYSTEM_WEBPATH_ROOT?>/lib/_bootstrap/bootstrap.js"></script>
     	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.js"></script>
 	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.css">
 	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.js"></script>
@@ -182,9 +182,9 @@ function popup_custom(id,title) {
 <script>
 
 </script>
-<script src="../plugins/dataTables/jquery.dataTables.min.js"></script>
-<script src="../plugins/dataTables/dataTables.bootstrap.min.js"></script>
-<link href="../plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <?php eb();?>
  
 <?php render($MasterPage);?>

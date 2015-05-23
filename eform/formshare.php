@@ -14,7 +14,7 @@ if($SystemSession_Member_ID>0) {
 	include("inc_menu2.php");
 	//----------------------------------------------------------------------------------------------------------------
         ?>
-	<script type="text/javascript" src="<?php echo SYSTEM_WEBPATH_ROOT?>/lib/bootstrap/bootstrap.js"></script>
+	<script type="text/javascript" src="<?php echo SYSTEM_WEBPATH_ROOT?>/lib/_bootstrap/bootstrap.js"></script>
     	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.js"></script>
 	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.css">
 	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.js"></script>

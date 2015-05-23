@@ -1,9 +1,9 @@
-<?php require_once '../theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Register <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <script src=""></script>
 <?php eb();?>
 
@@ -18,7 +18,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "../connection/db.php"; ?>
+<?php include "../_connection/db.php"; ?>
         <!-- Main content -->
         <div class="info-box">
           <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
@@ -69,8 +69,8 @@
 
 <?php sb('js_and_css_footer');?>
   <!-- DATA TABES SCRIPT -->
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
       $(function () {

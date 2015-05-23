@@ -1,21 +1,21 @@
-<?php require_once 'theme/util.inc.php'; $MasterPage = 'page_login.php';?>
+<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_login.php';?>
 
 <?php sb('title');?>Thai Palliative Care<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <!-- Bootstrap 3.3.4 -->
-<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- jQuery 2.1.4 -->
-<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
-<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- Login theme -->
 <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>login/css/main.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.css">
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "connection/db.php"; ?>
+<?php include "_connection/db.php"; ?>
 <!-- Content Header (Page header) -->
 <div class="container">
     <div class="row">

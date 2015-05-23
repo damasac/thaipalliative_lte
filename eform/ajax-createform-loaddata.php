@@ -1,5 +1,5 @@
 <?php
-   include "../connection/db_sql.php";
+   include "../_connection/db_sql.php";
    error_reporting(0);
    $task = $_GET["task"];
    $id =  $_POST["id"];
