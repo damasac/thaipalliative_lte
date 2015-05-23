@@ -609,13 +609,12 @@
         function editFormFnc(id,typeQuestion,dbname,fieldvalue,numclick) {
                 //alert(id);
                 //alert(dbname);
-
                 if (numclick=='0') {
 
                         $("div[class='panel-body2']").not($("div[id='editpanel"+id+"']")).remove();
                         $("div[id='panel']").hide();
                         $(".formItem").show();
-                                      $.post("ajax-editquestion-loaddata",{
+                                      $.post("ajax-editquestion-loaddata.php",{
                                               id:id,
                                               typeQuestion:typeQuestion
                                               },function(data){
@@ -630,6 +629,7 @@
         function insertP(data,id)
         {
               var a =  $("div[class='panel-body2']").length;
+	      alert(a);
               if (a==0) {
                 //code
                 $("#"+id).after(data);
@@ -655,6 +655,22 @@
 		    }
 		});
         }
+	function delFormFncMultiple(id,dbname,fieldvalue) {
+		 var idsplit = id.split("_");
+                var idDb = idsplit[1];
+                $("#"+id).remove();
+                $("div[class='panel-body2']").not($("div[class='panel-body']")).remove();
+                $.ajax({
+		    url: "ajax-createform-loaddata.php?task=deleteFieldMultiple",
+		    type: "post",
+		    data: {idDb:idDb,dbname:dbname,fieldvalue:fieldvalue},
+		    success: function(data){
+                        $('#typeQuestion').prop('selectedIndex',0);
+		    },
+		    error:function(){
+		    }
+		});
+	}
         function validationEng(valQuestion){
                 var len, digit;
                 if(valQuestion == " "){ 

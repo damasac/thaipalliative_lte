@@ -31,10 +31,7 @@
 	include("inc_menu.php");
 	
         ?>
-
-
-
-            <div class="panel panel-default">
+	<div class="panel panel-default">
 		<div class="panel-body" style="height: auto;">
 		    <div class="tagInput" style="background-color:red;height: auto;">
 			<input type="hidden" id="formid" value="<?php echo $dataFormMain["formid"];?>">
@@ -49,8 +46,10 @@
 		    <?php
 			$selectField = "SELECT * FROM formfield WHERE formid='".$dataFormMain["formid"]."' ORDER BY forder ";
 			$queryField = mysqli_query($con,$selectField) or die(mysqli_error());
+
 			while($dataField = mysqli_fetch_assoc($queryField)){
-			//echo formgenForEdit($dataField,$dataFormMain);
+			echo formgenForEdit($dataField,$dataFormMain,$con);
+
 		    ?>
 		    <?php }  ?>
 

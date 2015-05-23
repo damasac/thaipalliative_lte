@@ -5,6 +5,7 @@
    $id =  $_POST["id"];
    $field = $_POST["field"];
    $value = $_POST["val"];
+   $formid = mysqli_real_escape_string($con,$_POST["formid"]);
    $dbname = $_POST["dbname"];
    $fieldtype = $_POST["fieldtype"];
    $fieldvalue = $_POST["fieldvalue"];
@@ -79,11 +80,13 @@
  }
 
  if($task=="deleteField"){
+   
    $sqlSelectField = "SELECT * FROM `formfield` WHERE fieldid='".$_POST["idDb"]."' ";
    $querySelectField = mysqli_query($con,$sqlSelectField) or die(mysqli_error());
    $dataSField = mysqli_fetch_assoc($querySelectField);
    $sqlDeleteField = "DELETE FROM `formfield` WHERE fieldid='".$_POST["idDb"]."' ";
    $queryDeleteField = mysqli_query($con,$sqlDeleteField) or die(mysqli_error());
+   
    if($dataSField["valueprovince"]!=""){
       if($dataSField["haveTumbon"]==1){
          $sql1 = "ALTER TABLE `".$dbname."`
@@ -105,10 +108,10 @@
    }else{
       $sqlDeleleChoice = "DELETE FROM `formchoice` WHERE fieldid='".$_POST["idDb"]."' ";
       $sqlDeleteColumn = "ALTER TABLE `".$dbname."` DROP COLUMN `".$fieldvalue."`";
-      deleteAlterEtc($dbname,$fieldvalue,$_POST["idDb"]);
+
       $queryDeleteChoice = mysqli_query($con,$sqlDeleleChoice) or die(mysqli_error());
       $queryDeleteCoulmn = mysqli_query($con,$sqlDeleteColumn) or die(mysqli_error());
-   
+      deleteAlterEtc($dbname,$fieldvalue,$_POST["idDb"],$con);
       if($queryDeleteField){
          return true;
       }else{
@@ -116,12 +119,24 @@
       }
    }
  }
+ if($task=="deleteFieldMultiple"){
+   $sqlSelectFieldChoice = "SELECT * FROM `formchoice` WHERE `fieldid`='".$_POST["idDb"]."' ";
+   $querySelectFieldChoice = mysqli_query($con,$sqlSelectFieldChoice);
+   //echo $sqlSelectFieldChoice;
+   while($dataChoice = mysqli_fetch_assoc($querySelectFieldChoice)){
+      //print_r($dataChoice);
+      $sql = mysqli_query($con,"ALTER TABLE `".$dbname."` DROP COLUMN `".$dataChoice["choicevalue"]."`") or die(mysqli_error());
+   }
+   $sqlDeleleChoice = mysql_query("DELETE FROM `formchoice` WHERE fieldid='".$_POST["idDb"]."' ");
+   $sqlDeleteField = "DELETE FROM `formfield` WHERE fieldid='".$_POST["idDb"]."' ";
+   $queryDeleteField = mysqli_query($con,$sqlDeleteField) or die(mysqli_error());
+ }
  if($task=="createField"){
    if($fieldtype=="heading"){
       $sqlHead = mysqli_query($con,"SELECT *,forder FROM `formfield` WHERE `fieldtype`='heading' AND `formid`='".$_POST["formid"]."' ");
-      $numHead = mysqli_num_rows($con,$sqlHead);
+      $numHead = mysqli_num_rows($sqlHead);
       $sqlOrder = mysqli_query($con,"SELECT MAX(forder) FROM `formfield`");
-      $numOrder = mysqli_num_rows($con,$sqlOrder);
+      $numOrder = mysqli_num_rows($sqlOrder);
       
       if($numHead==0){
          $horder = 1;
@@ -187,8 +202,8 @@
    ";
          
    mysqli_query($con,$sqlAddField) or die(mysqli_error());
-   $fieldid =  mysqli_insert_id();
-   addAlter($dbname,$fieldvalue,$fieldtype,$fieldid);
+   $fieldid =  mysqli_insert_id($con);
+   addAlter($con,$dbname,$fieldvalue,$fieldtype,$fieldid);
    if($_POST["arrayRadioTextBox"]!=""){
       $labelRadio = $_POST["arrayRadioTextBox"][0];
       $valueRadio = $_POST["arrayRadioTextBox"][1];
@@ -212,12 +227,12 @@
             $valueRadio = $_POST["choiceRadio"][0];
             $labelRadio = $_POST["choiceRadio"][1];
             $etcRadio = $_POST["choiceRadio"][2];
-
+            echo $formid;
             for($i=0;$i<count($valueRadio);$i++){
                $sqlInsertRadio = "
                   INSERT INTO `formchoice` (formid,fieldid,choicevalue,choicelabel,choiceetc)
                   VALUES(
-                     '".$_POST["formid"]."',
+                     '".$formid."',
                      '".$fieldid."',
                      '".$valueRadio[$i]."',
                      '".$labelRadio[$i]."',
@@ -251,6 +266,8 @@
                      '0'
                   )
                ";
+               echo $_POST["id"];
+               echo $sqlInsertCheckbox;
                mysqli_query($con,$sqlInsertCheckbox) or die(mysqli_error());
                           
             }
@@ -356,7 +373,7 @@
    }
    if($_POST["choiceCheckbox"]!=""){
       $sqlCheckbox = mysqli_query($con,"SELECT choicevalue FROM `formchoice` WHERE fieldid='".$_POST["fieldid"]."' AND choiceetc='0' ") or die(mysqli_error());
-      $num = mysqli_num_rows($con,$sqlCheckbox);
+      $num = mysqli_num_rows($sqlCheckbox);
       if($num>=1){
          while($dataCheckbox=mysqli_fetch_assoc($sqlCheckbox)){
             //print_r($dataCheckbox["choicevalue"]);
@@ -423,19 +440,20 @@
          }
       }
  }
- function deleteAlterEtc($dbname,$fieldvalue,$fieldid){
+ function deleteAlterEtc($dbname,$fieldvalue,$fieldid,$con){
       $sqlSelectType = mysqli_query($con,"SELECT fieldtype FROM `formfield` WHERE fieldid='".$fieldid."' AND fieldvalue='".$fieldvalue."' ") or die(mysqli_error());
       $dataType = mysqli_fetch_assoc($sqlSelectType);
       if($dataType["fieldtype"]=="radiobox"){
          $sqlSelect = mysqli_query($con,"SELECT choicevalue FROM `formchoice` WHERE fieldid='".$fieldid."' AND choiceetc='1' ") or die(mysqli_error());
-         $num = mysqli_num_rows($con,$sqlSelect);
+         $num = mysqli_num_rows($sqlSelect);
          $data = mysqli_fetch_assoc($sqlSelect);
             if($num==1){
+               echo "OK!";
                $sql = mysqli_query($con,"ALTER TABLE `".$dbname."` DROP COLUMN `".$data["choicevalue"]."`") or die(mysqli_error());
             }   
       }else if ($dataType["fieldtype"]=="checkbox"){
          $sqlCheckbox = mysqli_query($con,"SELECT choicevalue FROM `formchoice` WHERE fieldid='".$fieldid."' ") or die(mysqli_error());
-         $num = mysqli_num_rows($con,$sqlCheckbox);
+         $num = mysqli_num_rows($sqlCheckbox);
          if($num>=1){
             while($dataCheckbox=mysqli_fetch_assoc($sqlCheckbox)){
                mysqli_query($con,"ALTER TABLE `".$dbname."` DROP COLUMN `".$dataCheckbox["choicevalue"]."`") or die(mysqli_error());  
@@ -444,7 +462,7 @@
       }
 
  }
- function addAlter($dbname,$fieldvalue,$fieldtype,$fieldid){
+ function addAlter($con,$dbname,$fieldvalue,$fieldtype,$fieldid){
    if($fieldtype=="text"){
       $type = "VARCHAR(255)";
       $sql = "ALTER TABLE `".$dbname."`ADD ".$fieldvalue." ".$type." ";

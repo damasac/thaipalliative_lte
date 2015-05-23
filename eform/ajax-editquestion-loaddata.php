@@ -1,19 +1,18 @@
-<?php  if(0) { ?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?php }
 
-include_once("../_config/config_system.php");
-include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
-    //mysql_select_db("eform");
-?>
 <?php
+    //error_reporting(0);
+    
+ include_once("../_connection/db_sql.php");
     $id = $_POST["id"];
     $typeQuestion = $_POST["typeQuestion"];
     $idexplode = explode("_",$id);
     $idDb = $idexplode["1"];
     $selectField = "SELECT * FROM formfield WHERE fieldid='".$idDb."' ";
-    $queryField =  mysql_query($selectField) or die(mysql_error());
-    $dataField = mysql_fetch_assoc($queryField);
-    $selectTable = mysql_query("SELECT `tablename` FROM `formmain` WHERE `formid`='".$dataField["formid"]."' ") or die(mysql_error());
-    $dataTable = mysql_fetch_assoc($selectTable);
+    $queryField =  mysqli_query($con,$selectField) or die(mysqli_error());
+    $dataField = mysqli_fetch_assoc($queryField);
+    $selectTable = mysqli_query($con,"SELECT `tablename` FROM `formmain` WHERE `formid`='".$dataField["formid"]."' ") or die(mysqli_error());
+    $dataTable = mysqli_fetch_assoc($selectTable);
+
     if($typeQuestion=="text"){
         ?>
 	<div class="panel-body2" id="editpanel<?php echo $id;?>" style="">
@@ -72,9 +71,9 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
                                             <div class="col-lg-4">
-                                            <label id="nameQuestion"><?php echo $nameQuestion?></label>
+                                            <label id="nameQuestion">หัวข้อคำถาม</label>
                                             <input type="text" class="form-control" disabled="disabled" placeholder="คำตอบ"/>
                                             </div>
 					</div>
@@ -146,7 +145,7 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
                                                    <div class="col-lg-6">
 						    <label id="nameQuestion">หัวข้อคำถาม</label>
 						    <textarea class="form-control" disabled="disabled" placeholder="คำตอบแบบยาว"></textarea>
@@ -222,19 +221,19 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					            <div class="row"  id="inputRadio">
 							<div class="col-lg-6 col-lg-offset-2" >
 									<?php
 									    $sqlChoiceRadio = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid ";
-									    $queryChoiceRadio = mysql_query($sqlChoiceRadio);
+									    $queryChoiceRadio = mysqli_query($con,$sqlChoiceRadio);
 									    $sqlChoiceRadioEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-									    $queryChoiceRadioEtc = mysql_query($sqlChoiceRadioEtc);
-									    $dataEtc = mysql_fetch_assoc($queryChoiceRadioEtc);
+									    $queryChoiceRadioEtc = mysqli_query($con,$sqlChoiceRadioEtc);
+									    $dataEtc = mysqli_fetch_assoc($queryChoiceRadioEtc);
 									?>
 									<?php
 										$i=1;
-										while($dataRadio= mysql_fetch_assoc($queryChoiceRadio)){
+										while($dataRadio= mysqli_fetch_assoc($queryChoiceRadio)){
 										$radioId = "radio".$dataRadio["choiceid"];
 									?>
 									<div class="form-inline" id="<?php echo $radioId?>">
@@ -334,19 +333,19 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 					    </select>
 					</div>
 				    </div>
-				    <div class="row"  id="example">
+				    <div class="row"  id="exampleEform">
 					<br>
 					<div class="col-lg-6 col-lg-offset-2" >
 							    <?php
 									    $sqlChoiceCheckbox = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid ";
-									    $queryChoiceCheckbox = mysql_query($sqlChoiceCheckbox);
+									    $queryChoiceCheckbox = mysqli_query($con,$sqlChoiceCheckbox);
 									    $sqlChoiceCheckboxEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-									    $queryChoiceCheckboxEtc = mysql_query($sqlChoiceCheckboxEtc);
-									    $dataEtc = mysql_fetch_assoc($queryChoiceCheckboxEtc);
+									    $queryChoiceCheckboxEtc = mysqli_query($con,$sqlChoiceCheckboxEtc);
+									    $dataEtc = mysqli_fetch_assoc($queryChoiceCheckboxEtc);
 									?>
 									<?php
 										$i=1;
-										while($dataCheckbox= mysql_fetch_assoc($queryChoiceCheckbox)){
+										while($dataCheckbox= mysqli_fetch_assoc($queryChoiceCheckbox)){
 										$checkboxId = "checkbox".$dataCheckbox["choiceid"];
 									?>
 									<div class="form-inline" id="<?php echo $checkboxId?>">
@@ -443,16 +442,16 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 					</div>
 				    </div>
 				    <br>
-					<div class="row" id="example">
+					<div class="row" id="exampleEform">
 					    <div class="col-lg-6 col-lg-offset-2" id="inputSelect">
 
 <?php
                     $sqlChoiceSelect = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid ";
-                    $queryChoiceSelect = mysql_query($sqlChoiceSelect);
+                    $queryChoiceSelect = mysqli_query($con,$sqlChoiceSelect);
             ?>
                             <?php
                                     $i=1;
-                                    while($dataSelect= mysql_fetch_assoc($queryChoiceSelect)){
+                                    while($dataSelect= mysqli_fetch_assoc($queryChoiceSelect)){
                                     $selectId = "select".$dataSelect["choiceid"];
                             ?>
                             <div class="form-inline" id="<?php echo $selectId?>">
@@ -539,12 +538,12 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					     <div class="col-lg-6">
             <!--<div class="checkbox" style="font-size:16px;">-->
                 <input type="text" class="form-control" id="date" name="date" value="__/__/____"><br><br>
                 <script>
-                    jQuery('#date').datetimepicker({
+                    jQuery($con,'#date').datetimepicker({
                         timepicker:false,
                         format:'d.m.Y H:i',
                         inline:true,
@@ -627,11 +626,11 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					    <div class="col-lg-3">
 						<input type="text" class="form-control" id="time" placeholder="" id="time" />
 						<script>
-						    jQuery('#time').datetimepicker({
+						    jQuery($con,'#time').datetimepicker({
 							    datepicker:false,
 							    inline:true,
 							    format:'H:i'
@@ -709,11 +708,11 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					    <div class="col-lg-6">
 						<input type="text" class="form-control" id="datetime" placeholder="" id="datetime" />
 						<script>
-						    jQuery('#datetime').datetimepicker({
+						    jQuery($con,'#datetime').datetimepicker({
 							inline:true,
 							lang:'th'
 							});
@@ -790,7 +789,7 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					    <div class="col-lg-6">
 						<div class="checkbox">
 						    <label >
@@ -871,7 +870,7 @@ include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
 				    </div>
 				    <div class="row">
 					<br>
-					<div id="example">
+					<div id="exampleEform">
 					    <div class="col-lg-12">
 						      <h4>หัวข้อคำถาม</h4>
 						      <hr class="hr-form">

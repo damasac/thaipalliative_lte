@@ -1,12 +1,12 @@
 <?php
-function formgenForEdit($i,$dataField,$dataFormMain){
+function formgenForEdit($dataField,$dataFormMain,$con){
 	 if($dataField["fieldtype"]=="text"){
 	    $formtext = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
 	    $formtext .= "<div id='editForm'>";
 	    $formtext .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formtext .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $formtext .= "</div>";
-	    $formtext .= "<label>".$i."".$dataField["fieldname"]."</label>";
+	    $formtext .= "<label>".$dataField["fieldname"]."</label>";
 	    $formtext .= "<code>".$dataField["fieldvalue"]."</code>";
 	    $formtext .= "<input type='text' class='form-control' id='' name=''>";
 	    $formtext .= "</div>";
@@ -18,7 +18,7 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label><code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label><code>".$dataField["fieldvalue"]."</code>";
 	    $form .= "<textarea class='form-control' id='' name=''></textarea>";
 	    $form .= "</div>";
 	    return $form;
@@ -30,21 +30,19 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $formradio .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formradio .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $formradio .= "</div>";
-	    $formradio .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
+	    $formradio .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
 	    
 	    $sqlRadio = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
-	    $queryRadio = mysql_query($sqlRadio);
-	    while($dataRadio = mysql_fetch_assoc($queryRadio)){
-		//$formradio .= "<div class='col-lg-".$dataRadio["margin"]."'></div>";
-		//$formradio .= "<div class='col-lg-".$dataRadio["objlen"]."'>";
+	    $queryRadio = mysqli_query($con,$sqlRadio);
+	    while($dataRadio = mysqli_fetch_assoc($queryRadio)){
 		$formradio .= "<div class='radio-inline'>";
 		$formradio .= "<label><input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadio["choicevalue"]."'><code>".$dataRadio["choicevalue"]."</code>".$dataRadio["choicelabel"]."</label>";
 		$formradio .= "<br><br></div>";
 	    }
 	    $sqlRadioEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryRadioEtc = mysql_query($sqlRadioEtc);
-	    $dataRadioEtc = mysql_fetch_array($queryRadioEtc);
-	    if(mysql_num_rows($queryRadioEtc)!=0){
+	    $queryRadioEtc = mysqli_query($con,$sqlRadioEtc);
+	    $dataRadioEtc = mysqli_fetch_array($queryRadioEtc);
+	    if(mysqli_num_rows($queryRadioEtc)!=0){
 		$formradio .= "<div class='radio-inline'><label>";
 		$formradio .= "<input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioEtc["choicevalue"]."'>".$dataRadioEtc["choicelabel"]."";
 		$formradio .= "</label>&nbsp;&nbsp:<input type='text' class='' name='".$dataRadioEtc["choicevalue"]."' id='".$dataRadioEtc["choicevalue"]."'/></div>";
@@ -57,20 +55,20 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $formcheckbox = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
 	    $formcheckbox .= "<div id='editForm'>";
 	    $formcheckbox .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
-	    $formcheckbox .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
+	    $formcheckbox .= "<button class='btn btn-default btn-xs' onclick=delFormFncMultiple('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $formcheckbox .= "</div>";
-	    $formcheckbox .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
+	    $formcheckbox .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
 	    $sqlCheckbox = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $queryCheckbox = mysql_query($sqlCheckbox);
-	    while($dataCheckbox = mysql_fetch_assoc($queryCheckbox)){
+	    $queryCheckbox = mysqli_query($con,$sqlCheckbox);
+	    while($dataCheckbox = mysqli_fetch_assoc($queryCheckbox)){
 		$formcheckbox .= "<div class='checkbox-inline'>";
 		$formcheckbox .= "<label><input type='checkbox' name='".$dataField["fieldvalue"]."[]' id='".$dataField["fieldvalue"]."[]' value='".$dataCheckbox["choicevalue"]."'><code>".$dataCheckbox["choicevalue"]."</code>".$dataCheckbox["choicelabel"]."</label>";
 		$formcheckbox .= "<br><br></div>";
 	    }
 	    $sqlCheckboxEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryCheckboxEtc = mysql_query($sqlCheckboxEtc);
-	    $dataCheckboxEtc = mysql_fetch_array($queryCheckboxEtc);
-	    if(mysql_num_rows($queryCheckboxEtc)!=0){
+	    $queryCheckboxEtc = mysqli_query($con,$sqlCheckboxEtc);
+	    $dataCheckboxEtc = mysqli_fetch_array($queryCheckboxEtc);
+	    if(mysqli_num_rows($queryCheckboxEtc)!=0){
 		$formcheckbox .= "<div class='checkbox-inline'><label>";
 		$formcheckbox .= "<input type='checkbox' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldavalue"]."' value='".$dataCheckboxEtc["choicevalue"]."'>".$dataCheckboxEtc["choicelabel"]."";
 		$formcheckbox .= "</label>&nbsp;&nbsp:<input type='text' class='' id='".$dataCheckboxEtc["choicevalue"]."'/></div>";
@@ -86,11 +84,11 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $formselect .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $formselect .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $formselect .= "</div>";
-	    $formselect .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
+	    $formselect .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code><br><br>";
             $formselect .= "<select class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."' style='width:auto;'>";
 	    $sqlSelect = " SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $querySelect = mysql_query($sqlSelect) or die(mysql_error());
-	    while($dataSelect = mysql_fetch_assoc($querySelect)){
+	    $querySelect = mysqli_query($con,$sqlSelect) or die(mysqli_error());
+	    while($dataSelect = mysqli_fetch_assoc($querySelect)){
                 $formselect .= "<option value='".$dataSelect["choicevalue"]."'>".$dataSelect["choicelabel"]."</option>";
 	    }
             $formselect .= "</select>";
@@ -103,7 +101,7 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $form .= "<input type='text' class='form-control' data-attr='date' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' style='cursor:pointer;width:auto;' placeholder='__/__/____'>";
 	    $form .= "</div>";
 	    return $form;
@@ -114,7 +112,7 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $form .= "<input type='text' class='form-control' data-attr='time' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' style='cursor:pointer;width:auto;' placeholder='__:__'>";
 	    $form .= "</div>";
 	    return $form;
@@ -125,7 +123,7 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $form .= "<input type='text' class='form-control' data-attr='datetime' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' style='cursor:pointer;width:auto;' placeholder='__/__/____  __:__'>";
 	    $form .= "</div>";
 	    return $form;
@@ -135,7 +133,7 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 
 	    $form .= "<div class='row'>";
 	    $form .= "<div class='col-lg-3'><select class='form-control'><option value=''>จังหวัด</option value=''></select></div>";
@@ -162,12 +160,12 @@ function formgenForEdit($i,$dataField,$dataFormMain){
 	     $form = "<div class='formItem' id='item_".$dataField["fieldid"]."' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');>";
 	    $form .= "<div id='editForm'>";
 	    $form .= "<button class='btn btn-default btn-xs' onclick=editFormFnc('item_".$dataField["fieldid"]."','".$dataField["fieldtype"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."','0');><i class='fa fa-pencil'></i></button>";
-	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFnc('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
+	    $form .= "<button class='btn btn-default btn-xs' onclick=delFormFncMultiple('item_".$dataField["fieldid"]."','".$dataFormMain["tablename"]."','".$dataField["fieldvalue"]."')><i class='fa fa-trash-o'></i></button>";
 	    $form .= "</div>";
-	    $form .= "<label>".$i."".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
+	    $form .= "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $sqlRadioText = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
-	    $queryRadioText = mysql_query($sqlRadioText);
-	    while($dataRadioText = mysql_fetch_assoc($queryRadioText)){
+	    $queryRadioText = mysqli_query($con,$sqlRadioText);
+	    while($dataRadioText = mysqli_fetch_assoc($queryRadioText)){
 		$form .= "<div class='radio'>";
 		$form .= "<label><input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioText["choicevalue"]."'><code>".$dataRadioText["choicevalue"]."</code>".$dataRadioText["choicelabel"]."";
 		$form .= "<input type='text' class='form-control' value='' name='".$dataRadioText["choicevalue"]."' id='".$dataRadioText["choicevalue"]."'></label>";
@@ -214,16 +212,16 @@ function formgenForShow($i,$dataField){
 	 }else if($dataField["fieldtype"]=="radiobox"){
 	    $formradio = "<label>".$dataField["fieldname"]."</label><br><br>";
 	    $sqlRadio = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
-	    $queryRadio = mysql_query($sqlRadio);
-	    while($dataRadio = mysql_fetch_assoc($queryRadio)){
+	    $queryRadio = mysqli_query($con,$sqlRadio);
+	    while($dataRadio = mysqli_fetch_assoc($queryRadio)){
 		$formradio .= "<div class='radio-inline'>";
 		$formradio .= "<label><input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadio["choicevalue"]."'>".$dataRadio["choicelabel"]."</label>";
 		$formradio .= "<br></div>";
 	    }
 	    $sqlRadioEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryRadioEtc = mysql_query($sqlRadioEtc);
-	    $dataRadioEtc = mysql_fetch_array($queryRadioEtc);
-	    if(mysql_num_rows($queryRadioEtc)!=0){
+	    $queryRadioEtc = mysqli_query($con,$sqlRadioEtc);
+	    $dataRadioEtc = mysqli_fetch_array($queryRadioEtc);
+	    if(mysqli_num_rows($queryRadioEtc)!=0){
 		$formradio .= "<div class='radio-inline'><label>";
 		$formradio .= "<input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioEtc["choicevalue"]."'>".$dataRadioEtc["choicelabel"]."";
 		$formradio .= "</label>&nbsp;&nbsp<input type='text' class='' name='".$dataRadioEtc["choicevalue"]."' id='".$dataRadioEtc["choicevalue"]."'/></div>";
@@ -235,16 +233,16 @@ function formgenForShow($i,$dataField){
 	 else if($dataField["fieldtype"]=="checkbox"){
 	    $formcheckbox = "<label>".$dataField["fieldname"]."</label><br><br>";
 	    $sqlCheckbox = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $queryCheckbox = mysql_query($sqlCheckbox);
-	    while($dataCheckbox = mysql_fetch_assoc($queryCheckbox)){
+	    $queryCheckbox = mysqli_query($con,$sqlCheckbox);
+	    while($dataCheckbox = mysqli_fetch_assoc($queryCheckbox)){
 		$formcheckbox .= "<div class='checkbox-inline'>";
 		$formcheckbox .= "<label><input type='checkbox' name='".$dataCheckbox["choicevalue"]."' id='".$dataCheckbox["choicevalue"]."' value='".$dataCheckbox["choicelabel"]."'>".$dataCheckbox["choicelabel"]."</label>";
 		$formcheckbox .= "<br></div>";
 	    }
 	    $sqlCheckboxEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryCheckboxEtc = mysql_query($sqlCheckboxEtc);
-	    $dataCheckboxEtc = mysql_fetch_array($queryCheckboxEtc);
-	    if(mysql_num_rows($queryCheckboxEtc)!=0){
+	    $queryCheckboxEtc = mysqli_query($con,$sqlCheckboxEtc);
+	    $dataCheckboxEtc = mysqli_fetch_array($queryCheckboxEtc);
+	    if(mysqli_num_rows($queryCheckboxEtc)!=0){
 		$formcheckbox .= "<div class='checkbox-inline'><label>";
 		$formcheckbox .= "<input type='checkbox' name='".$dataField["fieldvalue"]."[]' id='".$dataField["fieldvalue"]."[]' value='".$dataCheckboxEtc["choicevalue"]."'>".$dataCheckboxEtc["choicelabel"]."";
 		$formcheckbox .= "</label>&nbsp;&nbsp;<input type='text' class='' name='".$dataCheckboxEtc["choicevalue"]."' id='".$dataCheckboxEtc["choicevalue"]."'/></div>";
@@ -257,8 +255,8 @@ function formgenForShow($i,$dataField){
 	    $formselect = "<label>".$dataField["fieldname"]."</label><br><br>";
             $formselect .= "<select class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."' style='width:auto;'>";
 	    $sqlSelect = " SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $querySelect = mysql_query($sqlSelect) or die(mysql_error());
-	    while($dataSelect = mysql_fetch_assoc($querySelect)){
+	    $querySelect = mysqli_query($con,$sqlSelect) or die(mysqli_error());
+	    while($dataSelect = mysqli_fetch_assoc($querySelect)){
                 $formselect .= "<option value='".$dataSelect["choicevalue"]."'>".$dataSelect["choicelabel"]."</option>";
 	    }
             $formselect .= "</select>";
@@ -293,8 +291,8 @@ function formgenForShow($i,$dataField){
 	 }else if($dataField["fieldtype"]=="radiotextbox"){
 	    $form = "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $sqlRadioText = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
-	    $queryRadioText = mysql_query($sqlRadioText);
-	    while($dataRadioText = mysql_fetch_assoc($queryRadioText)){
+	    $queryRadioText = mysqli_query($con,$sqlRadioText);
+	    while($dataRadioText = mysqli_fetch_assoc($queryRadioText)){
 		$form .= "<div class='radio'>";
 		$form .= "<label><input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioText["choicevalue"]."'><code>".$dataRadioText["choicevalue"]."</code>".$dataRadioText["choicelabel"]."";
 		$form .= "<input type='text' class='form-control' value='' name='".$dataRadioText["choicevalue"]."' id='".$dataRadioText["choicevalue"]."'></label>";
@@ -329,9 +327,9 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	    
 	    $sqlRadio = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
 	    
-	    $queryRadio = mysql_query($sqlRadio);
+	    $queryRadio = mysqli_query($con,$sqlRadio);
 	    
-	    while($dataRadio = mysql_fetch_assoc($queryRadio)){
+	    while($dataRadio = mysqli_fetch_assoc($queryRadio)){
 		if($dataRadio["choicevalue"]==$value){
 			$check = "checked";
 		}else{
@@ -346,9 +344,9 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 		
 	    }
 	    $sqlRadioEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryRadioEtc = mysql_query($sqlRadioEtc);
-	    $dataRadioEtc = mysql_fetch_array($queryRadioEtc);
-	    if(mysql_num_rows($queryRadioEtc)!=0){
+	    $queryRadioEtc = mysqli_query($con,$sqlRadioEtc);
+	    $dataRadioEtc = mysqli_fetch_array($queryRadioEtc);
+	    if(mysqli_num_rows($queryRadioEtc)!=0){
 		$formradio .= "<div class='radio-inline'><label>";
 		$formradio .= "<input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioEtc["choicevalue"]."'>".$dataRadioEtc["choicelabel"]."";
 		$formradio .= "</label>&nbsp;&nbsp;<input type='text' class='' name='".$dataRadioEtc["choicevalue"]."' id='".$dataRadioEtc["choicevalue"]."'/></div>";
@@ -360,16 +358,16 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	 else if($dataField["fieldtype"]=="checkbox"){
 	    $formcheckbox = "<label>".$dataField["fieldname"]."</label><br><br>";
 	    $sqlCheckbox = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $queryCheckbox = mysql_query($sqlCheckbox);
-	    while($dataCheckbox = mysql_fetch_assoc($queryCheckbox)){
+	    $queryCheckbox = mysqli_query($con,$sqlCheckbox);
+	    while($dataCheckbox = mysqli_fetch_assoc($queryCheckbox)){
 		$formcheckbox .= "<div class='checkbox-inline'>";
 		$formcheckbox .= "<label><input type='checkbox' name='".$dataCheckbox["choicevalue"]."' id='".$dataCheckbox["choicevalue"]."' value='".$dataCheckbox["choicelabel"]."'>".$dataCheckbox["choicelabel"]."</label>";
 		$formcheckbox .= "<br></div>";
 	    }
 	    $sqlCheckboxEtc = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='1' ";
-	    $queryCheckboxEtc = mysql_query($sqlCheckboxEtc);
-	    $dataCheckboxEtc = mysql_fetch_array($queryCheckboxEtc);
-	    if(mysql_num_rows($queryCheckboxEtc)!=0){
+	    $queryCheckboxEtc = mysqli_query($con,$sqlCheckboxEtc);
+	    $dataCheckboxEtc = mysqli_fetch_array($queryCheckboxEtc);
+	    if(mysqli_num_rows($queryCheckboxEtc)!=0){
 		$formcheckbox .= "<div class='checkbox-inline'><label>";
 		$formcheckbox .= "<input type='checkbox' name='".$dataField["fieldvalue"]."[]' id='".$dataField["fieldvalue"]."[]' value='".$dataCheckboxEtc["choicevalue"]."'>".$dataCheckboxEtc["choicelabel"]."";
 		$formcheckbox .= "</label>&nbsp;&nbsp:<input type='text' class='' name='".$dataCheckboxEtc["choicevalue"]."' id='".$dataCheckboxEtc["choicevalue"]."'/></div>";
@@ -382,8 +380,8 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	    $formselect = "<label>".$dataField["fieldname"]."</label><br><br>";
             $formselect .= "<select class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."' style='width:auto;'>";
 	    $sqlSelect = " SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
-	    $querySelect = mysql_query($sqlSelect) or die(mysql_error());
-	    while($dataSelect = mysql_fetch_assoc($querySelect)){
+	    $querySelect = mysqli_query($con,$sqlSelect) or die(mysqli_error());
+	    while($dataSelect = mysqli_fetch_assoc($querySelect)){
                 $formselect .= "<option value='".$dataSelect["choicevalue"]."'>".$dataSelect["choicelabel"]."</option>";
 	    }
             $formselect .= "</select>";
@@ -419,8 +417,8 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	 }else if($dataField["fieldtype"]=="radiotextbox"){
 	    $form = "<label>".$dataField["fieldname"]."</label> <code>".$dataField["fieldvalue"]."</code>";
 	    $sqlRadioText = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY `choiceid`";
-	    $queryRadioText = mysql_query($sqlRadioText);
-	    while($dataRadioText = mysql_fetch_assoc($queryRadioText)){
+	    $queryRadioText = mysqli_query($con,$sqlRadioText);
+	    while($dataRadioText = mysqli_fetch_assoc($queryRadioText)){
 		$form .= "<div class='radio'>";
 		$form .= "<label><input type='radio' name='".$dataField["fieldvalue"]."' id='".$dataField["fieldvalue"]."' value='".$dataRadioText["choicevalue"]."'><code>".$dataRadioText["choicevalue"]."</code>".$dataRadioText["choicelabel"]."";
 		$form .= "<input type='text' class='form-control' value='' name='".$dataRadioText["choicevalue"]."' id='".$dataRadioText["choicevalue"]."'></label>";

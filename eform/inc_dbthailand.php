@@ -4,12 +4,12 @@
 ?>
 <div class="row">
     <div class="col-lg-3">    
-    <select id="province" name="province" class="form-control">
+    <select id="province" name="province" class="form-control" >
         <option value="">จังหวัด</option>
         <?php
             while($dataProvince = mysqli_fetch_assoc($sqlProvince)){
                     
-                    echo "<option value='".$dataProvince["PROVINCE_ID"]."'>'".$dataProvince["PROVINCE_NAME"]."'</option>";
+                    echo "<option value='".$dataProvince["PROVINCE_ID"]."'>".$dataProvince["PROVINCE_NAME"]."</option>";
                     
                 }
         ?>
