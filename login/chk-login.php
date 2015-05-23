@@ -18,8 +18,12 @@ if(isset($user_login) and isset($pwd_login)) {
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 	$dbarr = $res->fetch_assoc(); 
 	//print_r($dbarr); exit;
-	if($user_login=="") {
+	if(empty($_POST['username'])) {
 		echo "Error : กรุณากรอกรหัสผู้ใช้งาน";
+		exit();
+	}
+	else if(empty($_POST['password'])) {
+		echo "Error : กรุณากรอกรหัสผ่าน";
 		exit();
 	}
 	else if($user_login!=$dbarr['username'] AND $user_login!=$dbarr['email']) {

@@ -3,21 +3,29 @@ session_start();
 session_destroy();
 ?>
 
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>logout</title>
-</head>
-<body>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<meta http-equiv="refresh" content="3;URL=index.php">
-<div align="center"><img src="login/img/loading.gif" width="65" height="65" /><br>
-  <br>
-  <font size="3"><strong>กรุณารอสักครู่<br />
-  กำลังออกจากระบบ</strong></font>....</div>
-</body>
-</html>
+<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_blank.php';?>
+
+<?php sb('title');?> Logout <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
+<script src=""></script>
+<?php eb();?>
+
+<?php sb('content');?>
+<?php include "_connection/db.php"; ?>
+        <!-- Content Header (Page header) -->
+        <meta http-equiv="refresh" content="3;URL=index.php">
+        
+        <div class="lockscreen-logo">
+        <b>Logout</b></a>
+        </div>
+        <div align="center"><img src="login/img/loading.gif" width="65" height="65" /><br>
+
+        <!-- /.content -->
+<?php eb();?>
+
+
+<?php sb('js_and_css_footer');?>
+<?php eb();?>
+ 
+<?php render($MasterPage);?>
