@@ -1,2 +1,4 @@
 connection/*
 .gitignore
+
+_connection/db.php
