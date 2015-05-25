@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Register Form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="../_dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
-    <link href="../_dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-</head>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
+<?php sb('title');?> สวัสดีครับ <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
 <script language="javascript">
 function calAge(o){
      var tmp = o.value.split("-");
@@ -27,12 +11,26 @@ function calAge(o){
      document.getElementById("age").value = current_year - tmp[0];
 }
 </script>
+<?php eb();?>
 
-<body>
-<div class="container-fluid">
-    <section class="container">
-    <div class="container-page">        
+<?php sb('content');?>
+<?php include_once "../_connection/db.php"; ?>
 
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Register
+            <small>Optional description</small>
+            <hr>
+          </h1>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+        <form>
+        <div class="row">
+            
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
           <input type="text" name="" class="form-control" id="" value="">
@@ -147,7 +145,7 @@ function calAge(o){
               </div>
               </div>
             </div>
-        </div>
+      
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>13. สถานภาพ</label><br>
@@ -209,13 +207,23 @@ function calAge(o){
               <div class="col-lg-4">
                 Date<input type="date" name="" class="form-control">
               </div>
-              </div>
-            </div>       
-   </div> 
-  </section>
-</div>
-<script type="text/javascript">
+              </div><hr>
+            </div>
+            
+            
+            <div class="form-group col-lg-6">
+                <button class="btn btn-block btn-success btn-lg">Submit</button>
+            </div>
+            <div class="form-group col-lg-6">
+                <button class="btn btn-block btn-danger btn-lg">Cancel</button>
+            </div>
+            
+        </div>
+        </form>
+    </section>
+<?php eb();?>
 
-</script>
-</body>
-</html>
+<?php sb('js_and_css_footer');?>
+<?php eb();?>
+ 
+<?php render($MasterPage);?>
