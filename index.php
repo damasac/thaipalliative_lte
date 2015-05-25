@@ -99,12 +99,12 @@
 			<tbody>
 			<tr>
 			<td class="h2 text-right">ทั้งหมด</td>
-			<td class="textvaluebig text-right">10,234</td>
+			<td class="textvaluebig text-right">15,367</td>
 			<td class="textvalue2 text-left">ราย</td>
 			</tr>
 			<tr>
 			<td class="h3 text-right">นับตั้งแต่ต้นปี 2557</td>
-			<td class="textvaluesmall text-right">1,234</td>
+			<td class="textvaluesmall text-right">3,665</td>
 			<td class="textvalue2 text-left">ราย</td>
 			</tr>
 			<tr>
@@ -195,32 +195,32 @@
 			</tr>
 			<tr>
 			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
+			<td class="textvaluesmall text-right">50,554</td>
+			<td class="textvaluesmall text-right">17,869</td>
+			<td class="textvaluesmall text-right">4,921</td>
+			<td class="textvaluesmall text-right">766</td>
 			</tr>
 			<tr class="odd footable-disabled">
 			<td class="textlabelbold text-left" colspan="5">2. โรงพยาบาลมะเร็ง อุดร</td>
 			</tr>
 			<tr>
 			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
+			<td class="textvaluesmall text-right">22,578</td>
+			<td class="textvaluesmall text-right">8,407</td>
 			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
+			<td class="textvaluesmall text-right">266</td>
 			</tr>
 			<tr class="odd footable-disabled">
 			<td class="textlabelbold text-left" colspan="5">3. โรงพยาบาลศรีนครินทร์</td>
 			</tr>
 			<tr>
 			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
+			<td class="textvaluesmall text-right">38,351</td>
+			<td class="textvaluesmall text-right">4,178</td>
+			<td class="textvaluesmall text-right">487</td>
+			<td class="textvaluesmall text-right">96</td>
 			</tr>
-			<tr class="odd footable-disabled">
+			<!-- <tr class="odd footable-disabled">
 			<td class="textlabelbold text-left" colspan="5">4. โรงพยาบาล A</td>
 			</tr>
 			<tr>
@@ -289,7 +289,7 @@
 			<td class="textvaluesmall text-right">7,234</td>
 			<td class="textvaluesmall text-right">834</td>
 			<td class="textvaluesmall text-right">23</td>
-			</tr>			
+			</tr>			 -->
 			</tbody>
 			</table>
 			</div>

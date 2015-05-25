@@ -18,6 +18,16 @@
     -->
     <link href="../_dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 </head>
+
+<script language="javascript">
+function calAge(o){
+     var tmp = o.value.split("-");
+     var current = new Date();
+     var current_year = current.getFullYear();
+     document.getElementById("age").value = current_year - tmp[0];
+}
+</script>
+
 <body>
 <div class="container-fluid">
     <section class="container">
@@ -50,12 +60,12 @@
                 
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
-          <input type="date" name="" class="form-control" id="" value="">
+          <input type="date" name="" class="form-control" id="" value="" onchange="calAge(this);">
         </div>
         
         <div class="form-group col-lg-2">
           <label>5. อายุ</label>
-          <input type="text" name="" class="form-control" id="" value="">
+          <input type="text" name="" class="form-control" id="age" value="">
         </div>      
         
         <div class="form-group col-lg-12">
@@ -188,7 +198,7 @@
         </div>    
 
             <div class="form-group col-lg-12">
-          <label></label>
+              <label></label>
             <div class="row">
               <div class="col-lg-4">
                 Form completed by<input type="text" name="" class="form-control">
@@ -200,9 +210,7 @@
                 Date<input type="date" name="" class="form-control">
               </div>
               </div>
-            </div>
-        </div>        
-    
+            </div>       
    </div> 
   </section>
 </div>
