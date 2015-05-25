@@ -38,8 +38,10 @@
             <thead>
               <tr>
                 <th>HCODE</th>
-                <th>PTID</th>
-                <th>ชื่อ - สกุล</th>
+                <th>PTCODE</th>
+                <th>HN</th>
+                <th>ชื่อ</th>
+                <th>สกุล</th>
                 <th>เพศ</th>
                 <th>อายุ</th>
                 <th>OP</th>
@@ -49,16 +51,18 @@
 <?php
   $sex[1]="ชาย";
   $sex[2]="หญิง";
-  $sql="select * from palliative_register where hospcode like '{$_SESSION[tpc_puser_hcode]}'";
+  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where hospcode like '{$_SESSION[tpc_puser_hcode]}'";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>
               <tr>
                 <td><?php echo $row[hospcode];?></td>
                 <td><?php echo $row[pid];?></td>
-                <td><?php echo $row[name];?> <?php echo $row[lname];?></td>
+                <td><?php echo $row[hn];?></td>
+                <td><?php echo $row[name];?></td>
+                <td><?php echo $row[lname];?></td>
                 <td><?php echo $sex[$row[sex]];?></td>
-                <td><?php echo $row[birth];?></td>
+                <td><?php echo $row[age];?></td>
                 <td> </td>
               </tr>
 <?php
