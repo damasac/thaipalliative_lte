@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Register <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <script language="javascript">
@@ -13,22 +13,33 @@ function calAge(o){
 </script>
 <?php eb();?>
 
+<?php sb('content_header');?>
+  <h1>
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Register</a></li>
+  </ol>
+<?php eb();?>
+
 <?php sb('content');?>
 <?php include_once "../_connection/db.php"; ?>
+    
+    <div class="info-box">
+    <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
+    <div class="info-box-content">
+      <span class="info-box-text"><h4>Register Form</h4></span>
+      <span class="info-box-text">
+        แบบลงทะเบียนผู้ป่วย ศูนย์การุณรักษ์ (Palliative Care Center)
+      </span>
+    </div>
+  </div>
 
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Register
-            <small>Optional description</small>
-            <hr>
-          </h1>
+    <div class="box">
+    <div class="box-body">
 
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-        <form>
+    <form>
         <div class="row">
             
         <div class="form-group col-lg-6">
@@ -220,7 +231,10 @@ function calAge(o){
             
         </div>
         </form>
-    </section>
+
+    </div>
+  </div>
+
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
