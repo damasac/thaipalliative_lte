@@ -24,18 +24,25 @@ function calAge(o){
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include_once "../_connection/db.php"; ?>
 <?php
-  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where ptid like '{$_GET['dataid']}'";
-  $rst=$mysqli->query($sql);
-  $row=$rst->fetch_assoc();
-     
-  $hospcode=str_pad($row['hospcode'],5,"0",STR_PAD_LEFT);
-  $ptid=str_pad($row['pid'],5,"0",STR_PAD_LEFT);
-  $cid=$row[ssn];
-  $birth=$row[birth];
-  $age=$row[age];
+include_once "../_connection/db.php";
+
+$res = $mysqli->query("SELECT * FROM palliative_register")or die('[' . $mysqli->error . ']');
+$numGroup = $res->num_rows;
+$fields = $res->fetch_fields();
+//echo "<pre>"; echo $fields[1]->name; echo "</pre>";
+$sql = "SELECT *, floor(datediff(curdate(),birthdb)/365.25) as birthdb FROM palliative_register WHERE ptid = '$_GET[dataid]';";
+$res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+$dbarr = $res->fetch_array();
+  
+//echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
+if($dbarr['ptid']){
+    $task = 'update';
+}else {
+    $task = 'save';
+}
 ?>
+    
     <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
     <div class="info-box-content">
@@ -49,92 +56,88 @@ function calAge(o){
     <div class="box">
     <div class="box-body">
 
-    <form>
+    <form id="frm-register" onsubmit="frm_register(); return false;" action="#">
         <div class="row" style="padding: 25px 25px 25px 25px;">
             
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
-          <input type="text" name="" class="form-control" id="" value="<?php echo $hospcode;?>" readonly>
+          <input type="hidden" id="task" name="task" value="<?php echo $task; ?>" />
+          <input type="text" name="<?php $i=2; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
         
         <div class="form-group col-lg-6">
           <label>PID: </label>
-          <input type="text" name="" class="form-control" id="" value="<?php echo $ptid;?>" readonly>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
           <div class="form-group col-lg-4">
           <label>1. HN: </label>
-          <input type="text" name="" class="form-control" id="" value="">
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
         
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="date" name="" class="form-control" id="" value="">
+          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
         
         <div class="form-group col-lg-12">
           <label>3. เลขที่บัตรประจำตัวประชาชน: </label>
-          <input type="text" name="" class="form-control" id="" value="<?php echo $cid;?>" readonly>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
                 
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
-          <input type="date" name="" class="form-control" id="" value="<?php echo $birth;?>" onchange="calAge(this);">
+          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" onchange="calAge(this);">
         </div>
         
         <div class="form-group col-lg-2">
           <label>5. อายุ</label>
-          <input type="text" name="" class="form-control" id="age" value="<?php echo $age;?>" readonly>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="age" value="<?php echo $dbarr[$i]; ?>">
         </div>      
         
-        <div class="form-group col-lg-2">
-          <label>6.คำนำหน้า</label><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="title">
-               <option value=""></option>
-               <option value="นาย">นาย</option>
-               <option value="นาง">นาง</option>
-               <option value="นางสาว">นางสาว</option>
-               <option value="เด็กชาย">เด็กชาย</option>
-               <option value="เด็กหญ">เด็กหญิง</option>
-          </select>
+        <div class="form-group col-lg-3">
+          <label>6.1 คำนำหน้า</label>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
         </div>
-        <div class="form-group col-lg-5">
-          <label>ชื่อ</label>
-          <input type="text" name="" class="form-control">
+        
+        <div class="form-group col-lg-4">
+          <label>6.1 ชื่อ</label>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
         </div>
+        
         <div class="form-group col-lg-5">
-          <label>สกุล</label>
-          <input type="text" name="" class="form-control">               
+          <label>6.3 นามสกุล</label>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
         </div>
 
                
         <div class="form-group col-lg-5">
           <div class='showForm'><label>7. เพศ</label><br>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>ชาย</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>หญิง</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ชาย</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>หญิง</label></div>
           </div>
           </div>
 
         <div class="form-group col-lg-7">
           <div class='showForm'><label>8. สัญชาติ</label><br>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>ไทย</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name="" id=''/></div></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไทย</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>อื่นๆ</label>&nbsp;&nbsp;
+            <input type='text' class='' name="<?php $i++; echo $fields[$i]->name;?>" id=''/></div></div>
         </div>
 
         <div class="form-group col-lg-5">
           <div class='showForm'><label>9. เชื้อชาติ</label><br>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>ไทย</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>อื่นๆ</label>&nbsp;&nbsp;
+          <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไทย</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name='r' id=''/></div></div>
         </div>
 
         <div  class="form-group col-lg-7">
           <div class='showForm'><label>10. ศาสนา</label><br>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>พุทธ</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>คริสต์</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='3'>อิสลาม</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='4'>อื่นๆ</label>&nbsp;&nbsp;
+          <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>พุทธ</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>คริสต์</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>อิสลาม</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name='r' id=''/></div></div>
         </div>
 
@@ -142,16 +145,16 @@ function calAge(o){
           <label>11. </label>
             <div class="row">
               <div class="col-lg-2">
-                บ้านเลขที่<input type="text" name="" class="form-control">
+                บ้านเลขที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
               </div>
               <div class="col-lg-2">
-                หมู่ที่<input type="text" name="" class="form-control">
+                หมู่ที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                ตำบล<select type="dropdown" name="" class="form-control"></select>
+                ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
               </div>
                <div class="col-lg-4">
-                อำเภอ<select type="text" name="" class="form-control"></select>
+                อำเภอ<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
               </div>
             </div>
         </div>
@@ -159,10 +162,10 @@ function calAge(o){
         <div class="form-group col-lg-12">
             <div class="row">
               <div class="col-lg-6">
-                จังหวัด<select type="text" name="" class="form-control"></select>
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
               </div>
               <div class="col-lg-6">
-                รหัสไปรษณีย์<input type="text" name="" class="form-control">
+                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
               </div>
             </div>
         </div>
@@ -171,13 +174,13 @@ function calAge(o){
           <label>12. หมายเลขโทรศัพท์สำหรับติดต่อ</label>
             <div class="row">
               <div class="col-lg-4">
-                1.<input type="text" name="" class="form-control">
+                1.<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                2.<input type="text" name="" class="form-control">
+                2.<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                3.<input type="text" name="" class="form-control">
+                3.<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               </div>
             </div>
@@ -185,49 +188,49 @@ function calAge(o){
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>13. สถานภาพ</label><br>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>โสด</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>แต่งงาน</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='3'>แยก/หย่า</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='4'>หม้าย</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>โสด</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>แต่งงาน</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>แยก/หย่า</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>หม้าย</label></div>
           </div>
         </div>
 
       <div class="form-group col-lg-12">
           <div class='showForm'><label>14. สิทธิ์การรักษา</label><br>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>บัตรทอง</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>ข้าราชการ</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='3'>ประกันสังคม</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='4'>รัฐวิสาหกิจ</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='5'>จ่ายเอง</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>บัตรทอง</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>ข้าราชการ</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>ประกันสังคม</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>รัฐวิสาหกิจ</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>จ่ายเอง</label></div>
           </div>
         </div>
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>15. อาชีพ</label><br>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>ข้าราชการ/รัฐวิสาหกิจ</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>ค้าขาย</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='3'>ข้าราชการบำนาญ</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='4'>รับจ้าง</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='5'>เกษตรกร</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='6'>นักบวช</label></div>
-            <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='7'>ไม่ได้ประกอบอาชีพ</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ข้าราชการ/รัฐวิสาหกิจ</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>ค้าขาย</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>ข้าราชการบำนาญ</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>รับจ้าง</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>เกษตรกร</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='6' ? 'checked' : ''; ?> value='6'>นักบวช</label></div>
+            <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='7' ? 'checked' : ''; ?> value='7'>ไม่ได้ประกอบอาชีพ</label></div>
           </div>
         </div>
 
         <div  class="form-group col-lg-12">
           <div class='showForm'><label>16. โรคประจำตัว (เลือกได้มากกว่าหนึ่งคำตอบ)</label><br>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>เบาหวาน</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>โรคหัวใจ</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='3'>โรคไต</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='4'>ความดันโลหิตสูง</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='5'>อื่นๆ</label>&nbsp;&nbsp;
+          <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>เบาหวาน</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>โรคหัวใจ</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>โรคไต</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>ความดันโลหิตสูง</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name='r' id=''/></div></div>
         </div>  
 
         <div  class="form-group col-lg-12">
           <div class='showForm'><label>17. ประวัติการรักษาด้วยแพทย์ทางเลือก/สมุนไพร</label><br>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='1'>ไม่มี</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="" id="" value='2'>มี</label>&nbsp;&nbsp;
+          <div class='checkbox-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไม่มี</label></div>
+          <div class='checkbox-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>มี</label>&nbsp;&nbsp;
             <input type='text' class='' name='r' id=''/></div></div>
         </div>    
 
@@ -235,13 +238,13 @@ function calAge(o){
               <label></label>
             <div class="row">
               <div class="col-lg-4">
-                Form completed by<input type="text" name="" class="form-control">
+                Form completed by<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                รหัสที่ได้จากระบบ<input type="text" name="" class="form-control">
+                รหัสที่ได้จากระบบ<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                Date<input type="date" name="" class="form-control">
+                Date<input type="date" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               </div><hr>
             </div>
@@ -260,9 +263,34 @@ function calAge(o){
     </div>
   </div>
 
+  <pre><div id="div-onsave"></div></pre>
+
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
+<script>
+    function frm_register() {
+        var ptid = '<?php echo $_GET['ptid']; ?>';
+        var datalist=$('#frm-register').serialize();
+        
+        $('#frm-group').hide();
+        $('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+        $.ajax({
+                url : "ajax-register.php?ptid="+ptid,
+                type:"POST",
+                data : datalist,
+                success : function(returndata) {
+                    $("#div-onsave").html(returndata);
+                },
+                error : function(xhr, statusText, error) {
+                    System_Notice("Error! Could not retrieve the data.",'danger');     
+                }
+        });
+    }
+
+</script>
 <?php eb();?>
+
+<?php $mysqli->close(); ?>
  
 <?php render($MasterPage);?>
