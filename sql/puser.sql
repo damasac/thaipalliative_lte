@@ -11,7 +11,7 @@
  Target Server Version : 50533
  File Encoding         : utf-8
 
- Date: 05/25/2015 21:32:30 PM
+ Date: 05/25/2015 21:33:27 PM
 */
 
 SET NAMES utf8;
@@ -41,5 +41,5 @@ CREATE TABLE `puser` (
 -- ----------------------------
 --  Records of `puser`
 -- ----------------------------
-INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', 'fadmin', 'ladmin', '1', '2', '3', '', '', '', '2015-05-22 15:17:01');
+INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', 'fadmin', 'ladmin', '1', '13777', '7', '400101', '4001', '40', '2015-05-22 15:17:01');
 
