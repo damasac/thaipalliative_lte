@@ -3,14 +3,7 @@
 <?php sb('title');?> Register <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<script language="javascript">
-function calAge(o){
-     var tmp = o.value.split("-");
-     var current = new Date();
-     var current_year = current.getFullYear();
-     document.getElementById("age").value = current_year - tmp[0];
-}
-</script>
+
 <?php eb();?>
 
 <?php sb('content_header');?>
@@ -40,8 +33,7 @@ function calAge(o){
     <div class="box-body">
     
     <form>
-        <div class="row">
-          
+        <div class="row" style="padding: 25px 25px 25px 25px;">
 
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
@@ -153,8 +145,16 @@ function calAge(o){
               <div class="col-lg-4">
                 Date<input type="date" name="" class="form-control">
               </div>
-              </div>
-        </div>
+              </div><hr>
+            </div>
+            
+            
+            <div class="form-group col-lg-6">
+                <button class="btn btn-block btn-success btn-lg">Submit</button>
+            </div>
+            <div class="form-group col-lg-6">
+                <button class="btn btn-block btn-danger btn-lg">Cancel</button>
+            </div>
 
         </div>
         </form>

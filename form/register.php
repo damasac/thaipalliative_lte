@@ -40,7 +40,7 @@ function calAge(o){
     <div class="box-body">
 
     <form>
-        <div class="row">
+        <div class="row" style="padding: 25px 25px 25px 25px;">
             
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
