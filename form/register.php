@@ -25,7 +25,17 @@ function calAge(o){
 
 <?php sb('content');?>
 <?php include_once "../_connection/db.php"; ?>
-    
+<?php
+  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where ptid like '{$_GET['dataid']}'";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+     
+  $hospcode=str_pad($row['hospcode'],5,"0",STR_PAD_LEFT);
+  $ptid=str_pad($row['pid'],5,"0",STR_PAD_LEFT);
+  $cid=$row[ssn];
+  $birth=$row[birth];
+  $age=$row[age];
+?>
     <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
     <div class="info-box-content">
@@ -44,12 +54,12 @@ function calAge(o){
             
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
-          <input type="text" name="" class="form-control" id="" value="">
+          <input type="text" name="" class="form-control" id="" value="<?php echo $hospcode;?>" readonly>
         </div>
         
         <div class="form-group col-lg-6">
           <label>PID: </label>
-          <input type="text" name="" class="form-control" id="" value="">
+          <input type="text" name="" class="form-control" id="" value="<?php echo $ptid;?>" readonly>
         </div>
 
           <div class="form-group col-lg-4">
@@ -64,22 +74,37 @@ function calAge(o){
         
         <div class="form-group col-lg-12">
           <label>3. เลขที่บัตรประจำตัวประชาชน: </label>
-          <input type="text" name="" class="form-control" id="" value="">
+          <input type="text" name="" class="form-control" id="" value="<?php echo $cid;?>" readonly>
         </div>
                 
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
-          <input type="date" name="" class="form-control" id="" value="" onchange="calAge(this);">
+          <input type="date" name="" class="form-control" id="" value="<?php echo $birth;?>" onchange="calAge(this);">
         </div>
         
         <div class="form-group col-lg-2">
           <label>5. อายุ</label>
-          <input type="text" name="" class="form-control" id="age" value="">
+          <input type="text" name="" class="form-control" id="age" value="<?php echo $age;?>" readonly>
         </div>      
         
-        <div class="form-group col-lg-12">
-          <label>6. ชื่อ-สกุล</label>
+        <div class="form-group col-lg-2">
+          <label>6.คำนำหน้า</label><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="title">
+               <option value=""></option>
+               <option value="นาย">นาย</option>
+               <option value="นาง">นาง</option>
+               <option value="นางสาว">นางสาว</option>
+               <option value="เด็กชาย">เด็กชาย</option>
+               <option value="เด็กหญ">เด็กหญิง</option>
+          </select>
+        </div>
+        <div class="form-group col-lg-5">
+          <label>ชื่อ</label>
           <input type="text" name="" class="form-control">
+        </div>
+        <div class="form-group col-lg-5">
+          <label>สกุล</label>
+          <input type="text" name="" class="form-control">               
         </div>
 
                
