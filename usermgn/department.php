@@ -3,17 +3,13 @@
 <?php sb('title');?> User Setting <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<style>
-    .hospital{
-        /*background-color:red;*/
-    }
-</style>
+
 <?php eb();?>
 <?php sb('content');?>
 <?php include "../_connection/db.php"; ?>
 <?php
     $MenuSetting = "department";
-    include_once("menu_user.php");
+    include_once("inc_menu.php");
 ?>
 <div class="box">
 <div class="box-header">
@@ -89,7 +85,7 @@
 <script>
     
 </script>
-<script src="../_plugins/treeview/script.js">" type="text/javascript"></script>
+<script src="../_plugins/treeview/script.js" type="text/javascript"></script>
 <link href="../_plugins/treeview/style.css" rel="stylesheet" type="text/css"/>
 <script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>

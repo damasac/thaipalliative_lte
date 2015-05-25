@@ -19,11 +19,14 @@
 <?php include "../_connection/db.php"; ?>
 <?php
     $MenuSetting = "user";
-    include_once("menu_user.php");
+    include_once("inc_menu.php");
 ?>
 <div class="box">
 <div class="box-header">
+    
+  <?php  echo "<pre>"; print_r($_SESSION);?>
 <div class="box-title">จัดการสมาชิก</div><br>
+
 <table id="userTable" class="table table-striped table-bordered" cellspacing="0">
         <thead>
             <tr>
@@ -52,7 +55,25 @@
 </div>
 <?php eb();?>
 <?php sb('js_and_css_footer');?>
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
 <script>
+    function popup_custom() {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: "เพิ่มผู้ใช้งาน",
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: $('<div></div>').load("ajax-adduser-data.php?id=", function(data){
+		}),
+		onshown: function(dialogRef){ 
+		},
+		onhidden: function(dialogRef){ 
+		}
+		
+	});
+}
     $(document).ready(function() {
         $('#userTable').dataTable({
           "bPaginate": true,
