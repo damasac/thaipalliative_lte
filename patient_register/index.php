@@ -26,7 +26,6 @@
       <span class="info-box-text"><h4>ลงทะเบียน</h4></span>
       <span class="info-box-text">
           <a class="btn btn-default" id="user" href="search.php"><strong>เพิ่มข้อมูล</strong></a>
-          <a class="btn btn-default" id="user" href="../eform"><strong>เพิ่ม Ez Form</strong></a>
       </span>
     </div>
   </div>
@@ -63,7 +62,7 @@
                 <td><?php echo $row[lname];?></td>
                 <td><?php echo $sex[$row[sex]];?></td>
                 <td><?php echo $row[age];?></td>
-                <td> </td>
+                <td><a href="../emr/?ptid_key=<?php echo $row['ptid_key'];?>" class="btn btn-block btn-success">EMR</a></td>
               </tr>
 <?php
   }
