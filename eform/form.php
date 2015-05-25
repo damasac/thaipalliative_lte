@@ -4,12 +4,23 @@
 <?php sb('title');?> Ez Form <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="../_plugins/js-select2/select2.css">ห
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <link rel="stylesheet" href="../_plugins/js/jquery.datetimepicker.css">
 <link rel="stylesheet" href="style/style.css">
 <?php eb();?>
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
+<br>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="#">Examples</a></li>
+    <li class="active">Blank page</li>
+  </ol>
+
+
+<?php eb();?>
+
+<?php sb('content');?>
 <?php
 $useradd = $_SESSION["tpc_puser_id"];
 $idForm = $_GET["idFormMain"];
@@ -18,14 +29,6 @@ $MenuSetting="viewform";
 include("inc_menu.php");
 include_once("function/function_eform.php");	
 ?>
-<!--<ol class="breadcrumb">-->
-<!--  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
-<!--  <li><a href="#">Examples</a></li>-->
-<!--  <li class="active">Blank page</li>-->
-<!--</ol>-->
-<?php eb();?>
-
-<?php sb('content');?>
 <?php
 	
 	

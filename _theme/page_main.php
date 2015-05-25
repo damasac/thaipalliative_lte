@@ -174,7 +174,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- The user image in the navbar-->
                   <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="user-image" alt="User Image"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">User ::</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
@@ -209,9 +209,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
+              <!--<li>-->
+              <!--  <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+              <!--</li>-->
             </ul>
           </div>
         </nav>
@@ -263,7 +263,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="header">Setting Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
-	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>eform"><i class='fa fa-file-o'></i> <span>EZ Form</span></a></li>
+	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>eform"><i class='fa fa-file-o'></i> <span>Ez Form</span></a></li>
          
 	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-link'></i> <span>Logout</span></a></li>
 

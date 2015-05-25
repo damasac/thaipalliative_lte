@@ -12,6 +12,15 @@
 
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
+        <br>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li>
+          </ol>
+<?php eb();?>
+
+<?php sb('content');?>
 <?php
 $idForm = $_GET["idFormMain"];
 $MenuType="MenuEform";
@@ -19,9 +28,6 @@ $MenuSetting="manageform";
 	include("inc_menu.php");
 ?>
 
-<?php eb();?>
-
-<?php sb('content');?>
 <?php 
 	include_once("function/function_eform.php");
 	//----------------------------------------------------------------------------------------------------------------

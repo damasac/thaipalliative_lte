@@ -9,21 +9,22 @@
 
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
+        <br>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li>
+          </ol>
+
+<?php eb();?>
+
+<?php sb('content'); ?>
 <?php
 $useradd = $_SESSION["tpc_puser_id"];
 $MenuType="MenuMain";
 $MenuSetting="listeform";
 include_once("inc_menu.php");
 ?>
-<!--<ol class="breadcrumb">-->
-<!--<li><a href="#"><i class="fa fa-home"></i> Home</a></li>-->
-<!--<li><a href="#">Examples</a></li>-->
-<!--<li class="active">Blank page</li>-->
-<!--</ol>-->
-<?php eb();?>
-
-<?php sb('content'); ?>
-
 	<link rel="stylesheet" href="style/style.css">
                     <div class="panel panel-default">
                         <div class="panel-body" style="height: auto;">

@@ -9,20 +9,19 @@
 
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
+        <br>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li>
+          </ol>
+<?php eb();?>
+<?php sb('content'); ?>
 <?php
 $MenuType="MenuMain";
 $MenuSetting="shareform";
 include_once("inc_menu.php");
 ?>
-<!--<ol class="breadcrumb">-->
-<!--<li><a href="#"><i class="fa fa-home"></i> Home</a></li>-->
-<!--<li><a href="#">Examples</a></li>-->
-<!--<li class="active">Blank page</li>-->
-<!--</ol>-->
-<?php eb();?>
-
-<?php sb('content'); ?>
-
                     <div class="panel panel-default">
                         <div class="panel-body" style="height: auto;">
                             <div class="container-fluid">
