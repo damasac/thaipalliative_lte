@@ -65,7 +65,7 @@
               <tr>
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
-                <td><?php echo $row['hcode'];?></td>
+                <td><?php echo hospitalname($row['hcode']);?></td>
               </tr>
 <?php
   }
@@ -138,3 +138,13 @@
 <?php eb();?>
  
 <?php render($MasterPage);?>
+
+<?php
+function hospitalname ($hcode) {
+  global $mysqli;
+  $sql="select name from all_hospital_thai where code5 = '$hcode';";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+  return $row['name'];
+}
+?>
