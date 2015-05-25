@@ -1,27 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Follow up Form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="../_dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
-    <link href="../_dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<div class="container-fluid">
-    <section class="container">
-    <div class="container-page">        
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+
+<?php sb('title');?> Register <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
+<script language="javascript">
+function calAge(o){
+     var tmp = o.value.split("-");
+     var current = new Date();
+     var current_year = current.getFullYear();
+     document.getElementById("age").value = current_year - tmp[0];
+}
+</script>
+<?php eb();?>
+
+<?php sb('content_header');?>
+  <h1>
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Register</a></li>
+  </ol>
+<?php eb();?>
+
+<?php sb('content');?>
+<?php include_once "../_connection/db.php"; ?>
+
+   <div class="info-box">
+    <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
+    <div class="info-box-content">
+      <span class="info-box-text"><h4>Follow-up Form</h4></span>
+      <span class="info-box-text">
+        ติดตามและสรุปการดูแลผู้ป่วย ศูนย์การุณรักษ์ (Palliative Care Center)
+      </span>
+    </div>
+  </div>
+
+    <div class="box">
+    <div class="box-body">
+    
+    <form>
+        <div class="row">
+          
 
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
@@ -135,11 +155,16 @@
               </div>
               </div>
         </div>
-   </div> 
-  </section>
-</div>
-<script type="text/javascript">
 
-</script>
-</body>
-</html>
+        </div>
+        </form>
+
+    </div>
+  </div>
+   
+<?php eb();?>
+
+<?php sb('js_and_css_footer');?>
+<?php eb();?>
+ 
+<?php render($MasterPage);?>
