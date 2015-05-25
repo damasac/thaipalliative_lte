@@ -94,5 +94,4 @@
     });
   </script>
 <?php eb();?>
- 
 <?php render($MasterPage);?>
