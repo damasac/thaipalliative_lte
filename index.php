@@ -87,9 +87,11 @@
   <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
+        <div class="text-left">
         <a class="text-left h4" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          จำนวนผู้ป่วย ใน Thai Care Cloud
+          จำนวนผู้ป่วย ใน Thai Palliative
         </a>
+        </div>
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
@@ -132,9 +134,11 @@
   <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
+        <div class="text-left">
         <a class="collapsed text-left h4" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
           จำนวนผู้ป่วย วันนี้ 2 ราย
         </a>
+        </div>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -171,9 +175,11 @@
   <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
+        <div class="text-left">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           <span class="h4">จำนวนผู้ป่วยจำแนกตามหน่วยบริการ</span>
         </a>
+        </div>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
