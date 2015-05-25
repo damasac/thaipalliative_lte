@@ -19,7 +19,7 @@
 <?php include "../_connection/db.php"; ?>
   <!-- Main content -->
   <div class="info-box">
-    <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
+    <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-medkit"></i></span>
     <div class="info-box-content">
       <span class="info-box-text"><h4>Activity Record</h4></span>
     </div>
