@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
   <head>
     <meta charset="UTF-8">
@@ -254,7 +250,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li>
               <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>patient_register">
               <i class='fa fa-life-bouy'></i> 
-                <span>ให้บริการ</span>
+                <span>การให้บริการ</span>
               </a>
             </li>
             <li class="treeview">
