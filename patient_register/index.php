@@ -37,22 +37,33 @@
           <table id="example2" class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
+                <th>HCODE</th>
+                <th>PTID</th>
+                <th>ชื่อ - สกุล</th>
+                <th>เพศ</th>
+                <th>อายุ</th>
+                <th>OP</th>
               </tr>
             </thead>
             <tbody>
+<?php
+  $sex[1]="ชาย";
+  $sex[2]="หญิง";
+  $sql="select * from palliative_register where hospcode like '{$_SESSION[tpc_puser_hcode]}'";
+  $rst=$mysqli->query($sql);
+  while($row=$rst->fetch_assoc()) {
+?>
               <tr>
-                <td>Trident</td>
-                <td>Internet
-                  Explorer 4.0</td>
-                <td>Win 95+</td>
-                <td> 4</td>
-                <td>X</td>
+                <td><?php echo $row[hospcode];?></td>
+                <td><?php echo $row[pid];?></td>
+                <td><?php echo $row[name];?> <?php echo $row[lname];?></td>
+                <td><?php echo $sex[$row[sex]];?></td>
+                <td><?php echo $row[birth];?></td>
+                <td> </td>
               </tr>
+<?php
+  }
+?>
             </tbody>
           </table>
         </div>

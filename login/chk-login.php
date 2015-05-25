@@ -41,8 +41,7 @@ if(isset($user_login) and isset($pwd_login)) {
         $_SESSION[$Ss_prefix.'puser_username'] = $dbarr['username'];
         $_SESSION[$Ss_prefix.'puser_email'] = $dbarr['email'];
         $_SESSION[$Ss_prefix.'puser_status'] = $dbarr['status'];
-        $_SESSION[$Ss_prefix.'puser_area'] = $dbarr['area'];
-        $_SESSION[$Ss_prefix.'puser_site'] = $dbarr['site'];
+        $_SESSION[$Ss_prefix.'puser_hcode'] = $dbarr['hcode'];
         //-----------------------
 		echo "success";
 	}
