@@ -13,8 +13,9 @@
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
 <?php
+$idForm = $_GET["idFormMain"];
 $MenuType="MenuEform";
-$MenuSetting="listeform";
+$MenuSetting="manageform";
 	include("inc_menu.php");
 ?>
           <ol class="breadcrumb">

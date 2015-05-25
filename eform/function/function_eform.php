@@ -310,6 +310,7 @@ function formgenForShow($i,$dataField){
 
     }
     
+
 function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$value_tumbon){
 	 if($dataField["fieldtype"]=="text"){
 	    $formtext = "<label>".$dataField["fieldname"]."</label>";
@@ -403,9 +404,7 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	    return $formtextarea;
 	 }
 	 else if($dataField["fieldtype"]=="dbthailand"){
-		include("../eform2/inc_dbthailand_show.php");
-	    ?>
-	    <?php
+	    include_once  "inc_dbthailand_show2.php";
 	 }
 	 else if($dataField["fieldtype"]=="heading"){
 	    $form .= "<div class='heading-form'>";

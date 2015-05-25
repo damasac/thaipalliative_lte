@@ -1,15 +1,34 @@
-<?php  if(0) { ?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?php } 
-$System_LayoutUse="layout_easy.html";
-$System_AjaxFileAction="ajax-eform-loaddata.php";
-$System_ShowAjaxIFrame=0;
-$myMenuKey="E Form";
+<?php //error_reporting(0); ?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-include_once("../_config/config_system.php");
-include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
-if($SystemSession_Member_ID>0) { 
+<?php sb('title');?> Register <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+
+<link rel="stylesheet" href="../_plugins/js/jquery.datetimepicker.css">
+<link rel="stylesheet" href="style/style.css">
+<?php eb();?>
+<?php include "../_connection/db_sql.php"; ?>
+<?php sb('content_header');?>
+<?php
+
+$idForm = $_GET["idFormMain"];
+$MenuType="MenuEform";
+$MenuSetting="tableform";
+include("inc_menu.php");
+?>
+<ol class="breadcrumb">
+  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="#">Examples</a></li>
+  <li class="active">Blank page</li>
+</ol>
+<?php eb();?>
+
+<?php sb('content');?>
+<?Php 
     	//----------------------------------------------------------------------------------------------------------------
-	include_once(SYSTEM_DOC_ROOT."system/core-start.php");
-	include_once(SYSTEM_DOC_ROOT."system/core-body.php");
+
 	$sqlFormMain = "SELECT * FROM formmain WHERE formid='".$_GET["idFormMain"]."' ";
 	
 	$queryFormMain = mysql_query($sqlFormMain) or die(mysql_error());
@@ -33,12 +52,7 @@ if($SystemSession_Member_ID>0) {
 	}
 	//----------------------------------------------------------------------------------------------------------------
         ?>
-        <script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.css">
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.css">
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.css">
+
 	<link rel="stylesheet" href="style/style.css">
                     <div class="panel panel-default">
                         <div class="panel-body" style="height: auto;">
@@ -103,7 +117,6 @@ if($SystemSession_Member_ID>0) {
 			    </div>
                         </div>
                     </div>
-<?php } ?>
 <style>
     table thead{
 	background-color:#424242;
@@ -125,3 +138,14 @@ if($SystemSession_Member_ID>0) {
     }
     <?php }?>
 </script>
+<?php eb();?>
+<?php sb('js_and_css_footer');?>
+<script>
+
+</script>
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
+<?php eb();?>
+ 
+<?php render($MasterPage);?>

@@ -21,7 +21,7 @@ include_once("inc_menu.php");
 </ol>
 <?php eb();?>
 
-<?php sb('content');?>
+<?php sb('content'); ?>
 
 	<link rel="stylesheet" href="style/style.css">
                     <div class="panel panel-default">
