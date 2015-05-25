@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['tpc_puser_hcode'] != "") {
+  Header("Location: home.php");
+  exit;
+}
+?>
 <?php header("Content-type:text/html; charset=UTF-8"); ?>
 <!DOCTYPE html>
 <html>
