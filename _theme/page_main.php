@@ -251,7 +251,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><i class='fa fa-gear'></i> <span>Home</span></a></li>
-            <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>patient_register"><i class='fa fa-life-bouy'></i> <span>ให้บริการ</span></a></li>
+            <li>
+              <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>patient_register">
+              <i class='fa fa-life-bouy'></i> 
+                <span>ให้บริการ</span>
+              </a>
+            </li>
             <li class="treeview">
               <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
