@@ -62,7 +62,11 @@
                 <td><?php echo $row[lname];?></td>
                 <td><?php echo $sex[$row[sex]];?></td>
                 <td><?php echo $row[age];?></td>
+<<<<<<< Updated upstream
                 <td><a href="../emr/?ptid_key=<?php echo $row['ptid_key'];?>" class="btn btn-block btn-success">EMR</a></td>
+=======
+                <td><a href='../emr/?ptid=<?php echo $row[ptid_key];?>'>EMR</a></td>
+>>>>>>> Stashed changes
               </tr>
 <?php
   }
