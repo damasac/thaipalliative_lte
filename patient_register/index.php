@@ -50,18 +50,18 @@
 <?php
   $sex[1]="ชาย";
   $sex[2]="หญิง";
-  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where hospcode like '{$_SESSION[tpc_puser_hcode]}'";
+  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where hospcode like '{$_SESSION['tpc_puser_hcode']}'";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>
               <tr>
-                <td><?php echo $row[hospcode];?></td>
-                <td><?php echo $row[pid];?></td>
-                <td><?php echo $row[hn];?></td>
-                <td><?php echo $row[name];?></td>
-                <td><?php echo $row[lname];?></td>
-                <td><?php echo $sex[$row[sex]];?></td>
-                <td><?php echo $row[age];?></td>
+                <td><?php echo $row['hospcode'];?></td>
+                <td><?php echo $row['pid'];?></td>
+                <td><?php echo $row['hn'];?></td>
+                <td><?php echo $row['name'];?></td>
+                <td><?php echo $row['lname'];?></td>
+                <td><?php echo $sex[$row['sex']];?></td>
+                <td><?php echo $row['age'];?></td>
                 <td><a href="../emr/?ptid_key=<?php echo $row['ptid_key'];?>" class="btn btn-block btn-success">EMR</a></td>
               </tr>
 <?php
