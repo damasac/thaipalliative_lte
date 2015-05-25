@@ -533,7 +533,7 @@
             <!--<div class="checkbox" style="font-size:16px;">-->
                 <input type="text" class="form-control" id="date" name="date" value="__/__/____"><br><br>
                 <script>
-                    jQuery($con,'#date').datetimepicker({
+                    jQuery('#date').datetimepicker({
                         timepicker:false,
                         format:'d.m.Y H:i',
                         inline:true,
@@ -619,7 +619,7 @@
 					    <div class="col-lg-3">
 						<input type="text" class="form-control" id="time" placeholder="" id="time" />
 						<script>
-						    jQuery($con,'#time').datetimepicker({
+						    jQuery('#time').datetimepicker({
 							    datepicker:false,
 							    inline:true,
 							    format:'H:i'
@@ -700,7 +700,7 @@
 					    <div class="col-lg-6">
 						<input type="text" class="form-control" id="datetime" placeholder="" id="datetime" />
 						<script>
-						    jQuery($con,'#datetime').datetimepicker({
+						    jQuery('#datetime').datetimepicker({
 							inline:true,
 							lang:'th'
 							});
@@ -870,8 +870,7 @@
 
         <?php }
         ?>
-        <script>
-
+<script>
     function editQuestion(fieldid) {
         if ($("#tumbonCheck").is(":checked")) {
 		var tumbon = 1;

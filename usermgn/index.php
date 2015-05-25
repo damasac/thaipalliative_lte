@@ -24,7 +24,7 @@
 <div class="box">
 <div class="box-header">
     
-  <?php  echo "<pre>"; print_r($_SESSION);?>
+  <?php  //echo "<pre>"; print_r($_SESSION);?>
 <div class="box-title">จัดการสมาชิก</div><br>
 
 <table id="userTable" class="table table-striped table-bordered" cellspacing="0">

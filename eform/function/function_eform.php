@@ -198,7 +198,7 @@ function formgenForEdit($dataField,$dataFormMain,$con){
     ///////////////////////////////////////////////////
     
     
-function formgenForShow($i,$dataField){
+function formgenForShow($con,$i,$dataField){
 	 if($dataField["fieldtype"]=="text"){
 	    $formtext = "<label>".$dataField["fieldname"]."</label>";
 	    $formtext .= "<input type='text' class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."'>";
@@ -311,7 +311,7 @@ function formgenForShow($i,$dataField){
     }
     
 
-function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$value_tumbon){
+function formgenForUpdate($con,$i,$dataField,$value,$value_province,$value_amphur,$value_tumbon){
 	 if($dataField["fieldtype"]=="text"){
 	    $formtext = "<label>".$dataField["fieldname"]."</label>";
 	    $formtext .= "<input type='text' class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."' value='".$value."'>";
@@ -358,6 +358,7 @@ function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$va
 	 else if($dataField["fieldtype"]=="checkbox"){
 	    $formcheckbox = "<label>".$dataField["fieldname"]."</label><br><br>";
 	    $sqlCheckbox = "SELECT * FROM `formchoice` WHERE fieldid='".$dataField["fieldid"]."' AND choiceetc='0' ORDER BY choiceid";
+	 
 	    $queryCheckbox = mysqli_query($con,$sqlCheckbox);
 	    while($dataCheckbox = mysqli_fetch_assoc($queryCheckbox)){
 		$formcheckbox .= "<div class='checkbox-inline'>";

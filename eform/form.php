@@ -79,11 +79,11 @@ include_once("function/function_eform.php");
 					    $value_tumbon = $datavalue[$dataField["fieldvalue"]."_tumbon"];
 				    }
 				    echo "<div class='showForm'>";
-				    echo formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$value_tumbon);
+				    echo formgenForUpdate($con,$i,$dataField,$value,$value_province,$value_amphur,$value_tumbon);
 				    echo "</div>";
 				}else{
 				    echo "<div class='showForm'>";
-				    echo formgenForUpdate($i,$dataField);
+				    echo formgenForUpdate($con,$i,$dataField);
 				    echo "</div>";
 				}
 				$i++;

@@ -38,8 +38,9 @@ include_once("inc_menu.php");
 				if($dataRow["id"]==""){
 				    $idEform = 1;
 				}else{
-				    $idEform =  $dataRow["id"];
+				    $idEform =  $dataRow["id"]+1;
 				}
+				echo $idEform;
 			    ?>
 			    <div class="row">
 				     <div class="col-lg-3 pull-right">
@@ -163,6 +164,7 @@ function popup_custom(id,title) {
 		});
 	}
         function showEform(id,useradd){
+	    alert(id+useradd);
 	    $.ajax({
 		    url: "ajax-createform-loaddata.php?task=createForm",
 		    type: "post",

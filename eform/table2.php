@@ -35,7 +35,7 @@
 	if($dataFormMain["status_share"]==1 && $dataFormMain["public_view"]==1){
 	    $condition = "";
 	}else if($dataFormMain["public_view"]=="0"){
-	    $condition = "WHERE useradd='".$_SESSION[SS."SystemSession_Member_ID"]."' ";
+	    $condition = "WHERE useradd='".$useradd."' ";
 	}
 	//print_r($dataFormMain);
         $sqlColumn = "desc `".$dataFormMain["tablename"]."`";

@@ -88,7 +88,7 @@
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="text-left h4" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          จำนวนผู้ป่วย ใน Thai Care Cloud
+          จำนวนผู้ป่วย ใน Thai Palliative 
         </a>
       </h4>
     </div>
