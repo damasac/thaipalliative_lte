@@ -83,12 +83,7 @@
 			</div>
 			
 			<div class="col-md-8">
-				<div class="cls-content-sm panel panel-primary">
-					<div class="panel-heading">
-					  <h3 class="panel-title">Summary data</h3>
-					</div>
-					<div class="panel-body">
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom: -20px;">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom: -20px; color: #000;">
   <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
@@ -303,10 +298,7 @@
     </div>
   </div>
 </div>
-		
 
-					</div>
-				</div>
 			</div>
 			
 		</div>
