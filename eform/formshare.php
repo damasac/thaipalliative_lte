@@ -1,44 +1,41 @@
-<?php  if(0) { ?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?php } 
-$System_LayoutUse="layout_easy.html";
-$System_AjaxFileAction="ajax-eform-loaddata.php";
-$System_ShowAjaxIFrame=0;
-$myMenuKey="E Form";
-include_once("../_config/config_system.php");
-include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
-if($SystemSession_Member_ID>0) { 
-    	//----------------------------------------------------------------------------------------------------------------
-	include_once(SYSTEM_DOC_ROOT."system/core-start.php");
-	include_once(SYSTEM_DOC_ROOT."system/core-body.php");
-	include_once("function/function_eform.php");
-	$myMenuKey = "share";
-	include("inc_menu2.php");
-	//----------------------------------------------------------------------------------------------------------------
-        ?>
-	<script type="text/javascript" src="<?php echo SYSTEM_WEBPATH_ROOT?>/lib/_bootstrap/bootstrap.js"></script>
-    	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.css">
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.css">
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.css">
-	<link rel="stylesheet" href="style/style.css">
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+
+<?php sb('title');?> Ez Form <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
+<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+<?php eb();?>
+
+<?php include "../_connection/db_sql.php"; ?>
+<?php sb('content_header');?>
+<?php
+$MenuType="MenuMain";
+$MenuSetting="shareform";
+include_once("inc_menu.php");
+?>
+<!--<ol class="breadcrumb">-->
+<!--<li><a href="#"><i class="fa fa-home"></i> Home</a></li>-->
+<!--<li><a href="#">Examples</a></li>-->
+<!--<li class="active">Blank page</li>-->
+<!--</ol>-->
+<?php eb();?>
+
+<?php sb('content'); ?>
+
                     <div class="panel panel-default">
                         <div class="panel-body" style="height: auto;">
                             <div class="container-fluid">
                              <h1>Form Share</h1>
                              <br>
 			    <?php
-				//mysql_select_db("eform") or die(mysql_error());
-				$sqlForm = mysql_query("SELECT MAX(formid) AS id FROM formmain") or die(mysql_error());
-				$numberRow = mysql_num_rows($sqlForm);
-				$dataRow = mysql_fetch_assoc($sqlForm);
+				//mysqli_select_db("eform") or die(mysqli_error());
+				$sqlForm = mysqli_query($con,"SELECT MAX(formid) AS id FROM formmain") or die(mysqli_error());
+				$numberRow = mysqli_num_rows($sqlForm);
+				$dataRow = mysqli_fetch_assoc($sqlForm);
 				$idEform =  $dataRow["id"]+1;
 			    ?>
-			    <div class="row">
-				     <div class="col-lg-3 pull-right">
-					 <button class="btn btn-success btn-lg btn-block" onclick="showEform('<?php echo $idEform;?>');"><i class="fa fa-database"></i>&nbsp;&nbsp;&nbsp;Create E-Form</button>
-				     </div>
-				 </div>
+
 				<br>
 			   </div>
 			    <?php if($numberRow==0){
@@ -49,7 +46,6 @@ if($SystemSession_Member_ID>0) {
 					<tr>
 					    <th>ลำดับ</th>
 					    <th>ชื่อตาราง</th>
-					    <th>สร้างโดย</th>
 					    <th>วันที่สร้าง</th>
 					    <th>จัดการ</th>
 					</tr>
@@ -60,20 +56,14 @@ if($SystemSession_Member_ID>0) {
 					
 					$sqlForm2 = "SELECT * FROM formmain  WHERE `status_share`='1' ";
 					
-					$queryForm2 = mysql_query($sqlForm2);
-					while($dataForm = mysql_fetch_assoc($queryForm2)){
+					$queryForm2 = mysqli_query($con,$sqlForm2);
+					while($dataForm = mysqli_fetch_assoc($queryForm2)){
 					?>
 					<tr id="<?php echo $dataForm["formid"];?>">
 					    <td><?php echo $i;?></td>
 					    <td><?php echo $dataForm["formname"];?></td>
 					    <td><?php echo $dataForm["createdate"];?></td>
-					    <td><?php
-						$sqlUser = "SELECT * FROM v04cascap.`puser` WHERE pid='".$dataForm["pid"]."' ";
-MYSQL_QUERY("SET character_set_results = 'latin1', character_set_client = 'latin1', character_set_connection = 'latin1', character_set_database = 'latin1', character_set_server = 'latin1'") or die(mysql_error());
-						$queryUser = mysql_query($sqlUser);
-						$dataUser = mysql_fetch_assoc($queryUser);
-echo tis620_to_utf8($dataUser["name"]." ".$dataUser["surname"]);
-					    ?></td>
+
 					    <td>
 						<button class='btn btn-primary btn-xs'
 							onclick="location.href='form.php?task=public&idFormMain=<?php echo $dataForm["formid"]?>'">
@@ -92,11 +82,11 @@ echo tis620_to_utf8($dataUser["name"]." ".$dataUser["surname"]);
 			    <?php } ?>
                         </div>
                     </div>
-	<!---###############################################################################--->
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.css">
-	<!---###############################################################################--->
 
+<?php eb();?>
+<?php sb('js_and_css_footer');?>
+	<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+	<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
 <script>
 function popup_custom(id,title) {
 
@@ -150,6 +140,28 @@ function popup_custom(id,title) {
 		});
         }
 </script>
-<?php
-}
-?>
+
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
+<script type="text/javascript" src="../_plugins/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script language="javascript" src="script/scriptGoogleForm.js"></script>
+<script>
+        $("select[data-attr]").select2();  
+	$('input[data-attr=date]').datetimepicker({
+		timepicker:false
+	      });
+    	$('input[data-attr=time]').datetimepicker({
+		datepicker:false
+	      });
+    	$('input[data-attr=datetime]').datetimepicker({
+
+	      });
+</script>
+
+<?php eb();?>
+ 
+<?php render($MasterPage);?>
+

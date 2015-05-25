@@ -50,7 +50,6 @@ include("inc_menu.php");
 	if($numColumn<=6){
 	    $truncate = mysql_query("TRUNCATE TABLE `".$dataFormMain["tablename"]."`");
 	}
-	//----------------------------------------------------------------------------------------------------------------
         ?>
 
 	<link rel="stylesheet" href="style/style.css">
@@ -81,7 +80,7 @@ include("inc_menu.php");
 						<?php echo $icon."&nbsp;&nbsp;&nbsp;".$dataColumn["Field"];?>
 						</h5>
 					    </th>
-                                            <?
+                                            <?php
                                         }
                                     ?>
                                         </tr>

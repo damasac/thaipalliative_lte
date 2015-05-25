@@ -9,6 +9,13 @@
    $dbname = $_POST["dbname"];
    $fieldtype = $_POST["fieldtype"];
    $fieldvalue = $_POST["fieldvalue"];
+   $useradd = $_POST["useradd"];
+   if($task=="deleteDataTable"){
+      $sqlDeleteData = "DELETE FROM `tbdata_".$_POST["formid"]."` WHERE id='".$_POST["id"]."' ";
+
+      mysqli_query($con,$sqlDeleteData) ;
+      exit;
+   }
    if($task=="shareform"){
       $sqlUpdateShare = "UPDATE `formmain` SET
          `status_share`='".$_POST["status_share"]."',
@@ -18,7 +25,7 @@
          `public_delete`='".$_POST["delete_share"]."'
          WHERE formid='".$_POST["id"]."'
       ";
-      $queryUpdateShare = mysqli_query($sqlUpdateShare) or die(mysqli_error());
+      $queryUpdateShare = mysqli_query($con,$sqlUpdateShare) or die(mysqli_error());
       if($queryUpdateShare){
          return true;
       }
@@ -54,7 +61,7 @@
     $datenow = date("Y-m-d H:i:s");
     $queryCreateDB = mysqli_query($con,$sqlCreateDB);
     $sqlCreateForm = "INSERT INTO formmain(databaseid,formname,formdesc,tablename,pid,createdate)
-    VALUES('".$id."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$id."','asdas','".$datenow."')";
+    VALUES('".$id."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$id."','".$useradd."','".$datenow."')";
  
     $queryCreateForm = mysqli_query($con,$sqlCreateForm) or die(mysqli_error()."$datenow");
     $sqlCreateFormId = mysqli_insert_id($con);

@@ -1,11 +1,11 @@
 <?php
     error_reporting(0);
-include "../_connection/db_sql.php";
+    include "../_connection/db_sql.php";
 ?>
 <?php
     
     $tablename = $_POST["tablename"];
-    //$useradd = $_SESSION[SS."SystemSession_Member_ID"];
+    $useradd = $_SESSION["tpc_puser_id"];
     $task = $_POST["task"];
     $id = $_POST["id"];
     $dadd = date("Y-m-d H:i:s");
@@ -28,6 +28,6 @@ include "../_connection/db_sql.php";
     if($_GET['Redirect']){ ?>
         location.href = "../<?php echo base64_decode($_GET["Redirect"]);?>";
     <?php } else {  ?>
-        location.href = "table.php?idFormMain=<?php echo $_POST["formid"];?>";
+        location.href = "table2.php?idFormMain=<?php echo $_POST["formid"];?>";
     <?php } ?>
 </script>

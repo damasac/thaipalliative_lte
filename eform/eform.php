@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> Register <?php eb();?>
+<?php sb('title');?> Ez Form <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 
@@ -18,11 +18,7 @@ $MenuType="MenuEform";
 $MenuSetting="manageform";
 	include("inc_menu.php");
 ?>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
-          </ol>
+
 <?php eb();?>
 
 <?php sb('content');?>

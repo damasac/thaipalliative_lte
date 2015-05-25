@@ -1,29 +1,28 @@
 <?php error_reporting(0); ?>
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> Register <?php eb();?>
+<?php sb('title');?> Ez Form <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
-
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">ห
 <link rel="stylesheet" href="../_plugins/js/jquery.datetimepicker.css">
 <link rel="stylesheet" href="style/style.css">
 <?php eb();?>
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
 <?php
-
+$useradd = $_SESSION["tpc_puser_id"];
 $idForm = $_GET["idFormMain"];
 $MenuType="MenuEform";
 $MenuSetting="viewform";
 include("inc_menu.php");
 include_once("function/function_eform.php");	
 ?>
-<ol class="breadcrumb">
-  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="#">Examples</a></li>
-  <li class="active">Blank page</li>
-</ol>
+<!--<ol class="breadcrumb">-->
+<!--  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
+<!--  <li><a href="#">Examples</a></li>-->
+<!--  <li class="active">Blank page</li>-->
+<!--</ol>-->
 <?php eb();?>
 
 <?php sb('content');?>
@@ -34,7 +33,6 @@ include_once("function/function_eform.php");
 	$queryFormMain = mysqli_query($con,$sqlFormMain) or die(mysqli_error());
 	$dataFormMain = mysqli_fetch_assoc($queryFormMain);
 
-	//$useradd = $_SESSION[SS."SystemSession_Member_ID"];
 
 	?>
 
@@ -48,13 +46,13 @@ include_once("function/function_eform.php");
                 <hr style="border:1px #AAAAAA solid">
                 <div id="form" style="height:auto;">
                     <?php
+		    $id = $_POST["id"];
 		    $id = $_GET["id"];	
 		    if($id==""){
 			srand(make_seed());
 			$randval = rand();
 			$id = $randval;
 		    }
-		    //echo $id;
 		    ?>
 			<form action="insertdata.php" method="post" class="form-horizontal" >
 			<?php 
@@ -90,7 +88,7 @@ include_once("function/function_eform.php");
 		<br>
 		        <?php }  ?>
 			<input type="hidden" name="id" id="id" value="<?php echo $id;?>">
-			<!--<input type="hidden" name="useradd" id="useradd" value="<?php //echo $useradd;?>">-->
+			<input type="hidden" name="useradd" id="useradd" value="<?php echo $useradd;?>">
 			<input type="hidden" name="tablename" id="tablename" value="<?php echo $dataFormMain["tablename"];?>">
 			<input type="hidden" name="formid" id="formid" value="<?php echo $dataFormMain["formid"];?>">
 			<input type="submit" class="btn btn-primary" value="ส่งข้อมูล" >

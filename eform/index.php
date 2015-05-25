@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> EZ Form <?php eb();?>
+<?php sb('title');?> Ez Form <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
@@ -10,15 +10,16 @@
 <?php include "../_connection/db_sql.php"; ?>
 <?php sb('content_header');?>
 <?php
+$useradd = $_SESSION["tpc_puser_id"];
 $MenuType="MenuMain";
 $MenuSetting="listeform";
 include_once("inc_menu.php");
 ?>
-<ol class="breadcrumb">
-<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-<li><a href="#">Examples</a></li>
-<li class="active">Blank page</li>
-</ol>
+<!--<ol class="breadcrumb">-->
+<!--<li><a href="#"><i class="fa fa-home"></i> Home</a></li>-->
+<!--<li><a href="#">Examples</a></li>-->
+<!--<li class="active">Blank page</li>-->
+<!--</ol>-->
 <?php eb();?>
 
 <?php sb('content'); ?>
@@ -27,7 +28,7 @@ include_once("inc_menu.php");
                     <div class="panel panel-default">
                         <div class="panel-body" style="height: auto;">
                             <div class="container-fluid">
-                             <h1>My E-Form</h1>
+                             <h1>My Ez Form</h1>
                              <br>
 			    <?php
 				$sqlForm = mysqli_query($con,"SELECT MAX(formid) AS id FROM formmain") or die(mysqli_error());
@@ -41,7 +42,7 @@ include_once("inc_menu.php");
 			    ?>
 			    <div class="row">
 				     <div class="col-lg-3 pull-right">
-					 <button class="btn btn-success btn-lg btn-block" onclick="showEform('<?php echo $idEform;?>');"><i class="fa fa-database"></i>&nbsp;&nbsp;&nbsp;Create E-Form</button>
+					 <button class="btn btn-success btn-lg btn-block" onclick="showEform('<?php echo $idEform;?>','<?php echo $useradd;?>');"><i class="fa fa-database"></i>&nbsp;&nbsp;&nbsp;Create E-Form</button>
 				     </div>
 				 </div>
 				<br>
@@ -70,8 +71,7 @@ include_once("inc_menu.php");
 					<?php
 					$i = 1;
 					
-					$sqlForm2 = "SELECT * FROM formmain ";
-					
+					$sqlForm2 = "SELECT * FROM formmain WHERE `pid`='".$useradd."' ";
 					$queryForm2 = mysqli_query($con,$sqlForm2);
 					while($dataForm = mysqli_fetch_assoc($queryForm2)){
 					?>
@@ -115,11 +115,11 @@ include_once("inc_menu.php");
                     </div>
 		    <!-- Large modal -->
 
-	<!---###############################################################################--->
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/bootstrap3-dialog/bootstrap-dialog.min.css">
-	<!---###############################################################################--->
 
+<?php eb();?>
+<?php sb('js_and_css_footer');?>
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
 <script>
 function popup_custom(id,title) {
 
@@ -161,14 +161,12 @@ function popup_custom(id,title) {
 		$("#delBar").slideUp();
 		});
 	}
-        function showEform(id){
+        function showEform(id,useradd){
 	    $.ajax({
 		    url: "ajax-createform-loaddata.php?task=createForm",
 		    type: "post",
-		    data: {id:id},
+		    data: {id:id,useradd:useradd},
 		    success: function(data){
-			//alert(data);
-			//console.log(data);
 			location.href="eform.php?idFormMain="+data+"";
 		    },
 		    error:function(){
@@ -176,11 +174,6 @@ function popup_custom(id,title) {
 		    }
 		});
         }
-</script>
-<?php eb();?>
-<?php sb('js_and_css_footer');?>
-<script>
-
 </script>
 <script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>

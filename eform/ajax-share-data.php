@@ -1,25 +1,12 @@
-<?php  if(0) { ?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><?php } 
-$System_LayoutUse="layout_easy.html";
-$System_AjaxFileAction="ajax-eform-loaddata.php";
-$System_ShowAjaxIFrame=0;
-$myMenuKey="E Form";
-include_once("../_config/config_system.php");
-include_once(SYSTEM_DOC_ROOT."system/core-start-ajax.php");
-if($SystemSession_Member_ID>0) { 
-    	//----------------------------------------------------------------------------------------------------------------
-	include_once(SYSTEM_DOC_ROOT."system/core-start.php");
-	include_once("function/function_eform.php");
+
+<?php include "../_connection/db_sql.php"; ?>
+<?php 
 	    $sql = "SELECT * FROM `formmain` WHERE `formid`='".$_GET["id"]."'";
 	    
-	    $query = mysql_query($sql);
-	    $data = mysql_fetch_assoc($query);
+	    $query = mysqli_query($con,$sql);
+	    $data = mysqli_fetch_assoc($query);
         ?>
-    	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js-select2/select2.css">
-	<script type="text/javascript" src="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.js"></script>
-	<link rel="stylesheet" href="<? echo SYSTEM_WEBPATH_ROOT; ?>/lib/js/jquery.datetimepicker.css">
-	<link rel="stylesheet" href="style/style.css">
-				    <h1><i class="fa fa-cog"></i> ตั้งค่าการแชร์</h1>
+				    <h3><i class="fa fa-cog"></i> ตั้งค่าการแชร์</h3>
 				    <div class="row" style="height: 334px;color:black;">
 						<br>
 						<div class="col-lg-2">
@@ -125,7 +112,7 @@ if($SystemSession_Member_ID>0) {
 			var add_to_patient = $("#add_to_patient:checked").val();
 			var view_share = $("#view_share:checked").val();
 			var edit_share = $("#edit_share:checked").val();
-			var delete_share = $("#edit_share:checked").val();
+			var delete_share = $("#delete_share:checked").val();
 			}
 			$.ajax({
 			url: "ajax-createform-loaddata.php?task=shareform",
@@ -172,6 +159,3 @@ if($SystemSession_Member_ID>0) {
 	    }
 	
 </script>
-<?php
-}
-?>
