@@ -11,7 +11,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Register</a></li>
+    <li><a href="#">Treatment</a></li>
   </ol>
 <?php eb();?>
 
@@ -21,7 +21,7 @@
    <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
     <div class="info-box-content">
-      <span class="info-box-text"><h4>Follow-up Form</h4></span>
+      <span class="info-box-text"><h4>Treatment Form</h4></span>
       <span class="info-box-text">
         ข้อมูลการรักษาประคับประคอง ศูนย์การุณรักษ์ (Palliative Care Center)
       </span>
