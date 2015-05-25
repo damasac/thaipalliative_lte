@@ -54,11 +54,15 @@
                 <th>วันที่</th>
                 <th>แบบฟอร์ม/ข้อมูลการรักบริการ</th>
                 <th>หน่วยงาน</th>
+                <th>OP</th>
               </tr>
             </thead>
             <tbody>
 <?php
-  $sql="select dadd, formname, hcode from tb_emr where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
+  $form[1]="register.php";
+  $form[2]="treatment.php";
+  $form[3]="followup.php";
+  $sql="select formid,ptid_key,dataid,dadd, formname, hcode from tb_emr where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>
@@ -66,6 +70,7 @@
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
                 <td><?php echo hospitalname($row['hcode']);?></td>
+                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-success">Edit</a></td>
               </tr>
 <?php
   }
@@ -107,6 +112,7 @@
                 <th>วันที่</th>
                 <th>ข้อมูลจาก EZ-Form</th>
                 <th>หน่วยงาน</th>
+                <th>OP</th>
               </tr>
             </thead>
             <tbody>
@@ -119,6 +125,7 @@
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
                 <td><?php echo $row['hcode'];?></td>
+                <td> </td>
               </tr>
 <?php
   //}
