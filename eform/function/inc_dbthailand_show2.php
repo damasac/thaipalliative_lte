@@ -1,12 +1,13 @@
 <?php
  include_once("db_sql.php");
- $sqlProvince = mysqli_query($con,"SELECT * FROM `province`") or die(mysqli_error());
+
+ $sqlProvince = mysqli_query($con,"SELECT * FROM `const_province`") or die(mysqli_error());
  $sqlCount = mysqli_query($con,"SELECT * FROM `formfield` WHERE `fieldtype`='dbthailand' ");
  if($value_amphur!=""){
-   $sqlAmphur = mysqli_query($con,"SELECT * FROM `amphur` WHERE `PROVINCE_ID`='".$value_province."' ");
+   $sqlAmphur = mysqli_query($con,"SELECT * FROM `const_amphur` WHERE `PROVINCE_ID`='".$value_province."' ");
  }
  if($value_tumbon!=""){
-  $sqlTumbon = mysqli_query($con,"SELECT * FROM `district` WHERE `AMPHUR_ID`='".$value_amphur."'") or die(mysqli_error());
+  $sqlTumbon = mysqli_query($con,"SELECT * FROM `const_district` WHERE `AMPHUR_ID`='".$value_amphur."'") or die(mysqli_error());
  }
 ?>
 <label>
@@ -70,7 +71,7 @@
                     });
         }
         function getTumbon(name,value,num){
-             $("#tumbon_"+num).html("<option value=''>- เลือกตำบล -</option>");
+           $("#tumbon_"+num).html("<option value=''>- เลือกตำบล -</option>");
            var amphur_id = value;
            $.getJSON("ajax-area-loaddata.php?task=tumbon&amphur_id="+amphur_id,function(result){
                     $.each(result, function(i, field){

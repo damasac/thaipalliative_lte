@@ -1,6 +1,6 @@
 <?php
  include_once("../../_connection/db_sql.php");
- $sqlProvince = mysqli_query($con,"SELECT * FROM province ") or die(mysql_error());
+ $sqlProvince = mysqli_query($con,"SELECT * FROM const_province ") or die(mysql_error());
 ?>
 <div class="row">
     <div class="col-lg-3">    

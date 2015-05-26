@@ -20,12 +20,80 @@
 <?php
     $MenuSetting = "user";
     include_once("inc_menu.php");
+    $sqlSelectUser = "SELECT  * FROM `puser`
+    WHERE
+    `area`='".$_SESSION["tpc_puser_area"]."'
+    AND `province`='".$_SESSION["tpc_puser_province"]."'
+    AND `hcode`='".$_SESSION["tpc_puser_hcode"]."' ";
+    
+    $querySelectUser = $mysqli->query($sqlSelectUser);
+    function getTypeUser($status){
+        $typeUser;
+        if($status==1){
+            $typeUser="Super Admin";
+        }else if($status==2){
+            $typeUser="Admin Area";
+        }
+        else if($status==3){
+            $typeUser="Admin Site";
+        }
+        else if($status==4){
+            $typeUser="User Site";
+        }
+        return $typeUser;
+    }
 ?>
 <div class="box">
 <div class="box-header">
-    
+<span style="float:right;">
+    <div class="row">
+        <div class="col-lg-3">
+        <select class="form-control" id="area" name="area" >
+           <option value="0">- เลือกเขต -</option>
+            <?php for($i=1;$i<=13;$i++){?>
+                <option value="<?php echo $i?>"
+                    <?php if($_SESSION["tpc_puser_area"]==$i){echo "selected";}else{echo "";}?>
+                                >เขตบริการสุขภาพที่ <?php echo $i;?></option>
+           <?php }?>
+        </select>
+        </div>
+        <div class="col-lg-2">
+        <?php
+                    $sqlProvince = "SELECT * FROM `all_hospital_zone` WHERE zone_code='".$_SESSION["tpc_puser_area"]."' ";
+                    $queryProvince = $mysqli->query($sqlProvince);
+        ?>
+        <select class="form-control" id="province" name="province" >
+            <option value="0">- เลือกจังหวัด -</option>
+            <?php while($dataProvince = $queryProvince->fetch_assoc()){?>
+                <option value="<?php echo $dataProvince["provincecode"];?>"
+                <?php if($_SESSION["tpc_puser_province"]==$dataProvince["provincecode"]){echo "selected";}else{echo "";}?>
+                ><?php echo $dataProvince["province"]?></option>
+            <?php }?>
+        </select>
+        </div>
+        <div class="col-lg-5">
+        <?php
+                    $sqlHospital = "SELECT `hcode`,`name` FROM `all_hospital_thai` WHERE provincecode='".$_SESSION["tpc_puser_province"]."' ORDER BY hcode";
+                    $queryHospital = $mysqli->query($sqlHospital);
+        ?>
+            <select class="form-control" id="hospital" name="hospital" style="width:350px;">
+                <option value="0">- เลือกโรงพยาบาล -</option>
+                <?php while($dataHospital = $queryHospital->fetch_assoc()){?>
+                    <option value="<?php echo $dataHospital["hcode"];?>"
+                    <?php if($_SESSION["tpc_puser_hcode"]==$dataHospital["hcode"]){echo "selected";}else{echo "";}?>
+                    ><?php echo $dataHospital["hcode"]?> : <?php echo $dataHospital["name"]?></option>
+                <?php }?>
+            </select>
+        </div>
+        <div class="col-lg-2">
+        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</button>
+        </div>
+    </div>
+</span>
   <?php  //echo "<pre>"; print_r($_SESSION);?>
-<div class="box-title">จัดการสมาชิก</div><br>
+<!--<div class="box-title">จัดการสมาชิก-->
+
+<!--</div>--><br><br><br>
 
 <table id="userTable" class="table table-striped table-bordered" cellspacing="0">
         <thead>
@@ -34,19 +102,21 @@
                 <th>อีเมลล์</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>
-                <th>ชื่อโรงพยาบาล</th>
+                <th>สถานะ</th>
                 <th>วันที่สร้าง</th>
             </tr>
         </thead>
         <tbody>
+            <?php while($dataSelectUser = $querySelectUser->fetch_assoc()){?>
             <tr>
-                <td>Admin</td>
-                <td>skaball69@gmail.com</td>
-                <td>ภานุพงศ์</td>
-                <td>ศรีศุภเดชะ</td>
-                <td>โรงพยาบาลขอนแก่นราม</td>
-                <td>22-May-15</td>
+                <td><?php echo $dataSelectUser["username"];?></td>
+                <td><?php echo $dataSelectUser["email"];?></td>
+                <td><?php echo $dataSelectUser["fname"];?></td>
+                <td><?php echo $dataSelectUser["lname"];?></td>
+                <td><?php echo getTypeUser($dataSelectUser["status"]);?></td>
+                <td><?php echo $dataSelectUser["createdate"];?></td>
             </tr>
+            <?php }?>
         </tbody>
     </table>
 </div>
@@ -57,25 +127,35 @@
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
 <link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
-    function popup_custom() {
-
-	dialogPopWindow = BootstrapDialog.show({
-		title: "เพิ่มผู้ใช้งาน",
-		cssClass: 'popup-dialog',
-                closable: true,
-                closeByBackdrop: false,
-                closeByKeyboard: false,
-		size:'size-wide',
-		draggable: false,
-		message: $('<div></div>').load("form_adduser.php?id=", function(data){
-		}),
-		onshown: function(dialogRef){ 
-		},
-		onhidden: function(dialogRef){ 
-		}
-		
-	});
+    $("#hospital").select2();
+    function popup_custom(hcode) {
+        var hcode = $("#hospital").val();
+        var area = $("#area").val();
+        var province = $("#province").val();
+        if (hcode=="0") {
+               alert("กรุณาเลือกโรงพยาบาลก่อน");
+               return ;
+        }else{
+            dialogPopWindow = BootstrapDialog.show({
+                    title: "เพิ่มผู้ใช้งาน",
+                    cssClass: 'popup-dialog',
+                    closable: true,
+                    closeByBackdrop: false,
+                    closeByKeyboard: false,
+                    size:'size-wide',
+                    draggable: false,
+                    message: $('<div></div>').load("form_adduser.php?hcode="+hcode, function(data){
+                    }),
+                    onshown: function(dialogRef){ 
+                    },
+                    onhidden: function(dialogRef){ 
+                    }
+                    
+            });
+        }
 }
     $(document).ready(function() {
         $('#userTable').dataTable({
@@ -88,6 +168,27 @@
             });
     } );
 </script>
+<script>
+            $("#area").on("change",function(){
+                var area = $(this).val();
+                    $.getJSON("ajax-area-loaddata.php?task=areaProvince&area="+area+"",function(result){
+                        $("#province").html("<option value='0'>- เลือกจังหวัด -</option>");
+                        $.each(result, function(i, field){
+                              $("#province").append("<option value="+field.provincecode+" >"+field.province+"</option>");
+                        });
+                  });
+            });
+            $("#province").on("change",function(){
+                var province = $(this).val();
+                    $.getJSON("ajax-area-loaddata.php?task=provinceHospital&province="+province+"",function(result){
+                        $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
+                            $("#hospital").select2();
+                        $.each(result, function(i, field){
+                              $("#hospital").append("<option value="+field.hcode+" >"+field.hcode+" : "+field.name+"</option>");
+                        });
+                  });
+            });
+        </script>
 <script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
 <link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
