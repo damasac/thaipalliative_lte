@@ -6,8 +6,9 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php include "../_connection/db.php"; ?>
   <h1>
-    <small></small>
+    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,7 +17,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "../_connection/db.php"; ?>
+
   <!-- Main content -->
 <?php
   $sex[1]="ชาย";
@@ -104,7 +105,7 @@
                 <th>วันที่</th>
                 <th>แบบฟอร์ม/ข้อมูลการรักบริการ</th>
                 <th>หน่วยงาน</th>
-                <th>OP</th>
+                <th>แก้ไขข้อมูล</th>
               </tr>
             </thead>
             <tbody>
@@ -120,7 +121,17 @@
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
                 <td><?php echo hospitalname($row['hcode']);?></td>
-                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-success">Edit</a></td>
+<?php
+  if ($_SESSION['tpc_puser_hcode'] == $row['hcode']) {
+?>
+                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-success"><i class="fa fa-fw fa-edit"></i> Edit</a></td>
+<?php
+  }else{
+?>
+                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
+<?php
+  }
+?>
               </tr>
 <?php
   }
@@ -162,7 +173,7 @@
                 <th>วันที่</th>
                 <th>ข้อมูลจาก EZ-Form</th>
                 <th>หน่วยงาน</th>
-                <th>OP</th>
+                <th>แก้ไขข้อมูล</th>
               </tr>
             </thead>
             <tbody>
@@ -196,12 +207,3 @@
  
 <?php render($MasterPage);?>
 
-<?php
-function hospitalname ($hcode) {
-  global $mysqli;
-  $sql="select name from all_hospital_thai where code5 = '$hcode';";
-  $rst=$mysqli->query($sql);
-  $row=$rst->fetch_assoc();
-  return $row['name'];
-}
-?>

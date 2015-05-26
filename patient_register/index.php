@@ -8,8 +8,9 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php include "../_connection/db.php"; ?>
   <h1>
-    <small></small>
+    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -18,7 +19,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "../_connection/db.php"; ?>
+
   <!-- Main content -->
   <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
@@ -43,7 +44,7 @@
                 <th>สกุล</th>
                 <th>เพศ</th>
                 <th>อายุ</th>
-                <th>OP</th>
+                <th>เข้าดูข้อมูล</th>
               </tr>
             </thead>
             <tbody>

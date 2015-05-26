@@ -14,3 +14,13 @@ $mysqli ->set_charset("utf8");
 //$res->fetch_array();
 //$res->num_rows;
 ?>
+
+<?php
+function hospitalname ($hcode) {
+  global $mysqli;
+  $sql="select name from all_hospital_thai where code5 = '$hcode';";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+  return $row['name'];
+}
+?>
