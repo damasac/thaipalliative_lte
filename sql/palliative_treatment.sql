@@ -1,35 +1,26 @@
--- phpMyAdmin SQL Dump
--- version 4.4.3
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 26, 2015 at 02:55 PM
--- Server version: 5.6.24
--- PHP Version: 5.5.24
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : localhost
+Source Server Version : 50617
+Source Host           : localhost:3306
+Source Database       : thaipalliative_lte
 
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2015-05-27 05:16:33
+*/
 
---
--- Database: `thaipalliative_lte`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `palliative_treatment`
---
-
-CREATE TABLE IF NOT EXISTS `palliative_treatment` (
+-- ----------------------------
+-- Table structure for palliative_treatment
+-- ----------------------------
+DROP TABLE IF EXISTS `palliative_treatment`;
+CREATE TABLE `palliative_treatment` (
   `ptid` bigint(20) NOT NULL COMMENT 'ID',
-  `hospcode` varchar(15) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Hospital Code',
-  `pid` varchar(15) COLLATE utf8_unicode_ci NOT NULL COMMENT 'PID',
   `f2datein` date DEFAULT NULL COMMENT 'วันที่เข้ารับการรักษาตัว',
   `f2dateconsult` date DEFAULT NULL COMMENT 'วันที่ปรึกษา',
   `f2wardconsult` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'หอผู้ป่วยที่ปรึกษา',
@@ -168,19 +159,10 @@ CREATE TABLE IF NOT EXISTS `palliative_treatment` (
   `f2cartno` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `update_by` int(11) NOT NULL COMMENT 'แก้ไขโดย',
   `create_by` int(11) NOT NULL COMMENT 'สร้างโดย',
-  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา'
+  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา',
+  PRIMARY KEY (`ptid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `palliative_treatment`
---
-ALTER TABLE `palliative_treatment`
-  ADD PRIMARY KEY (`ptid`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of palliative_treatment
+-- ----------------------------

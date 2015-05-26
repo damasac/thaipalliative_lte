@@ -1,35 +1,26 @@
--- phpMyAdmin SQL Dump
--- version 4.4.3
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 26, 2015 at 03:49 PM
--- Server version: 5.6.24
--- PHP Version: 5.5.24
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : localhost
+Source Server Version : 50617
+Source Host           : localhost:3306
+Source Database       : thaipalliative_lte
 
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2015-05-27 05:16:20
+*/
 
---
--- Database: `thaipalliative_lte`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `palliative_followup`
---
-
-CREATE TABLE IF NOT EXISTS `palliative_followup` (
+-- ----------------------------
+-- Table structure for palliative_followup
+-- ----------------------------
+DROP TABLE IF EXISTS `palliative_followup`;
+CREATE TABLE `palliative_followup` (
   `ptid` bigint(20) NOT NULL COMMENT 'ID',
-  `hospcode` varchar(15) NOT NULL COMMENT 'Hospital Code',
-  `pid` varchar(15) NOT NULL COMMENT 'PID',
   `f3value1` int(11) DEFAULT NULL COMMENT 'กิจกรรมการดูแล',
   `f3value1_1` int(11) NOT NULL COMMENT 'กิจกรรมการดูแล',
   `f3value2` int(11) DEFAULT NULL COMMENT 'การพูดคุยเรื่องสถานที่ดูแล',
@@ -48,19 +39,10 @@ CREATE TABLE IF NOT EXISTS `palliative_followup` (
   `f3problemlist` text COMMENT 'Problem list',
   `update_by` int(11) NOT NULL COMMENT 'แก้ไขโดย',
   `create_by` int(11) NOT NULL COMMENT 'สร้างโดย',
-  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา'
+  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา',
+  PRIMARY KEY (`ptid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ทะเบียนผู้ป่วย';
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `palliative_followup`
---
-ALTER TABLE `palliative_followup`
-  ADD PRIMARY KEY (`ptid`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of palliative_followup
+-- ----------------------------
