@@ -488,8 +488,7 @@ $(document).ready(function(){
         var ptid = '<?php echo $_GET['dataid']; ?>';
         var datalist=$('#frm-register').serialize();
 
-        $('#frm-group').hide();
-        $('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+        //$('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
         $.ajax({
                 url : "ajax-register-save.php?ptid="+ptid,
                 type:"POST",
@@ -505,7 +504,7 @@ $(document).ready(function(){
         });
     }
     
-    function popup_save(ptid) {
+function popup_save(ptid) {
 
 	dialogPopWindow = BootstrapDialog.show({
 		title: 'ผลการทำงาน',

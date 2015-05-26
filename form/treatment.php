@@ -17,6 +17,14 @@
 </ol>
 <?php
 include_once "../_connection/db.php";
+//หาข้อมูลใน register
+$sql = "SELECT ptid_key, hcode FROM tb_emr WHERE id = '$_GET[dataid]';";
+$res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+$dbarr_reg = $res->fetch_array();
+
+$sql = "SELECT ptid, hospcode, pid FROM palliative_register WHERE ptid_key = '$dbarr_reg[ptid_key]' AND hospcode = '$dbarr_reg[hcode]';";
+$res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+$dbarr_reg = $res->fetch_array();
 
 $res = $mysqli->query("SELECT * FROM palliative_treatment")or die('[' . $mysqli->error . ']');
 $numGroup = $res->num_rows;
@@ -47,16 +55,18 @@ if($dbarr['ptid']){
     <div class="box">
     <div class="box-body">
     
-    <form>
+    <form id="frm-treatment" onsubmit="frm_treatment(); return false;">
     <div class="row" style="padding: 25px 25px 25px 25px;">
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
-          <input type="text" name="<?php $i=1; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" readonly>
+           <input type="hidden" id="task" name="task" value="<?php echo $task; ?>" />
+          <input type="hidden"name="ptid" value="<?php echo $_GET['dataid']; ?>" />
+          <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['hospcode']; ?>">
         </div>
         
         <div class="form-group col-lg-6">
           <label>PID: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" readonly>
+          <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['pid']; ?>">
         </div>
         
         <div class="form-group col-lg-12">
@@ -129,7 +139,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-12">
           <label>8. การวินิจฉัยหลัก </label>
-          <textarea name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>"></textarea>
+          <textarea name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>"><?php echo $dbarr[$i]; ?></textarea>
         </div>
 
         <div class="form-group col-lg-12">
@@ -799,7 +809,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-12">
           <label>แผนผังครอบครัว (Genogram)</label>
-          <textarea class="form-control" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>"></textarea>
+          <textarea class="form-control" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>"><?php echo $dbarr[$i]; ?></textarea>
         </div>
 
         <div class="form-group col-lg-12">
@@ -958,7 +968,7 @@ if($dbarr['ptid']){
                 รหัสที่ได้จากระบบ<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                Date<input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+                Date<input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo date('Y-m-d H:i:s'); ?>">
               </div>
               </div><hr>
             </div>
@@ -1001,7 +1011,47 @@ $(document).ready(function(){
      increaseArea: '20%' // optional
   });
 });
-</script>   
+</script>
+<script>
+    function frm_treatment() {
+        var ptid = '<?php echo $_GET['dataid']; ?>';
+        var datalist=$('#frm-treatment').serialize();
+
+        //$('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+        $.ajax({
+                url : "ajax-treatment-save.php?ptid="+ptid,
+                type:"POST",
+                data : datalist,
+                success : function(returndata) {
+                     if ($.trim(returndata)=='save' || $.trim(returndata)=='update') {
+                        popup_save('<?php echo $dbarr_reg['ptid']; ?>');
+                    }
+                },
+                error : function(xhr, statusText, error) {
+                    
+                }
+        });
+    }
+    
+function popup_save(ptid) {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: 'ผลการทำงาน',
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: '<hr><h1 class="text-center"><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1><div class="form-group"><hr><div class="col-md-12"><a role="button" href="../emr/?ptid='+ptid+'" class="btn btn-lg btn-primary btn-block"><li class="fa fa-book"></li> ไปที่หน้า EMR</a></div></div>&nbsp;',
+		onshown: function(dialogRef){ 
+            $("#ezfrom").select2();
+            //(".select2-input").attr("id","ezfrom");
+		},
+		onhidden: function(dialogRef){ 
+			//alert('onhidden');
+		}
+	});
+}
+
+</script>
 
 <?php eb();?>
  
