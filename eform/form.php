@@ -108,6 +108,10 @@ include_once("function/function_eform.php");
 <?php eb();?>
 <?php sb('js_and_css_footer');?>
 
+
+<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <script type="text/javascript" src="../_plugins/js/jquery.datetimepicker.js"></script>
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
