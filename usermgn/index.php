@@ -131,6 +131,7 @@
                 <th>นามสกุล</th>
                 <th>สถานะ</th>
                 <th>วันที่สร้าง</th>
+                <th>จัดการ</th>
             </tr>
         </thead>
         <tbody id="dataSelectUser">
@@ -142,6 +143,10 @@
                 <td><?php echo $dataSelectUser["lname"];?></td>
                 <td><?php echo getTypeUser($dataSelectUser["status"]);?></td>
                 <td><?php echo $dataSelectUser["createdate"];?></td>
+                <td>
+                    <button class='btn btn-warning btn-xs' onclick="editUser('<?php echo $dataSelectUser['id'];?>','<?php echo $dataSelectUser['hcode']?>')">แก้ไข</button>
+                    <button class='btn btn-danger btn-xs' onclick="deleteUser('<?php echo $dataSelectUser['id'];?>')">ลบ</button>
+                </td>
             </tr>
             <?php }?>
         </tbody>
@@ -157,6 +162,43 @@
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
+    function deleteUser(id){
+        dialogPopWindow = BootstrapDialog.show({
+                    title: "ลบผู้ใช้งาน",
+                    cssClass: 'popup-dialog',
+                    closable: true,
+                    closeByBackdrop: false,
+                    closeByKeyboard: false,
+                    size:'size-wide',
+                    draggable: false,
+                    message: $('<div></div>').load("form_deleteuser.php?id="+id, function(data){
+                    }),
+                    onshown: function(dialogRef){ 
+                    },
+                    onhidden: function(dialogRef){ 
+                    }
+                    
+         });
+    }
+    function editUser(id,hcode) {
+        //code
+        dialogPopWindow = BootstrapDialog.show({
+                    title: "แก้ไขผู้ใช้งาน",
+                    cssClass: 'popup-dialog',
+                    closable: true,
+                    closeByBackdrop: false,
+                    closeByKeyboard: false,
+                    size:'size-wide',
+                    draggable: false,
+                    message: $('<div></div>').load("form_edituser.php?hcode="+hcode+"&id="+id, function(data){
+                    }),
+                    onshown: function(dialogRef){ 
+                    },
+                    onhidden: function(dialogRef){ 
+                    }
+                    
+            });
+    }
     $("#area").on("change",function(){
             $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
             $("#hospital").select2();
