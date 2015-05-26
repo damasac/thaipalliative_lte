@@ -7,16 +7,13 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
-  <h1>
-    <small></small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Follow-up Form</a></li>
-  </ol>
 <?php eb();?>
 
 <?php sb('content');?>
+<ol class="breadcrumb">
+   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+   <li><a href="#">Follow-up Form</a></li>
+</ol>
 <?php
 include_once "../_connection/db.php";
 
@@ -178,10 +175,33 @@ if($dbarr['ptid']){
 
     </div>
   </div>
+
+<div id="div-onsave"></div>
    
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
+<script>
+    function frm_register() {
+        var ptid = '<?php echo $_GET['dataid']; ?>';
+        var datalist=$('#frm-register').serialize();
+
+        $('#frm-group').hide();
+        $('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+        $.ajax({
+                url : "ajax-register-save.php?ptid="+ptid,
+                type:"POST",
+                data : datalist,
+                success : function(returndata) {
+                    //$("#div-onsave").html(returndata);
+                },
+                error : function(xhr, statusText, error) {
+                    
+                }
+        });
+    }
+
+</script>
 <?php eb();?>
  
 <?php render($MasterPage);?>

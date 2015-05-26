@@ -11,23 +11,19 @@ function calAge(o){
      document.getElementById("age").value = current_year - tmp[0];
 }
 </script>
+<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">
+<link href="../_plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <?php eb();?>
 
 <?php sb('content_header');?>
-<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">
-<link href="../_plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
-<?php include "../_connection/db.php"; ?>
-  <h1>
-    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
-  </h1>
-
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Register</a></li>
-  </ol>
 <?php eb();?>
 
 <?php sb('content');?>
+<?php include "../_connection/db.php"; ?>
+<ol class="breadcrumb">
+   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+   <li><a href="#">Register</a></li>
+</ol>
 <?php
 
 /** Connect CASCAP database. */

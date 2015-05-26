@@ -3,20 +3,18 @@
 <?php sb('title');?> Treatment <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
+<link href="../_plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <?php eb();?>
 
 <?php sb('content_header');?>
-<link href="../_plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
-  <h1>
-    <small></small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Treatment</a></li>
-  </ol>
+
 <?php eb();?>
 
 <?php sb('content');?>
+<ol class="breadcrumb">
+   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+   <li><a href="#">Treatment</a></li>
+</ol>
 <?php
 include_once "../_connection/db.php";
 
