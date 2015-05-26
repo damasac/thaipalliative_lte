@@ -37,8 +37,8 @@
         </div><!-- /.info-box -->
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <center><img src="ss1.png" width=800 border=0></center><br>
-          <center><img src="ss2.png" width=800 border=0></center>
+          <center><img src="ss1.png" class="img-responsive img-rounded" border=0></center><br>
+          <center><img src="ss2.png" class="img-responsive img-rounded" border=0></center>
         </section>
         <section class="content-header">
           <h1>
