@@ -245,7 +245,7 @@ $.extend( $.validator, {
 		messages: {},
 		groups: {},
 		rules: {},
-		errorClass: "error",
+		errorClass: "alert alert-danger alert-dismissable",
 		validClass: "valid",
 		errorElement: "label",
 		focusCleanup: false,
