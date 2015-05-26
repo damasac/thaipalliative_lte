@@ -9,16 +9,14 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php eb();?>
+
+<?php sb('content');?>
 <?php include "../_connection/db.php"; ?>
 <ol class="breadcrumb">
    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
    <li><a href="#">EMR</a></li>
 </ol>
-<?php eb();?>
-
-<?php sb('content');?>
-  
-<h3><b><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</b></h3><br>
       
 <?php
   $sex[1]="ชาย";
@@ -164,6 +162,8 @@
                   <li><a style="cursor: pointer;" onclick="popup_ezform('myform', '<?php echo $_GET["ptid_key"]; ?>');"><span class="fa fa-plus-circle"></span> My Form</a></li>
                   <li class="divider"></li>
                   <li><a style="cursor: pointer;" onclick="popup_ezform('public', '<?php echo $_GET["ptid_key"]; ?>');"><span class="fa fa-plus-circle"></span> Public Form</a></li>
+                  <li class="divider"></li>
+                  <li><a href="../eform" target="_blank"><span class="fa fa-plus-circle"></span> Go to EZ-Form</a></li>
                 </ul>
               </div>
             
