@@ -251,6 +251,26 @@ function popup_ezform(task, ptid_key) {
 	});
 }
 
+function remove_ezform(task, id, tablename) {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: 'Easy Form (EZ-Form)',
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: $('<div></div>').load("../substudy/ajax-edit-ezform.php?task="+task+"&id="+id+"&tablename="+tablename+"&ptid="+'<?php echo $_GET['ptid']; ?>', function(data){
+			//runSomeScript();
+		}),
+		onshown: function(dialogRef){ 
+            $("#ezfrom").select2();
+            //(".select2-input").attr("id","ezfrom");
+		},
+		onhidden: function(dialogRef){ 
+			//alert('onhidden');
+		}
+	});
+}
+
 function load_ezform(formid, id, ptid_key) {
     $('#div-ezform').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
     $.ajax({
