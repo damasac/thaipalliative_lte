@@ -460,7 +460,7 @@ if($dbarr['ptid']){
     </div>
   </div>
 
-  <pre><div id="div-onsave"></div></pre>
+ 
 
 <?php eb();?>
 
@@ -499,13 +499,33 @@ $(document).ready(function(){
                 type:"POST",
                 data : datalist,
                 success : function(returndata) {
-                    $("#div-onsave").html(returndata);
+                    if ($.trim(returndata)) {
+                        popup_save($.trim(returndata));
+                    }
                 },
                 error : function(xhr, statusText, error) {
                     System_Notice("Error! Could not retrieve the data.",'danger');
                 }
         });
     }
+    
+    function popup_save(ptid) {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: 'ผลการทำงาน',
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: '<hr><h1 class="text-center"><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1><div class="form-group"><hr><div class="col-md-12"><a role="button" href="../emr/?ptid='+ptid+'" class="btn btn-lg btn-primary btn-block"><li class="fa fa-book"></li> ไปที่หน้า EMR</a></div></div>&nbsp;',
+		onshown: function(dialogRef){ 
+            $("#ezfrom").select2();
+            //(".select2-input").attr("id","ezfrom");
+		},
+		onhidden: function(dialogRef){ 
+			//alert('onhidden');
+		}
+	});
+}
 
 </script>
 

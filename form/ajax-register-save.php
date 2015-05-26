@@ -40,8 +40,9 @@ if($_POST['task']=='save'){
     $sql = "INSERT INTO `palliative_register` (".$fields.") VALUES (".$values.");";
     //echo $sql; exit;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $ptid = $mysqli->insert_id;
+    echo $ptid;
     $sql = "UPDATE palliative_register SET ptid_key = ptid WHERE ptid_key = 0 AND ptid ='$ptid'";
-
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');    
     //$pgroup = $mysqli->insert_id;
 } else  if($_POST['task']=='update'){
@@ -56,7 +57,7 @@ if($_POST['task']=='save'){
     $values = substr($values, 0, -2); // remove back string eg. , 2 string
     //insert data form
     $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
-    
+    echo $ptid;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 }
 function nextpid ($hcode) {
@@ -67,14 +68,3 @@ function nextpid ($hcode) {
     return $dbarr['pid'];
 }
 ?>
-    <div id="divfrm-followup-tab2">
-        <div class="text-center">
-            <hr>
-            <h1><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1>
-            <div class="form-group">
-                <hr>
-                <div class="col-md-6"><button type="button" onclick="loadForm('<?php echo $pgroup; ?>');" class="btn btn-lg btn-success btn-block" id="createreport">ดูข้อมูลที่บันทึก</button></div>
-                <div class="col-md-6"><button type="button" onclick='location.href="?tab=admin&task=followup-group-manager"; return false;' class="btn btn-lg btn-primary btn-block">รายการกลุ่มทั้งหมด</button></div>
-            </div>
-        </div>
-    </div>
