@@ -52,12 +52,12 @@ if($dbarr['ptid']){
     <div class="row" style="padding: 25px 25px 25px 25px;">
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
-          <input type="text" name="<?php $i=1; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type="text" name="<?php $i=1; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" readonly>
         </div>
         
         <div class="form-group col-lg-6">
           <label>PID: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" readonly>
         </div>
         
         <div class="form-group col-lg-12">

@@ -164,6 +164,11 @@ if($dbarr['ptid']){
 }else {
     $task = 'save';
 }
+
+  if ($dbarr['createdate']!="0000-00-00 00:00:00") {
+     echo $dbarr['createdate']=substr($dbarr['createdate'],8,2).substr($dbarr['createdate'],5,2).substr($dbarr['createdate'],0,4);
+  }
+print_r($dbarr);
 ?>
 
     <div class="info-box">
@@ -200,7 +205,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo substr($dbarr[$i],0,10); ?>" data-provide="datepicker" data-date-language="th-th" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo str_replace("0000-00-00","",substr($dbarr[$i],0,10)); ?>">
         </div>
 
         <div class="form-group col-lg-12">
@@ -210,7 +215,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" onchange="calAge(this);"  data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo str_replace("0000-00-00","",$dbarr[$i]); ?>" onchange="calAge(this);" required>
         </div>
 
         <div class="form-group col-lg-2">
@@ -289,15 +294,65 @@ if($dbarr['ptid']){
             <div class="row">
                <div class="col-lg-3">
      ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required id="tambonSelect">
+<?php
+     if ($dbarr['tambon'] != "") {
+?>
+          <option value="<?php echo $dbarr['tambon'];?>">
+<?php
+     $sql="select DISTRICT_NAME from const_district where DISTRICT_CODE like '{$dbarr['tambon']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $tambon = $res2->fetch_array();
+    echo $tambon['DISTRICT_NAME'];
+?>
+          </option>
+<?php
+     }else{
+?>
           <option value="0">- ค้นจากชื่อตำบล -</option>
+<?php
+     }
+?>
+
      </select>
               </div>
 
                <div class="col-lg-3">
-                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required></select>
+                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required>
+<?php
+     if ($dbarr['ampur'] != "") {
+?>
+          <option value="<?php echo $dbarr['ampur'];?>">
+<?php
+     
+     $sql="select AMPHUR_NAME from const_amphur where AMPHUR_CODE like '{$dbarr['ampur']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $amphur = $res2->fetch_array();
+    echo $amphur['AMPHUR_NAME'];
+?>
+          </option>
+<?php
+     }
+?>                    
+                </select>
               </div>
               <div class="col-lg-3">
-                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly=true required></select>
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly=true required>
+<?php
+     if ($dbarr['changwat'] != "") {
+?>
+          <option value="<?php echo $dbarr['changwat'];?>">
+<?php
+     
+     $sql="select PROVINCE_NAME from const_province where PROVINCE_CODE like '{$dbarr['changwat']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $amphur = $res2->fetch_array();
+    echo $amphur['PROVINCE_NAME'];
+?>
+          </option>
+<?php
+     }
+?>                                        
+                </select>
               </div>
               <div class="col-lg-3">
                 รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control">
@@ -410,10 +465,7 @@ if($dbarr['ptid']){
 
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
-<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker-thai.js"></script>
-<script type="text/javascript" src="../_plugins/datepicker-th/locales/bootstrap-datepicker.th.js"></script>
-
+<!-- InputMask -->
 <script src="../_plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
@@ -429,7 +481,9 @@ $(document).ready(function(){
      radioClass: 'iradio_minimal-blue',
      increaseArea: '20%' // optional
   });
-  $("[data-mask]").inputmask();
+  $("#createdate").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
+  $("#birth").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
+  
 });
 </script>
 <script>
@@ -453,9 +507,10 @@ $(document).ready(function(){
     }
 
 </script>
+
 <!--Query province amphur tambon By Ball-->
 <script>
-     $('.datepicker').datepicker();
+     
      $("#tambonSelect").select2();
      $(function(){
           $(".select2-input").attr("id","textSearch");

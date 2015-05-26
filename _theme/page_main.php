@@ -71,7 +71,7 @@
             <span class="sr-only">Toggle navigation</span>
           </a>
 	  <a href="#" >
-            <span style="  color: white;position: relative;top: 15px;"><?php echo $_SESSION["tpc_puser_hcodename"];?></span>
+            <span style="  color: white;position: relative;top: 15px;"><?php echo $_SESSION["tpc_puser_hcodenamecode"];?></span>
           </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
