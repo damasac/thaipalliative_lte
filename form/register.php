@@ -151,7 +151,7 @@ if($dbarr['ptid']){
               <div class="col-lg-2">
                 หมู่ที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
               </div>
-               <div class="col-lg-3">
+               <div class="col-lg-2">
                 หมู่บ้าน<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
               </div>
                <div class="col-lg-3">
@@ -202,6 +202,8 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>แต่งงาน</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>แยก/หย่า</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>หม้าย</label></div>
+               <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>อื่นๆ</label>&nbsp;&nbsp;
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div>
           </div>
         </div>
 
@@ -212,6 +214,8 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>ประกันสังคม</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>รัฐวิสาหกิจ</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>จ่ายเอง</label></div>
+             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='6' ? 'checked' : ''; ?> value='6'>อื่นๆ</label>&nbsp;&nbsp;
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div>
           </div>
         </div>
 
@@ -224,6 +228,8 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>เกษตรกร</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='6' ? 'checked' : ''; ?> value='6'>นักบวช</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='7' ? 'checked' : ''; ?> value='7'>ไม่ได้ประกอบอาชีพ</label></div>
+             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='8' ? 'checked' : ''; ?> value='8'>อื่นๆ</label>&nbsp;&nbsp;
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div>
           </div>
         </div>
 
