@@ -6,16 +6,26 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php include "_connection/db.php"; ?>
   <h1>
-    <small></small>
+    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
   </h1>
+
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
   </ol>
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include "_connection/db.php"; ?>
+        <div class="info-box">
+          <span class="info-box-icon bg-blue"><i class="fa fa-home"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text"><h4>Thai Palliative Care Cloud</h4></span>
+            <span class="info-box-text">
+
+            </span>
+          </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>

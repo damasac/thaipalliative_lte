@@ -246,7 +246,7 @@
 		  
             <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><i class='fa fa-gear'></i> <span>Home</span></a></li>
+            <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><i class='fa fa-home'></i> <span>Home</span></a></li>
             <li>
               <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>patient_register">
               <i class='fa fa-life-bouy'></i> 

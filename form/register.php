@@ -14,9 +14,11 @@ function calAge(o){
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php include "../_connection/db.php"; ?>
   <h1>
-    <small></small>
+    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
   </h1>
+
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="#">Register</a></li>
@@ -25,7 +27,6 @@ function calAge(o){
 
 <?php sb('content');?>
 <?php
-include_once "../_connection/db.php";
 
 $res = $mysqli->query("SELECT * FROM palliative_register")or die('[' . $mysqli->error . ']');
 $numGroup = $res->num_rows;
@@ -78,7 +79,7 @@ if($dbarr['ptid']){
         
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" date>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" data-provide="datepicker" data-date-language="th-th" date>
         </div>
         
         <div class="form-group col-lg-12">
@@ -166,16 +167,19 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-12">
             <div class="row">
                <div class="col-lg-3">
-                ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required></select>
+     ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required id="tambonSelect">
+          <option value="0">- ค้นจากชื่อตำบล -</option>
+     </select>
               </div>
+           
                <div class="col-lg-3">
-                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required></select>
+                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required></select>
               </div>
               <div class="col-lg-3">
-                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" readonly required></select>
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly=true required></select>
               </div>
               <div class="col-lg-3">
-                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control">
               </div>
             </div>
         </div>
@@ -284,6 +288,14 @@ if($dbarr['ptid']){
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker-thai.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/locales/bootstrap-datepicker.th.js"></script>
+<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
     function frm_register() {
         var ptid = '<?php echo $_GET['dataid']; ?>';
@@ -303,6 +315,46 @@ if($dbarr['ptid']){
                 }
         });
     }
+
+</script>
+<!--Query province amphur tambon By Ball-->
+<script>
+     $('.datepicker').datepicker();
+     $("#tambonSelect").select2();
+     $(function(){
+          $(".select2-input").attr("id","textSearch");
+      $("#textSearch").on('keyup', function(e){
+          if (e.keyCode>3) {
+            var txtSearch = $(this).val();
+               $.getJSON("ajax-area-loaddata.php?task=getaddress&txtSearch="+txtSearch+"",function(result){
+                    console.log(result);
+                       $("#tambonSelect").html("<option value='0'>- ค้นหาตำบล -</option>");
+                       $.each(result, function(i, field){
+                             $("#tambonSelect").append("<option value="+field.DISTRICT_CODE+" >ต. "+field.DISTRICT_NAME+" : อ."+field.AMPHUR_NAME+" : จ."+field.PROVINCE_NAME+"</option>");
+
+                       });
+                    });
+                 }
+             });
+         });
+          //code
+          $("#tambonSelect").on("change",function(){
+              var tambon = $("#tambonSelect").val();
+              var tambontext = $("#tambonSelect option:selected").text();
+              var splittambon = tambontext.split(" : ");
+              var tambontext = splittambon[0];
+              var splittambon2 = tambontext.split(".");
+              var tambontext2 = splittambon2[1];
+              console.log(tambontext);
+               $(".select2-chosen").html("<option >"+tambontext2+"</option");
+               $.getJSON("ajax-area-loaddata.php?task=getaddress2&tambon="+tambon+"",function(result){
+                       $.each(result, function(i, field){
+                              $("#provinceSelect").html("<option value="+field.PROVINCE_CODE+">"+field.PROVINCE_NAME+"</option>");
+                              $("#amphurSelect").html("<option value="+field.AMPHUR_CODE+">"+field.AMPHUR_NAME+"</option>");
+                              $("#postcodeSelect").attr("value",field.POSTCODE);
+                       });
+               });
+          });
 
 </script>
 <?php eb();?>
