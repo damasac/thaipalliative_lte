@@ -42,7 +42,7 @@ include_once("function/function_eform.php");
     	<link rel="stylesheet" href="style/style.css">
         <div class="panel panel-default">
             <div class="panel-body" style="height: auto;">
-		<span style="float:right"><a href="table.php?task=public&idFormMain=<?php echo $_GET["idFormMain"]?>" class="btn btn-primary" style="color:white;">ดูตารางข้อมูล</a></span>
+		<span style="float:right"><a href="table2.php?task=public&idFormMain=<?php echo $_GET["idFormMain"]?>" class="btn btn-primary" style="color:white;">ดูตารางข้อมูล</a></span>
                 <p style="font-size:36px;color:black;"><?php echo $dataFormMain["formname"];?></p>
                 <p style="font-size:16px;"><?php echo $dataFormMain["formdesc"];?></p>
 		

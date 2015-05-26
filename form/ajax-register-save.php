@@ -25,6 +25,7 @@ if($_POST['task']=='save'){
     $fields = ''; $values = '';
     foreach($_POST as $key => $val){
         if($key <> 'task'){
+            if ($key=='pid') $val=nextpid($_POST[hospcode]);
             $fields .= $key.', ';
             $values .= "'". $mysqli ->real_escape_string($val)."', ";
         }
@@ -53,6 +54,13 @@ if($_POST['task']=='save'){
     $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
 
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+}
+function nextpid ($hcode) {
+    global $mysqli;
+    $sql="SELECT lpad(max(ifnull(pid,'0'))+1,5,'0') as pid from palliative_register where hospcode='{$hcode}'";
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $dbarr = $res->fetch_array();
+    return $dbarr['pid'];
 }
 ?>
     <div id="divfrm-followup-tab2">

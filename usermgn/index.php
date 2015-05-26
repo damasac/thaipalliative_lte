@@ -18,13 +18,26 @@
 <?php sb('content');?>
 <?php include "../_connection/db.php"; ?>
 <?php
+
     $MenuSetting = "user";
     include_once("inc_menu.php");
+    $status = $_SESSION["tpc_puser_status"];
+    if($status==1){
+        $condition = "";
+    }
+    else if($status==2 || $status==3){
+        $condition = "AND status!='1'";
+    }
+    else if($status==4){
+        $condition = "AND status NOT IN (1,2,3)";
+    }
     $sqlSelectUser = "SELECT  * FROM `puser`
     WHERE
     `area`='".$_SESSION["tpc_puser_area"]."'
     AND `province`='".$_SESSION["tpc_puser_province"]."'
-    AND `hcode`='".$_SESSION["tpc_puser_hcode"]."' ";
+    AND `hcode`='".$_SESSION["tpc_puser_hcode"]."'
+    ".$condition."
+    ";
     
     $querySelectUser = $mysqli->query($sqlSelectUser);
     function getTypeUser($status){
@@ -35,9 +48,12 @@
             $typeUser="Admin Area";
         }
         else if($status==3){
-            $typeUser="Admin Site";
+            $typeUser="Admin Province";
         }
         else if($status==4){
+            $typeUser="Admin Site";
+        }
+        else if($status==5){
             $typeUser="User Site";
         }
         return $typeUser;
@@ -45,8 +61,13 @@
 ?>
 <div class="box">
 <div class="box-header">
-<span style="float:right;">
+    <span style="float: right">
+        <button class="btn btn-info btn-flat" ><i class="fa fa-plus"></i> โหลดข้อมูล</button>
+        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</button>
+    </span>
+<span >
     <div class="row">
+        <?php if($_SESSION["tpc_puser_status"]==1){?>
         <div class="col-lg-3">
         <select class="form-control" id="area" name="area" >
            <option value="0">- เลือกเขต -</option>
@@ -57,6 +78,8 @@
            <?php }?>
         </select>
         </div>
+        <?php }else {}?>
+        <?php if($_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==1){?>
         <div class="col-lg-2">
         <?php
                     $sqlProvince = "SELECT * FROM `all_hospital_zone` WHERE zone_code='".$_SESSION["tpc_puser_area"]."' ";
@@ -71,12 +94,14 @@
             <?php }?>
         </select>
         </div>
-        <div class="col-lg-5">
+        <?php }?>
+        <?php if($_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==1 || $_SESSION["tpc_puser_status"]==4){?>
+        <div class="col-lg-3">
         <?php
                     $sqlHospital = "SELECT `hcode`,`name` FROM `all_hospital_thai` WHERE provincecode='".$_SESSION["tpc_puser_province"]."' ORDER BY hcode";
                     $queryHospital = $mysqli->query($sqlHospital);
         ?>
-            <select class="form-control" id="hospital" name="hospital" style="width:350px;">
+            <select class="form-control" id="hospital" name="hospital"  >
                 <option value="0">- เลือกโรงพยาบาล -</option>
                 <?php while($dataHospital = $queryHospital->fetch_assoc()){?>
                     <option value="<?php echo $dataHospital["hcode"];?>"
@@ -85,11 +110,10 @@
                 <?php }?>
             </select>
         </div>
-        <div class="col-lg-2">
-        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</button>
-        </div>
+        <?php }?>
     </div>
 </span>
+
   <?php  //echo "<pre>"; print_r($_SESSION);?>
 <!--<div class="box-title">จัดการสมาชิก-->
 

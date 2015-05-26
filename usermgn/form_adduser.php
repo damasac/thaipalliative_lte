@@ -71,7 +71,9 @@
               <?php if($status==1){?>
               <option value="1">Super Admin</option>
               <option value="2">Admin Area</option>
-              <option value="3">Admin Site</option>
+              <option value="3">Admin Province</option>
+              <option value="4">Admin Site</option>
+              <option value="5">User Site</option>
               <?php }if($status==2){?>
               <option value="3">Admin Site</option>
               <?php }?>
@@ -82,10 +84,10 @@
       </div>
     </div>
 </div>
-    <p>
-    <label>เขตบริการ</label>
-    <span class="text">เขตบริการสุขภาพที่ <?php echo $dataAddr["zone_code"];?></span>
-    </p>
+      <p>
+      <label>เขตบริการ</label>
+      <span class="text">เขตบริการสุขภาพที่ <?php echo $dataAddr["zone_code"];?></span>
+      </p>
       <p>
       <label>โรงพยาบาล</label><code id="valHospital" ></code>
       <span class="text"><?php echo $dataAddr["hname"];?></span>
@@ -103,8 +105,11 @@
 
     <label>ตำบล</label>
     <span class="text"><?php echo $dataAddr["tambon"];?></span>
-    <input type="hidden" id="tambon" name="tambon">
-   
+    <input type="hidden" id="area" name="area" value="<?php echo $dataAddr["zone_code"];?>">
+    <input type="hidden" id="hospital" name="hospital" value="<?php echo $hcode;?>">
+    <input type="hidden" id="province" name="province" value="<?php echo $dataAddr["provincecode"]?>">
+    <input type="hidden" id="amphur" name="amphur" value="<?php echo $dataAddr["amphurcode"]?>">
+    <input type="hidden" id="tambon" name="tambon" value="<?php echo $dataAddr["tamboncode"]?>">
     <div class="row">
       <div class="col-lg-12">
          <br>
@@ -158,8 +163,8 @@
     var fname = $("#fname").val();
     var lname = $("#lname").val();
     var status = $("#status").val();
-    var area = $("#areaSelect").val();
-    var site = $("#hospitalSelect").val();
+    var area = $("#area").val();
+    var site = $("#hospital").val();
     var province = $("#province").val();
     var amphur = $("#amphur").val();
     var district = $("#tambon").val();
@@ -240,18 +245,18 @@
                       district:district
                       },
 		    success: function(data){
-                      console.log(data)
-                      if (data=="userDenied") {
+
+                      if ($.trim(data)=="1") {
                         //code
                         $("#valUsername").show();
                         $("#valUsername").html("ชื่อนี้มีผู้ใช้งานแล้วกรุณาระบุใหม่");
                       }
-                      if (data=="emailDenied") {
+                      if ($.trim(data)=="2") {
                         //code
                         $("#valEmail").show();
                         $("#valEmail").html("อีเมล์นี้มีผู้ใช้งานแล้วกรุณาระบุใหม่");
                       }
-                      if (data=="Success") {
+                      if ($.trim(data)=="0") {
                         //code
                         location.href="index.php";
                       }
