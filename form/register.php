@@ -166,16 +166,19 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-12">
             <div class="row">
                <div class="col-lg-3">
-                ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required></select>
+     ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required id="tambonSelect">
+          <option value="0">- ค้นจากชื่อตำบล -</option>
+     </select>
               </div>
+           
                <div class="col-lg-3">
-                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required></select>
+                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly required></select>
               </div>
               <div class="col-lg-3">
-                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" readonly required></select>
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly required></select>
               </div>
               <div class="col-lg-3">
-                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control" readonly>
               </div>
             </div>
         </div>
@@ -284,6 +287,10 @@ if($dbarr['ptid']){
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
     function frm_register() {
         var ptid = '<?php echo $_GET['dataid']; ?>';
@@ -303,6 +310,45 @@ if($dbarr['ptid']){
                 }
         });
     }
+
+</script>
+<!--Query province amphur tambon By Ball-->
+<script>
+     $("#tambonSelect").select2();
+     $(function(){
+          $(".select2-input").attr("id","textSearch");
+      $("#textSearch").on('keyup', function(e){
+          if (e.keyCode>3) {
+            var txtSearch = $(this).val();
+               $.getJSON("ajax-area-loaddata.php?task=getaddress&txtSearch="+txtSearch+"",function(result){
+                    console.log(result);
+                       $("#tambonSelect").html("<option value='0'>- ค้นหาตำบล -</option>");
+                       $.each(result, function(i, field){
+                             $("#tambonSelect").append("<option value="+field.DISTRICT_CODE+" >ต. "+field.DISTRICT_NAME+" : จ."+field.PROVINCE_NAME+"</option>");
+
+                       });
+                    });
+                 }
+             });
+         });
+          //code
+          $("#tambonSelect").on("change",function(){
+              var tambon = $("#tambonSelect").val();
+              var tambontext = $("#tambonSelect option:selected").text();
+              var splittambon = tambontext.split(" : ");
+              var tambontext = splittambon[0];
+              var splittambon2 = tambontext.split(".");
+              var tambontext2 = splittambon2[1];
+              console.log(tambontext);
+               $(".select2-chosen").html("<option >"+tambontext2+"</option");
+               $.getJSON("ajax-area-loaddata.php?task=getaddress2&tambon="+tambon+"",function(result){
+                       $.each(result, function(i, field){
+                              $("#provinceSelect").html("<option value="+field.PROVINCE_CODE+">"+field.PROVINCE_NAME+"</option>");
+                              $("#amphurSelect").html("<option value="+field.AMPHUR_CODE+">"+field.AMPHUR_NAME+"</option>");
+                              $("#postcodeSelect").attr("value",field.POSTCODE);
+                       });
+               });
+          });
 
 </script>
 <?php eb();?>
