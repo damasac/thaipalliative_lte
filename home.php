@@ -34,7 +34,7 @@
 
         </section><!-- /.content -->
         
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom: -20px; color: #000;">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="color: #000;">
   <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
@@ -177,76 +177,7 @@
 			<td class="textvaluesmall text-right">487</td>
 			<td class="textvaluesmall text-right">96</td>
 			</tr>
-			<!-- <tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">4. โรงพยาบาล A</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">5. โรงพยาบาล B</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">6. โรงพยาบาล C</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>			
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">7. โรงพยาบาล D</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>			
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">8. โรงพยาบาล E</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>			
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">9. โรงพยาบาล F</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>			
-			<tr class="odd footable-disabled">
-			<td class="textlabelbold text-left" colspan="5">10. โรงพยาบาล G</td>
-			</tr>
-			<tr>
-			<td> </td>
-			<td class="textvaluesmall text-right">20,234</td>
-			<td class="textvaluesmall text-right">7,234</td>
-			<td class="textvaluesmall text-right">834</td>
-			<td class="textvaluesmall text-right">23</td>
-			</tr>			 -->
+			
 			</tbody>
 			</table>
 			</div>
