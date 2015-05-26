@@ -22,7 +22,6 @@ $dataFormMain = mysqli_fetch_assoc($queryFormMain);
             <div class="panel-body" style="height: auto;">
 		<div class="pull-right">
 			<a target="_blank" href="../eform/table2.php?task=public&idFormMain=<?php echo $_GET["idFormMain"]?>" class="btn btn-success" style="color:white;"><li class="fa fa-eye"></li> ดูตารางข้อมูล</a>
-			<a onclick="remove_ezform('remove', '<?php echo $_REQUEST["id"];?>', '<?php echo $dataFormMain["tablename"];?>');" class="btn btn-info" style="color:white;"><li class="fa fa-trash-o"></li> Delete Record</a>
 			<a href="?ptid=<?php echo $_GET['ptid_key']; ?>" class="btn btn-danger" style="color:white;"><li class="fa fa-times"></li> Close</a>
 		</div>  
 		        <p style="font-size:36px;color:black;"><?php echo $dataFormMain["formname"];?></p>
@@ -72,11 +71,7 @@ $dataFormMain = mysqli_fetch_assoc($queryFormMain);
                         ?>
 		<br>
 		        <?php }  ?>
-			<input type="hidden" name="id" id="id" value="<?php echo $id;?>">
-			<input type="hidden" name="useradd" id="useradd" value="<?php echo $useradd;?>">
-			<input type="hidden" name="tablename" id="tablename" value="<?php echo $dataFormMain["tablename"];?>">
-			<input type="hidden" name="formid" id="formid" value="<?php echo $dataFormMain["formid"];?>">
-			<input type="submit" class="btn btn-primary" value="ส่งข้อมูล" >
+
                     </form>
 		
                 </div>

@@ -197,14 +197,14 @@
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
                 <td><?php echo hospitalname($row['hcode']);?></td>
-                <?php
+<?php
 if ($_SESSION['tpc_puser_hcode'] == $row['hcode']) {
 ?>
                 <td><a onclick="load_ezform('<?php echo $row['formid']; ?>', '<?php echo $row['id']; ?>', '<?php echo $row['ptid_key']; ?>');" class="btn btn-block btn-success"><i class="fa fa-fw fa-edit"></i> Edit</a></td>
 <?php
   }else{
 ?>
-                <td><a  class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
+                <td><a onclick="load_ezform_readonly('<?php echo $row['formid']; ?>', '<?php echo $row['id']; ?>', '<?php echo $row['ptid_key']; ?>');" class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
 <?php
   }
 ?>
@@ -275,6 +275,21 @@ function load_ezform(formid, id, ptid_key) {
     $('#div-ezform').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
     $.ajax({
          url : "../substudy/ezform.php?ptid_key="+ptid_key+"&idFormMain="+formid+"&id="+id,
+        success : function(returndata) {
+            $("#div-ezform").html(returndata);
+            $('html,body').animate({scrollTop: $("a[name='ezform']").offset().top},'slow');
+        },
+        error : function(xhr, statusText, error) {
+            //
+        }
+    });
+   
+}
+
+function load_ezform_readonly(formid, id, ptid_key) {
+    $('#div-ezform').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+    $.ajax({
+         url : "../substudy/ezform_readonly.php?ptid_key="+ptid_key+"&idFormMain="+formid+"&id="+id,
         success : function(returndata) {
             $("#div-ezform").html(returndata);
             $('html,body').animate({scrollTop: $("a[name='ezform']").offset().top},'slow');
