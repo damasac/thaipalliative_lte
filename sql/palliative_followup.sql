@@ -1,47 +1,66 @@
-/*
-Navicat MySQL Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.4.3
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 26, 2015 at 03:49 PM
+-- Server version: 5.6.24
+-- PHP Version: 5.5.24
 
-Source Server         : localhost
-Source Server Version : 50617
-Source Host           : localhost:3306
-Source Database       : thaipalliative_lte
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-Target Server Type    : MYSQL
-Target Server Version : 50617
-File Encoding         : 65001
 
-Date: 2015-05-26 13:46:04
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+--
+-- Database: `thaipalliative_lte`
+--
 
--- ----------------------------
--- Table structure for palliative_followup
--- ----------------------------
-DROP TABLE IF EXISTS `palliative_followup`;
-CREATE TABLE `palliative_followup` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `palliative_followup`
+--
+
+CREATE TABLE IF NOT EXISTS `palliative_followup` (
   `ptid` bigint(20) NOT NULL COMMENT 'ID',
   `hospcode` varchar(15) NOT NULL COMMENT 'Hospital Code',
   `pid` varchar(15) NOT NULL COMMENT 'PID',
-  `hn` varchar(15) NOT NULL COMMENT 'HN',
   `f3value1` int(11) DEFAULT NULL COMMENT 'กิจกรรมการดูแล',
+  `f3value1_1` int(11) NOT NULL COMMENT 'กิจกรรมการดูแล',
   `f3value2` int(11) DEFAULT NULL COMMENT 'การพูดคุยเรื่องสถานที่ดูแล',
   `f3value3` int(11) DEFAULT NULL COMMENT 'การพูดคุยเรื่องสถานที่เสียชีวิต',
   `f3value4` int(11) DEFAULT NULL COMMENT 'การพูดคุยเรื่องการปฏิเสธเครื่องพยุงชีพ',
   `f3value4_2` int(11) DEFAULT NULL COMMENT 'Livings will',
   `f3value5` int(11) DEFAULT NULL COMMENT 'ได้รับการพยุงชีพ (ใส่ ETT) ก่อนปรึกษา',
   `f3value6` int(11) DEFAULT NULL COMMENT 'การถอดถอนเครื่องพยุงชีพ',
+  `f3value6_2` int(11) NOT NULL COMMENT 'การถอดถอนเครื่องพยุงชีพ',
+  `f3value6_3` int(11) NOT NULL COMMENT 'การถอดถอนเครื่องพยุงชีพ',
+  `f3value6_4` int(11) NOT NULL COMMENT 'การถอดถอนเครื่องพยุงชีพ',
+  `f3value6_5` int(11) NOT NULL COMMENT 'การถอดถอนเครื่องพยุงชีพ',
   `f3datedeath` date DEFAULT NULL COMMENT 'วันที่เสียชีวิต',
   `f3deathlocation` int(11) DEFAULT NULL COMMENT 'สถานที่เสียชีวิต',
-  `f3deathreason` varchar(255) DEFAULT NULL COMMENT 'ลักษณะการเสียชีวิต',
+  `f3deathreason` int(11) DEFAULT NULL COMMENT 'ลักษณะการเสียชีวิต',
   `f3problemlist` text COMMENT 'Problem list',
-  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา',
   `update_by` int(11) NOT NULL COMMENT 'แก้ไขโดย',
-  `create_time` datetime NOT NULL COMMENT 'สร้างเวลา',
   `create_by` int(11) NOT NULL COMMENT 'สร้างโดย',
-  PRIMARY KEY (`ptid`)
+  `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ทะเบียนผู้ป่วย';
 
--- ----------------------------
--- Records of palliative_followup
--- ----------------------------
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `palliative_followup`
+--
+ALTER TABLE `palliative_followup`
+  ADD PRIMARY KEY (`ptid`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
