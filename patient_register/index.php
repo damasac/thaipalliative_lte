@@ -8,18 +8,15 @@
 <?php eb();?>
 
 <?php sb('content_header');?>
-<?php include "../_connection/db.php"; ?>
-  <h1>
-    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Register</a></li>
-  </ol>
 <?php eb();?>
 
 <?php sb('content');?>
+<ol class="breadcrumb">
+   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+   <li><a href="#">Register</a></li>
+</ol>
 
+<?php include "../_connection/db.php"; ?>
   <!-- Main content -->
   <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
