@@ -73,6 +73,7 @@ if(0 == $cascap && $insert != 1){
     $dbarr['3'] = $pid_str;
     $dbarr['4'] = '';
     $dbarr['5'] = date("d/m/Y");
+
   }else{
     function tis620_to_utf8($tis) {
       $utf8 = '';
@@ -102,7 +103,7 @@ if(0 == $cascap && $insert != 1){
                                         title AS prename,
                                         name AS name,
                                         surname AS lname,
-                                        '' AS sex,
+                                        v3 AS sex,
                                         '' AS nation,
                                         '' AS nationx,
                                         '' AS race,
@@ -156,6 +157,8 @@ if(0 == $cascap && $insert != 1){
     $dbarr['9'] = tis620_to_utf8($dbarr['9']);
     $dbarr['10'] = tis620_to_utf8($dbarr['10']);
     $dbarr['11'] = tis620_to_utf8($dbarr['11']);
+    
+    $dbarr['ptid_key'] = 0;
   }
 }
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
@@ -190,6 +193,7 @@ print_r($dbarr);
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
           <input type="hidden" id="task" name="task" value="<?php echo $task; ?>" />
+          <input type="hidden" id="ptid_key" name="ptid_key" value="<?php echo $dbarr['ptid_key']; ?>" />
           <input type="text" name="<?php $i=2; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" readonly minlength=5 maxlength=5 required>
         </div>
 

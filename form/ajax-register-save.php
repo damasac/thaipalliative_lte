@@ -12,14 +12,15 @@ include_once "../_connection/db.php";
 if($_POST['task']=='save'){
     
     $pid = $_SESSION['tpc_puser_id'];
-    $hcode = $_SESSION['tpc_puser_id'];
+    $hcode = $_SESSION['tpc_puser_hcode'];
     $datenow =date('Y-m-d H:i:s');
     $ptid_key = $_POST['ptid_key'];
     $sql ="INSERT INTO `tb_emr` (`formid`, `formname`, `tbname`, `ptid_key`, `dadd`, `pidadd`, `hcode`, `dupdate`, `pidupdate`)
-    VALUES ('3', 'ลงทะเบียนผู้ป่วย', 'palliative_register', '$ptid_key', '$datenow', '$pid', '$hcode', '$datenow', '$pid');";
+    VALUES ('1', 'ลงทะเบียนผู้ป่วย', 'palliative_register', '$ptid_key', '$datenow', '$pid', '$hcode', '$datenow', '$pid');";
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $ptid = $mysqli->insert_id;
     //echo $ptid; exit;
+
     $_POST['ptid'] = $ptid;
      // INSERT INTO table_name (column1,column2,column3,...) VALUES (value1,value2,value3,...);
     $fields = ''; $values = '';
@@ -39,6 +40,9 @@ if($_POST['task']=='save'){
     $sql = "INSERT INTO `palliative_register` (".$fields.") VALUES (".$values.");";
     //echo $sql; exit;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $sql = "UPDATE palliative_register SET ptid_key = ptid WHERE ptid_key = 0 AND ptid ='$ptid'";
+
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');    
     //$pgroup = $mysqli->insert_id;
 } else  if($_POST['task']=='update'){
     $ptid =$_GET['ptid'];
@@ -52,7 +56,7 @@ if($_POST['task']=='save'){
     $values = substr($values, 0, -2); // remove back string eg. , 2 string
     //insert data form
     $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
-    
+    echo $sql;exit;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 }
 function nextpid ($hcode) {

@@ -119,7 +119,7 @@
   $form[1]="register.php";
   $form[2]="treatment.php";
   $form[3]="followup.php";
-  $sql="select formid,ptid_key,dataid,dadd, formname, hcode from tb_emr where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
+  $sql="select formid,ptid_key,dataid,dadd, formname, hcode,id from tb_emr where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>
@@ -130,11 +130,11 @@
 <?php
   if ($_SESSION['tpc_puser_hcode'] == $row['hcode']) {
 ?>
-                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-success"><i class="fa fa-fw fa-edit"></i> Edit</a></td>
+                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['id'];?>" class="btn btn-block btn-success"><i class="fa fa-fw fa-edit"></i> Edit</a></td>
 <?php
   }else{
 ?>
-                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['dataid'];?>" class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
+                <td><a href="../form/<?php echo $form[$row['formid']];?>?dataid=<?php echo $row['id'];?>" class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
 <?php
   }
 ?>

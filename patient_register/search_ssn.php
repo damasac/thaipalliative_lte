@@ -112,7 +112,7 @@
                   <td>'.$sex[$row['sex']].'</td>
                   <td>'.$row['age'].'</td>
                   <td>
-                  	<a href="../emr/?ptid_key='.$row['ptid_key'].'" class="btn btn-block btn-primary">EMR</a>
+                  	<a href="../emr/?ptid='.$row['ptid_key'].'" class="btn btn-block btn-primary">EMR</a>
                   </td>
                 </tr>';
   	}
