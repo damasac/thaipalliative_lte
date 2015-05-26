@@ -30,6 +30,7 @@ include_once "../_connection/db.php";
 $res = $mysqli->query("SELECT * FROM palliative_register")or die('[' . $mysqli->error . ']');
 $numGroup = $res->num_rows;
 $fields = $res->fetch_fields();
+
 //echo "<pre>"; echo $fields[1]->name; echo "</pre>";
 $sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as birthdb FROM palliative_register WHERE ptid = '$_GET[dataid]';";
 $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
@@ -285,7 +286,7 @@ if($dbarr['ptid']){
         $('#frm-group').hide();
         $('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
         $.ajax({
-                url : "ajax-register.php?ptid="+ptid,
+                url : "ajax-register-save.php?ptid="+ptid,
                 type:"POST",
                 data : datalist,
                 success : function(returndata) {
