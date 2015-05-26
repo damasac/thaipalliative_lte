@@ -1,9 +1,17 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Home <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<script src=""></script>
+<?php eb();?>
+
+<?php sb('content_header');?>
+  <h1>
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  </ol>
 <?php eb();?>
 
 <?php sb('content');?>
@@ -25,8 +33,9 @@
           <!-- Your Page Content Here -->
 
         </section><!-- /.content -->
+        
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom: -20px; color: #000;">
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <div class="text-left">
@@ -73,7 +82,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <div class="text-left">
@@ -114,12 +123,12 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <div class="text-left">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <span class="h4">จำนวนผู้ป่วยจำแนกตามหน่วยบริการ</span>
+        <a class="collapsed h4" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          จำนวนผู้ป่วยจำแนกตามหน่วยบริการ
         </a>
         </div>
       </h4>
