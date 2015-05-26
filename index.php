@@ -49,7 +49,7 @@ if (isset($_SESSION['tpc_puser_hcode'])) {
 			<div class="cls-brand">
 				<a class="box-inline" href=".">
 					<!-- <img alt="Nifty Admin" src="img/logo.png" class="brand-icon"> -->
-					<span class="h1">Thai Palliative</span></span>
+					<span class="h1">Thai Palliative</span>
 				</a>
 			</div>
 		</div>
@@ -64,8 +64,8 @@ if (isset($_SESSION['tpc_puser_hcode'])) {
             <div class="col-md-4">
 				<div class="cls-content-sm panel">
 					<div class="panel-body">
-						<div style="display: none;" id="alert-login" class="callout callout-danger">
-						</div>
+                        <img src="img/karunruk-logo.png" alt="karunruk-logo" class="img-responsive img-rounded" style="margin: auto;">
+						<div style="display: none;" id="alert-login" class="callout callout-danger"></div>
 						<p class="pad-btm h2">Sign In to system panel</p>
 						<form id="frm-login" onsubmit="submit_login(); return false;">
 							<div class="form-group">
