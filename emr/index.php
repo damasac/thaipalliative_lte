@@ -94,9 +94,9 @@
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#"><span class="fa fa-plus-circle"></span> Follow-up Form</a></li>
+                  <li><a href="../form/insert_emr.php?task=followup&ptid_key=<?php echo $_GET['ptid_key']; ?>"><span class="fa fa-plus-circle"></span> Follow-up Form</a></li>
                   <li class="divider"></li>
-                  <li><a href="#"><span class="fa fa-plus-circle"></span> Treatment Form</a></li>
+                  <li><a href="../form/insert_emr.php?task=treatment&ptid_key=<?php echo $_GET['ptid_key']; ?>"><span class="fa fa-plus-circle"></span> Treatment Form</a></li>
                 </ul>
               </div>
             
