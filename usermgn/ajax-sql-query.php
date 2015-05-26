@@ -23,11 +23,12 @@
         $sqlEmail = "SELECT * FROM `puser` WHERE `email`='".$email."' ";
         $queryEmail = $mysqli->query($sqlEmail);
         $numEmail = $queryEmail->num_rows;
+
         if($numUser==1){
-             echo "userDenied";
+             echo "1";
              exit;
         }else if($numEmail==1){
-            echo "emailDenied";
+            echo "2";
             exit;
         }else{
     
@@ -64,7 +65,7 @@
                 ";
        $query =   $mysqli->query($sql) or die(mysqli_error($mysqli));
             if($query){
-             echo "Success";
+             echo "0";
             }
         }
     }
