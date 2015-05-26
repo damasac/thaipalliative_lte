@@ -12,7 +12,7 @@ include_once "../_connection/db.php";
 
 
 if($_GET['task']=='myform'){ ?>
-<h3><b>My Form<b></h3><hr>
+<h3><li class="fa fa-user"></li> <b>My Form<b></h3><hr>
 <form>
     <div class="form-group">
     <input type="hidden" id="ptid_key" name="ptid_key" value="<?php echo $_GET['ptid_key']; ?>" />
@@ -43,6 +43,40 @@ if($_GET['task']=='myform'){ ?>
   
     
 </form>
+
+<?php }else if($_GET['task']=='public'){ ?>
+<h3><li class="fa fa-share-alt-square"></li> <b>Public Form<b></h3><hr>
+<form>
+    <div class="form-group">
+    <input type="hidden" id="ptid_key" name="ptid_key" value="<?php echo $_GET['ptid_key']; ?>" />
+     <select class="form-control" id="ezfrom" name="ezfrom">
+            <option value="0">- เลือก Public Form -</option>
+<?php
+  $sql="select formname, formid from formmain where status_share = '1';";
+  $rst=$mysqli->query($sql);
+  while($dbarr=$rst->fetch_assoc()) {
+?>
+    <option value="<?php echo $dbarr['formid']; ?>"><?php echo $dbarr['formname']; ?></option>
+<?php
+  }
+?>
+        </select>
+    </div>
+    <hr>
+    <div class="form-group">
+       <div class="row">
+            <div class="col-md-6">
+            <button type="button" id="btnsubmit" class="btn btn-block btn-success btn-lg">เลือก Form</button>
+            </div>
+            <div class="col-md-6">
+            <button type="button" id="btnclose" class="btn btn-block btn-danger btn-lg">Close</button>
+            </div>
+        </div>
+    </div>
+  
+    
+</form>
+<?php } ?>
 
 <script>
     $( "#btnsubmit" ).click(function() {
@@ -88,9 +122,3 @@ if($_GET['task']=='myform'){ ?>
        
     }
 </script>
-
-<?php }else if($_GET['task']=='public'){
-  
-}
-
-?>

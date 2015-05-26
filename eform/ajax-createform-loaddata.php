@@ -60,8 +60,8 @@
     ";
     $datenow = date("Y-m-d H:i:s");
     $queryCreateDB = mysqli_query($con,$sqlCreateDB);
-    $sqlCreateForm = "INSERT INTO formmain(databaseid,formname,formdesc,tablename,pid,createdate,public_add,public_edit,public_delete)
-    VALUES('".$id."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$id."','".$useradd."','".$datenow."','1','1','1')";
+    $sqlCreateForm = "INSERT INTO formmain(databaseid,formname,formdesc,tablename,pid,createdate,status_share,public_add,public_edit,public_delete)
+    VALUES('".$id."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$id."','".$useradd."','".$datenow."','0','1','1','1')";
  
     $queryCreateForm = mysqli_query($con,$sqlCreateForm) or die(mysqli_error()."$datenow");
     $sqlCreateFormId = mysqli_insert_id($con);

@@ -125,7 +125,13 @@
 				    delete_share:delete_share
 				    },
 			success: function(data){
+			        if (status_share==0) {
+							//code	
+				    location.href="index.php";
+				}else{
 				    location.href="formshare.php";
+
+				}
 			},
 			error:function(){
 			    alert("failure");
