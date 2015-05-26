@@ -50,7 +50,7 @@
 <?php
   $sex[1]="ชาย";
   $sex[2]="หญิง";
-  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where hospcode like '{$_SESSION['tpc_puser_hcode']}'";
+  $sql="select *,floor(datediff(curdate(),birth)/365.25) as age from palliative_register where hospcode like '{$_SESSION['tpc_puser_hcode']}'";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>
