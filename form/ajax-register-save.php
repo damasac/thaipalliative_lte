@@ -50,8 +50,8 @@ if($_POST['task']=='save'){
     
     $values = substr($values, 0, -2); // remove back string eg. , 2 string
     //insert data form
-    $sql = "UPDATE v05cascap.tbl_followup_group SET ". $values. " WHERE pgroup = '$ptid';";
-    echo $sql; exit;
+    $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
+
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 }
 ?>

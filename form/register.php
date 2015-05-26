@@ -63,12 +63,12 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
           <input type="hidden" id="task" name="task" value="<?php echo $task; ?>" />
-          <input type="text" name="<?php $i=2; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type="text" name="<?php $i=2; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" minlength=5 maxlength=5 required>
         </div>
         
         <div class="form-group col-lg-6">
           <label>PID: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" minlength=5 maxlength=5 required>
         </div>
 
           <div class="form-group col-lg-4">
@@ -78,7 +78,7 @@ if($dbarr['ptid']){
         
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" date>
         </div>
         
         <div class="form-group col-lg-12">
@@ -123,14 +123,14 @@ if($dbarr['ptid']){
           <div class='showForm'><label>8. สัญชาติ</label><br>
           <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไทย</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name="<?php echo $fields[$i]->name;?>" id=''/></div></div>
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
         </div>
 
         <div class="form-group col-lg-5">
           <div class='showForm'><label>9. เชื้อชาติ</label><br>
           <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไทย</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name='r' id=''/></div></div>
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
         </div>
 
         <div  class="form-group col-lg-7">
@@ -139,7 +139,7 @@ if($dbarr['ptid']){
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>คริสต์</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>อิสลาม</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name='r' id=''/></div></div>
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
         </div>
 
         <div class="form-group col-lg-12">
@@ -234,14 +234,14 @@ if($dbarr['ptid']){
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='3' ? 'checked' : ''; ?> value='3'>โรคไต</label></div>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>ความดันโลหิตสูง</label></div>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name='r' id=''/></div></div>
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
         </div>  
 
         <div  class="form-group col-lg-12">
           <div class='showForm'><label>17. ประวัติการรักษาด้วยแพทย์ทางเลือก/สมุนไพร</label><br>
           <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไม่มี</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>มี</label>&nbsp;&nbsp;
-            <input type='text' class='' name='r' id=''/></div></div>
+            <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
         </div>    
 
             <div class="form-group col-lg-12">
@@ -298,6 +298,9 @@ if($dbarr['ptid']){
         });
     }
 
+</script>
+<script>
+$("#frm-register").validate();
 </script>
 <?php eb();?>
 
