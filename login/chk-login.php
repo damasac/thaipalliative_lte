@@ -37,11 +37,12 @@ if(isset($user_login) and isset($pwd_login)) {
 	else if(($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
         //-----------------------
         $Ss_prefix = 'tpc_';
-		$_SESSION[$Ss_prefix.'puser_id'] = $dbarr['id'];
+	$_SESSION[$Ss_prefix.'puser_id'] = $dbarr['id'];
         $_SESSION[$Ss_prefix.'puser_username'] = $dbarr['username'];
         $_SESSION[$Ss_prefix.'puser_email'] = $dbarr['email'];
         $_SESSION[$Ss_prefix.'puser_status'] = $dbarr['status'];
         $_SESSION[$Ss_prefix.'puser_hcode'] = $dbarr['hcode'];
+        $_SESSION[$Ss_prefix.'puser_area'] = $dbarr['area'];
         //-----------------------
 		echo "success";
 	}

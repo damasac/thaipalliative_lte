@@ -63,6 +63,9 @@
 	dialogPopWindow = BootstrapDialog.show({
 		title: "เพิ่มผู้ใช้งาน",
 		cssClass: 'popup-dialog',
+                closable: true,
+                closeByBackdrop: false,
+                closeByKeyboard: false,
 		size:'size-wide',
 		draggable: false,
 		message: $('<div></div>').load("ajax-adduser-data.php?id=", function(data){

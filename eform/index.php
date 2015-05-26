@@ -15,7 +15,6 @@
             <li><a href="#">Examples</a></li>
             <li class="active">Blank page</li>
           </ol>
-
 <?php eb();?>
 
 <?php sb('content'); ?>
