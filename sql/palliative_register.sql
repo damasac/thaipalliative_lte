@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-05-26 13:35:45
+Date: 2015-05-26 13:46:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `palliative_register`;
 CREATE TABLE `palliative_register` (
-  `ptid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ptid` bigint(20) NOT NULL,
   `ptid_key` bigint(20) NOT NULL,
   `hospcode` varchar(15) NOT NULL COMMENT 'Hospital Code',
   `pid` varchar(15) NOT NULL COMMENT 'PID',
@@ -59,7 +59,7 @@ CREATE TABLE `palliative_register` (
   `create_by` int(11) NOT NULL COMMENT 'สร้างโดย',
   `update_time` datetime NOT NULL COMMENT 'แก้ไขเวลา',
   PRIMARY KEY (`ptid`)
-) ENGINE=InnoDB AUTO_INCREMENT=100000001 DEFAULT CHARSET=utf8 COMMENT='ทะเบียนผู้ป่วย';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ทะเบียนผู้ป่วย';
 
 -- ----------------------------
 -- Records of palliative_register
