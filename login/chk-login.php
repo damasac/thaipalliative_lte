@@ -13,7 +13,7 @@ if(isset($user_login) and isset($pwd_login)) {
     include_once "../_connection/db.php";
     
     $sql="SELECT * FROM puser WHERE username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
-    echo $sql;
+
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 	$dbarr = $res->fetch_assoc(); 
 
