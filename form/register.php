@@ -61,7 +61,7 @@ if(0 == $cascap && $insert != 1){
   if(0 == $cascap){
     $dataid = '';
     isset($_GET['dataid'])? $dataid = $_GET['dataid'] : '';
-    $sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as birthdb FROM palliative_register WHERE ptid = '".$dataid."';";
+    $sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as '8' FROM palliative_register WHERE ptid = '".$dataid."';";
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $dbarr = $res->fetch_array();
 
@@ -136,7 +136,7 @@ if(0 == $cascap && $insert != 1){
                                         '' AS update_by,
                                         '' AS create_by,
                                         '' AS update_time,
-                                        floor(datediff(curdate(),bdatedb)/365.25) as birthdb
+                                        floor(datediff(curdate(),bdatedb)/365.25) as '8'
                                       FROM patient
                                       WHERE cid LIKE ? AND ptid = ptid_key");
     $stmt->bind_param('s', $dataid);
