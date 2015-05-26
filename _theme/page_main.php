@@ -70,6 +70,9 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+	  <a href="#" >
+            <span style="  color: white;position: relative;top: 15px;"><?php echo $_SESSION["tpc_puser_hcodename"];?></span>
+          </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -172,37 +175,37 @@
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs">User : <?php echo $_SESSION['tpc_puser_username']; ?></span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- The user image in the menu -->
-                  <li class="user-header">
-                    <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="img-circle" alt="User Image" />
-                    <p>
-                     User : <?php echo $_SESSION['tpc_puser_username']; ?>
-                      <!--<small>Member since Nov. 2012</small>-->
-                    </p>
-                  </li>
+                <!--<ul class="dropdown-menu">-->
+                <!--  <!-- The user image in the menu -->
+                <!--  <li class="user-header">-->
+                <!--    <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="img-circle" alt="User Image" />-->
+                <!--    <p>-->
+                <!--     User : <?php echo $_SESSION['tpc_puser_username']; ?>-->
+                <!--      <!--<small>Member since Nov. 2012</small>-->
+                <!--    </p>-->
+                <!--  </li>-->
                   <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </li>
+                  <!--<li class="user-body">-->
+                  <!--  <div class="col-xs-4 text-center">-->
+                  <!--    <a href="#">Followers</a>-->
+                  <!--  </div>-->
+                  <!--  <div class="col-xs-4 text-center">-->
+                  <!--    <a href="#">Sales</a>-->
+                  <!--  </div>-->
+                  <!--  <div class="col-xs-4 text-center">-->
+                  <!--    <a href="#">Friends</a>-->
+                  <!--  </div>-->
+                  <!--</li>-->
                   <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
+                <!--  <li class="user-footer">-->
+                <!--    <div class="pull-left">-->
+                <!--      <a href="#" class="btn btn-default btn-flat">Profile</a>-->
+                <!--    </div>-->
+                <!--    <div class="pull-right">-->
+                <!--      <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php" class="btn btn-default btn-flat">Sign out</a>-->
+                <!--    </div>-->
+                <!--  </li>-->
+                <!--</ul>-->
               </li>
               <!-- Control Sidebar Toggle Button -->
               <!--<li>-->
@@ -263,10 +266,12 @@
             
             <li class="header">Setting Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
+	    <?php if($_SESSION["tpc_puser_status"]!=5){?>
+            <li ><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
+	    <?php }?>
 	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>eform"><i class='fa fa-file-o'></i> <span>Ez Form</span></a></li>
          
-	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-link'></i> <span>Logout</span></a></li>
+	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-sign-out'></i> <span>Logout</span></a></li>
 
 	
 			

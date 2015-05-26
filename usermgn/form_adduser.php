@@ -258,7 +258,6 @@
                       }
                       if ($.trim(data)=="0") {
                         //code
-                        alert(data);
                         location.href="index.php";
                       }
 
