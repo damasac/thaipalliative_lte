@@ -18,12 +18,10 @@ if(isset($user_login) and isset($pwd_login)) {
 	$dbarr = $res->fetch_assoc(); 
 
 	if(empty($_POST['username'])) {
-
 		echo "Error : กรุณากรอกรหัสผู้ใช้งาน";
 		exit();
 	}
 	else if(empty($_POST['password'])) {
-	    
 		echo "Error : กรุณากรอกรหัสผ่าน";
 		exit();
 	}
@@ -39,7 +37,7 @@ if(isset($user_login) and isset($pwd_login)) {
         //-----------------------
 
         $Ss_prefix = 'tpc_';
-	$_SESSION[$Ss_prefix.'puser_id'] = $dbarr['id'];
+		$_SESSION[$Ss_prefix.'puser_id'] = $dbarr['id'];
         $_SESSION[$Ss_prefix.'puser_username'] = $dbarr['username'];
         $_SESSION[$Ss_prefix.'puser_email'] = $dbarr['email'];
         $_SESSION[$Ss_prefix.'puser_status'] = $dbarr['status'];
