@@ -73,7 +73,6 @@ if(0 == $cascap && $insert != 1){
     $dbarr['3'] = $pid_str;
     $dbarr['4'] = '';
     $dbarr['5'] = date("d/m/Y");
-
   }else{
     function tis620_to_utf8($tis) {
       $utf8 = '';
@@ -157,8 +156,6 @@ if(0 == $cascap && $insert != 1){
     $dbarr['9'] = tis620_to_utf8($dbarr['9']);
     $dbarr['10'] = tis620_to_utf8($dbarr['10']);
     $dbarr['11'] = tis620_to_utf8($dbarr['11']);
-    
-    $dbarr['ptid_key'] = 0;
   }
 }
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
@@ -171,7 +168,7 @@ if($dbarr['ptid']){
   if ($dbarr['createdate']!="0000-00-00 00:00:00") {
      $dbarr['createdate']=substr($dbarr['createdate'],8,2).substr($dbarr['createdate'],5,2).substr($dbarr['createdate'],0,4);
   }
-
+//print_r($dbarr);
 ?>
 
     <div class="info-box">

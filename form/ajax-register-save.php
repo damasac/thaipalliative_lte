@@ -56,7 +56,7 @@ if($_POST['task']=='save'){
     $values = substr($values, 0, -2); // remove back string eg. , 2 string
     //insert data form
     $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
-    echo $sql;exit;
+    
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 }
 function nextpid ($hcode) {
