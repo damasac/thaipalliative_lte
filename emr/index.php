@@ -21,7 +21,7 @@
 <?php
   $sex[1]="ชาย";
   $sex[2]="หญิง";
-  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
+  $sql="select *,floor(datediff(curdate(),birth)/365.25) as age from palliative_register where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
   $rst=$mysqli->query($sql);
   $row=$rst->fetch_assoc();
 ?>  
