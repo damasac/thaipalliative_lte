@@ -10,11 +10,16 @@
     $status = $_POST["status"];
     $area = $_POST["area"];
     $site = $_POST["site"];
+    $province = $_POST["province"];
+    $amphur = $_POST["amphur"];
+    $district = $_POST["district"];
     $hcode = $_GET["hcode"];
     $date = date("Y-m-d H:i:s");
     //echo $password."<br>".$date;
     if($task=="addUser"){
-        $sql = "INSERT INTO `puser`(username,password,email,fname,lname,status,area,site,createdate)
+        $sql = "INSERT INTO
+        `puser`
+        (`username`,`password`,`email`,`fname`,`lname`,`status`,`area`,`hcode`,`district`,`amphur`,`province`,`createdate`)
         VALUES(
             '".$username."',
             '".$password."',
@@ -24,15 +29,13 @@
             '".$status."'
             '".$area."',
             '".$site."',
+            '".$district."',
+            '".$amphur."',
+            '".$province."',
             '".$date."'
         );
         ";
+        echo $sql;
         $mysqli->query($sql) or die(mysqli_error($mysqli));
-    }
-    if($task=="getProvince"){
-        $sql = "SELECT province,tambon,amphur FROM all_hospital_thai WHERE hcode='".$hcode."'";
-        $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
-        $data = $query->fetch_assoc();
-        print_r($data);
     }
 ?>

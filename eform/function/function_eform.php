@@ -311,7 +311,7 @@ function formgenForShow($i,$dataField){
     }
     
 
-function formgenForUpdate($i,$dataField,$value,$value_province,$value_amphur,$value_tumbon){
+function formgenForUpdate($con,$i,$dataField,$value,$value_province,$value_amphur,$value_tumbon){
 	 if($dataField["fieldtype"]=="text"){
 	    $formtext = "<label>".$dataField["fieldname"]."</label>";
 	    $formtext .= "<input type='text' class='form-control' id='".$dataField["fieldvalue"]."' name='".$dataField["fieldvalue"]."' value='".$value."'>";

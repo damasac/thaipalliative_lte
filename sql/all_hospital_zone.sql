@@ -22,11 +22,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `all_hospital_zone`;
 CREATE TABLE `all_hospital_zone` (
-  `provincecode` varchar(2) NOT NULL,
-  `province` varchar(100) DEFAULT NULL,
-  `zone_code` varchar(10) NOT NULL,
-  `zone_name` varchar(200) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `provincecode` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `province` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `zone_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `zone_name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 --  Records of `all_hospital_zone`
