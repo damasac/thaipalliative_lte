@@ -25,31 +25,51 @@
   $rst=$mysqli->query($sql);
   $row=$rst->fetch_assoc();
 ?>  
-  <div class="info-box">
-    <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-medkit"></i></span>
-    <div class="info-box-content">
-      <div class="col-lg-2"><span class="info-box-text"><h4>Activity Record</h4></span></div>
-      
-      <div class="col-lg-2">
-      <button class="btn bg-orange">รหัส</button> <?php echo $row[hospcode];?> <?php echo $row[pid];?> 
+  
+    <div class="box box-warning">
+    <div class="box-body">
+      <div class="row">
+        
+        <div class="col-sm-2">
+            
+                <div class="small-box bg-green">
+                    <div class="inner" style="height: 175px;">
+                      <h3>Info</h3>
+                      <p>Activity Record</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="../form/register.php?dataid=<?php echo $_GET['ptid_key'];?>" class="small-box-footer">
+                      More info <i class="fa fa-medkit"></i>
+                    </a>
+              </div>
+    
+        </div>
+        
+        <div class="col-sm-10" style="margin-bottom: -20px;">
+            
+            <div class="box box-warning box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">ข้อมูลส่วนตัว</h3>
+              <div class="box-tools pull-right">
+              </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <h3>รหัส : <?php echo $row['hospcode'];?> <?php echo $row['pid'];?> </h3>   
+                <h4>ชื่อ - สกุล <?php echo mb_substr($row['name'],0,4,"UTF-8");?>... <?php echo mb_substr($row['lname'],0,4,"UTF-8");?>...</h4>
+                <h4>เพศ : <?php echo $sex[$row['sex']];?> </h4>
+                <h4>อายุ : <?php echo $row['age'];?> </h4> 
+            </div><!-- /.box-body -->
+          </div>
+
+        </div>
       </div>
-      
-      <div class="col-lg-3">
-      <button class="btn bg-orange">ชื่อ - สกุล </button> <?php echo mb_substr($row[name],0,4,"UTF-8");?>... <?php echo mb_substr($row[lname],0,4,"UTF-8");?>...
-      </div>
-      
-      <div class="col-lg-2">
-      <button class="btn bg-orange">เพศ</button> <?php echo $sex[$row[sex]];?>
-      </div>
-      
-      <div class="col-lg-3">
-      <button class="btn bg-orange">อายุ</button> <?php echo $row[age];?> ปี
-      </div>
-      
     </div>
   </div>
+
   
-  <div class="box">
+  <div class="box box-success">
     <div class="box-body">
       <div class="row">
         <div class="col-sm-12">
@@ -107,15 +127,15 @@
     </div>
   </div>
   
-    <div class="box">
+    <div class="box box-danger">
     <div class="box-body">
       <div class="row">
         <div class="col-sm-12">
         
         <div class="pull-right">
             <div class="btn-group">
-                <button type="button" class="btn btn-lg btn-success"><span class="fa fa-plus-circle"></span>  EZ-Form</button>
-                <button type="button" class="btn btn-lg btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-lg btn-danger"><span class="fa fa-plus-circle"></span>  EZ-Form</button>
+                <button type="button" class="btn btn-lg btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <span class="caret"></span>
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
