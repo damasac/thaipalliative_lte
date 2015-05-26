@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-05-26 15:04:39
+Date: 2015-05-26 22:17:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,12 +34,13 @@ CREATE TABLE `puser` (
   `province` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of puser
 -- ----------------------------
 INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', 'fadmin', 'ladmin', '1', '13777', '7', '400101', '4001', '40', '2015-05-22 15:17:01');
-INSERT INTO `puser` VALUES ('2', 'adminball', 'c702838dacdcc5a6e43d4580e22e6205de3170af', 'skaball69@gmail.com', 'ภานุพงศ์', 'ศรีศุภเดชะ', '1', '91111', '07', '400101', '4001', '40', '2015-05-26 08:43:57');
-INSERT INTO `puser` VALUES ('4', 'adminvut', 'c702838dacdcc5a6e43d4580e22e6205de3170af', 'kongvut@gmail.com', 'คงวุติ', 'แสงกล้า', '1', '91112', '07', '400101', '4001', '40', '2015-05-26 10:00:39');
-INSERT INTO `puser` VALUES ('5', 'admincascap', '9a294c1469cf39fe07dcd350a4eb3f523896064d', 'cascap@gmail.com', 'CASCAP', 'KKU', '2', '13777', '07', '400101', '4001', '40', '2015-05-26 10:03:38');
+INSERT INTO `puser` VALUES ('3', 'adminarea', 'f345eb82329e50c5f4c1d1dc8629deb42bd4f559', 'skaball69@gmail.com', 'cascap', 'kku', '2', '00049', '2', '400101', '4001', '63', '2015-05-26 14:39:13');
+INSERT INTO `puser` VALUES ('4', 'adminprovince', 'ad59e9efd14df6207814f5e1a5e6a76c768511f5', 'adminprovince@province.com', 'cascap', 'kku', '3', '13777', '7', '400101', '4001', '40', '2015-05-26 14:39:36');
+INSERT INTO `puser` VALUES ('5', 'adminsite', '4564b73eea95ce3be7687d7dc305a2e95b3101c8', 'adminsite@adminsite.com', 'cascap', 'kku', '4', '13777', '7', '400101', '4001', '40', '2015-05-26 14:40:20');
+INSERT INTO `puser` VALUES ('6', 'usersite', '7e10d42536a53807c5389e37c6a7c3de1849eba6', 'user@cascap.in.th', 'user', 'cascap', '5', '13777', '7', '400101', '4001', '40', '2015-05-26 14:54:45');
