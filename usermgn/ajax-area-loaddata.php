@@ -1,25 +1,37 @@
 <?php
+    error_reporting(0);
     include "../_connection/db.php";
-    if($_GET["task"]=="hospital"){
-    $sql = "SELECT DISTINCT
-	`hcode`,
-	`name`
-FROM
-	all_hospital_thai
-WHERE
-	`provincecode` IN (
-		SELECT
-			province_id
-		FROM
-			province_zone
-		WHERE
-			zone_id = '".$_GET["mophID"]."'
-	)";
+    $task = $_GET["task"];
+    $hcode = $_GET["hcode"];
+    $txtSearch = $_GET["txtSearch"];
+    if($task=="hospital"){
+    $sql = "SELECT hcode,name FROM all_hospital_thai WHERE `name` LIKE '%".$txtSearch."%' OR `hcode` LIKE '%".$txtSearch."%' LIMIT 10 ";
+
     $query = $mysqli->query($sql);
     
     while($data = $query->fetch_assoc()){
         $array[] = $data;
     }
     print json_encode($array);
+    }
+    if($task=="getdetailaddress"){
+	$sql = "SELECT
+	a.provincecode,
+	a.province,
+	CONCAT(a.provincecode,a.amphurcode) AS amphurcode,
+	a.amphur,
+	CONCAT(a.provincecode,a.amphurcode,a.tamboncode) AS tamboncode,
+	a.tambon
+	FROM
+		all_hospital_thai AS a
+	INNER JOIN all_hospital_zone AS b ON a.provincecode = b.provincecode
+	WHERE
+		`hcode` = '".$hcode."'
+	";
+	$query = $mysqli->query($sql);
+	while($data = $query->fetch_assoc()){
+	    $array[] = $data;
+	}
+	print json_encode($array);
     }
 ?>

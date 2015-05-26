@@ -63,44 +63,35 @@
       </div>
     </div>
 </div>
-<div class="row" id="moreSelect" style="display:none;">
-    <div class="col-lg-6">
-      <label>เขตบริการ</label><code id="valArea" style="display:none;"></code>
-      <select class="form-control" id="mophSelect" name="mophSelect"> 
-        <option value="0">- เลือกเขตบริการสุขภาพ -</option>
-        <?php for($i=1;$i<=13;$i++){?>
-          <?php echo "<option value='".$i."'>เขตบริการสุขภาพที่ ".$i."</option>";?>
-        <?php } ?>
-      </select>
-    </div>
-    <div class="col-lg-6" >
-      <label>หน่วยบริการ</label><code id="valHospital" style="display:none;"></code>
-      <select class="form-control"id="hospitalSelect" name="hospitalSelect" style="display:none;">
-        <option ></option>
+<div class="row" id="moreSelect">
+    <div class="col-lg-12" >
+      <label>โรงพยาบาล</label><code id="valHospital" ></code>
+      <select class="form-control" id="hospitalSelect" name="hospitalSelect">
+        <option value="0">- ค้นหาจากชื่อโรงพยาบาล หรือ รหัสโรงพยาบาล -</option>
       </select>
     </div>
 </div>
 <br>
-<div class="row" id="provinceZone" style="display:none;">
+<div class="row" id="provinceZone" >
   <div class="col-lg-4" >
     <label>จังหวัด</label>
-    <select class="form-control" id="provinceSelect" name="provinceSelect">
-      <option ></option>
-    </select>
+    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
   </div>
     <div class="col-lg-4" >
     <label>อำเภอ</label>
-    <select class="form-control" id="provinceSelect" name="provinceSelect">
-      <option ></option>
-    </select>
+    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
   </div>
   <div class="col-lg-4" >
     <label>ตำบล</label>
-    <select class="form-control" id="provinceSelect" name="provinceSelect">
-      <option ></option>
-    </select>
+    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
   </div>
 
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <label>เขตบริการ</label>
+    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
+  </div>
 </div>
 <br>
 <div class="row">
@@ -112,54 +103,32 @@
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <?php ?>
 <script>
+  $("#hospitalSelect").select2();
+  $(".select2-input").attr("id","textSearch");
   $("#status").change(function(){
       var status = $(this).val();
-      if (status==2) {
-        //code
-        $("#provinceZone").hide();
-        $("#hospitalSelect").html("<option value='0'>- เลือกหน่วยบริการ -</option>");
-        $("#mophSelect").val(0);
-        $("#hospitalSelect").val(0);
-        $("#hospitalSelect").show();
-        $("#hospitalSelect").attr("disabled","disabled");
-        $("#moreSelect").show();
-      }else if (status==3) {
-        //code
-        $("#hospitalSelect").html("<option value='0'>- เลือกหน่วยบริการ -</option>");
-        $("#mophSelect").val(0);
-        $("#hospitalSelect").val(0);
-        $("#hospitalSelect").show();
-        $("#hospitalSelect").removeAttr("disabled");
-        $("#hospitalSelect").select2();
-        $("#moreSelect").show();
-      }
-      else{
-        //code
-        $("#provinceZone").hide();
-        $("#hospitalSelect").html("<option value='0'>- เลือกหน่วยบริการ -</option>");
-        $("#mophSelect").val(0);
-        $("#hospitalSelect").val(0);
-        $("#hospitalSelect").hide();
-        $("#moreSelect").hide();
-      }
+
     });
-  $("#mophSelect").on("change",function(){
-    $("#hospitalSelect").html("<option value='0'>- เลือกหน่วยบริการ -</option>");
-    $("#hospitalSelect").val(0);
-    var mophID = $(this).val();
-      $.getJSON("ajax-area-loaddata.php?task=hospital&mophID="+mophID+"",function(result){
-        $("#hospitalSelect").html("<option value='0'>- เลือกหน่วยบริการ -</option>");
-        $.each(result, function(i, field){
-              $("#hospitalSelect").append("<option value="+field.hcode+" >"+field.name+"</option>");
-        });
+  $(function(){
+      $(".select2-input").attr("id","textSearch");
+      $("#textSearch").on('keyup', function(e){
+          if (e.keyCode>3) {
+            var txtSearch = $(this).val();
+                  $.getJSON("ajax-area-loaddata.php?task=hospital&txtSearch="+txtSearch+"",function(result){
+                    console.log(result);
+                  $("#hospitalSelect").html("<option value='0'>- ค้นหาจากชื่อโรงพยาบาล หรือ รหัสโรงพยาบาล -</option>");
+                  $.each(result, function(i, field){
+                        $("#hospitalSelect").append("<option value="+field.hcode+" >"+field.hcode+" : "+field.name+"</option>");
+                  });
+                  });
+            }
         });
     });
   $("#hospitalSelect").on("change",function(){
-      var hcode = $("#hospitalSelect").val();
-      $("#provinceZone").show();
-      $.post("ajax-sql-query.php?task=getProvince&hcode="+hcode,function(data){
-          alert(data);
-      });
+      var hcode = $(this).val();
+                  $.getJSON("ajax-area-loaddata.php?task=getdetailaddress&hcode="+hcode+"",function(result){
+                    console.log(result);
+          });
     });
   function saveUser() {
     //code
@@ -171,6 +140,9 @@
     var status = $("#status").val();
     var area = $("#mophSelect").val();
     var site = $("#hospitalSelect").val();
+    var province = $("#provinceSelect").val();
+    var amphur = $("#amphurSelect").val();
+    var district = $("#tambonSelect").val();
     if (username=="") {
       $("#valUsername").show();
       $("#valUsername").html("กรุณากรอกชื่อผู้ใช้งาน");
@@ -237,7 +209,7 @@
     }else{
       $("#valArea").hide();
     }
-    if (status==3 && hospital==0) {
+    if (status==3 && site==0) {
       //code
        $("#valHospital").show();
         $("#valHospital").html("กรุณาเลือกหน่วยบริการ");
@@ -245,9 +217,9 @@
     }else{
       $("#valHospital").hide();
     }
-    goAjaxSave(username,password,email,fname,lname,status,area,site);
+    goAjaxSave(username,password,email,fname,lname,status,area,site,province,amphur,district);
   }
-  function goAjaxSave(username,password,email,fname,lname,status,area,site){
+  function goAjaxSave(username,password,email,fname,lname,status,area,site,province,amphur,district){
       $.ajax({
 		    url: "ajax-sql-query.php?task=addUser",
 		    type: "post",
@@ -259,7 +231,10 @@
                       lname:lname,
                       status:status,
                       area:area,
-                      site:site
+                      site:site,
+                      province:province,
+                      amphur:amphur,
+                      district:district
                       },
 		    success: function(data){
 			//location.href="index.php?";

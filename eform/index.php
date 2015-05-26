@@ -37,7 +37,7 @@ include_once("inc_menu.php");
 				if($dataRow["id"]==""){
 				    $idEform = 1;
 				}else{
-				    $idEform =  $dataRow["id"];
+				    $idEform =  $dataRow["id"]+1;
 				}
 			    ?>
 			    <div class="row">
