@@ -170,14 +170,14 @@
                   <!-- The user image in the navbar-->
                   <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="user-image" alt="User Image"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">User ::</span>
+                  <span class="hidden-xs">User : <?php echo $_SESSION['tpc_puser_username']; ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="img-circle" alt="User Image" />
                     <p>
-                     User :: 
+                     User : <?php echo $_SESSION['tpc_puser_username']; ?>
                       <!--<small>Member since Nov. 2012</small>-->
                     </p>
                   </li>
@@ -199,7 +199,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -224,21 +224,21 @@
               <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/blank-avatar.png" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>User ::</p>
+              <p>User : <?php echo $_SESSION['tpc_puser_username']; ?></p>
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
 
           <!-- search form (Optional) -->
-          <form action="#" method="get" class="sidebar-form">
+          <!--<form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form>-->
           <!-- /.search form -->
 
           <!-- Sidebar Menu -->
@@ -253,13 +253,13 @@
                 <span>การให้บริการ</span>
               </a>
             </li>
-            <li class="treeview">
+            <!--<li class="treeview">
               <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="#">Link in level 2</a></li>
                 <li><a href="#">Link in level 2</a></li>
               </ul>
-            </li>
+            </li>-->
             
             <li class="header">Setting Menu</li>
             <!-- Optionally, you can add icons to the links -->
