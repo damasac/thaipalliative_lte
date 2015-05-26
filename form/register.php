@@ -169,9 +169,9 @@ if($dbarr['ptid']){
 }
 
   if ($dbarr['createdate']!="0000-00-00 00:00:00") {
-     echo $dbarr['createdate']=substr($dbarr['createdate'],8,2).substr($dbarr['createdate'],5,2).substr($dbarr['createdate'],0,4);
+     $dbarr['createdate']=substr($dbarr['createdate'],8,2).substr($dbarr['createdate'],5,2).substr($dbarr['createdate'],0,4);
   }
-print_r($dbarr);
+
 ?>
 
     <div class="info-box">
