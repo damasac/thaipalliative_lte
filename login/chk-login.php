@@ -46,7 +46,7 @@ if(isset($user_login) and isset($pwd_login)) {
         $_SESSION[$Ss_prefix.'puser_hcode'] = $dbarr['hcode'];
         $_SESSION[$Ss_prefix.'puser_amphur'] = $dbarr['amphur'];
         $_SESSION[$Ss_prefix.'puser_area'] = $dbarr['area'];
-	$_SESSION[$Ss_prefix."puser_hcodename"] = hospitalname($dbarr["hcode"]);
+	$_SESSION[$Ss_prefix."puser_hcodename"] = hospitalname($dbarr["hcode"]) . " (" .$dbarr['hcode']. ")";
         //-----------------------
 		echo "success";
 	}
