@@ -45,14 +45,14 @@
 
   }
 
-  /*if(!valid_citizen_id($_POST['ssn'])){
+  if(!valid_citizen_id($_POST['ssn'])){
     echo '<div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-ban"></i> เลขบัตรประจำตัวประชาชนไม่ถูกต้อง</h4>
                     กรุณาตรวจสอบเลขบัตรประจำตัวประชาชนหรือลองอีกครั้ง
                   </div>';
     exit;
-  }*/
+  }
 
   /** Constant */
   $sex[1]="ชาย";
