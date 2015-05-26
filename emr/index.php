@@ -18,10 +18,34 @@
 <?php sb('content');?>
 <?php include "../_connection/db.php"; ?>
   <!-- Main content -->
+<?php
+  $sex[1]="ชาย";
+  $sex[2]="หญิง";
+  $sql="select *,floor(datediff(curdate(),birthdb)/365.25) as age from palliative_register where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+?>  
   <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-medkit"></i></span>
     <div class="info-box-content">
-      <span class="info-box-text"><h4>Activity Record</h4></span>
+      <div class="col-lg-2"><span class="info-box-text"><h4>Activity Record</h4></span></div>
+      
+      <div class="col-lg-2">
+      <button class="btn bg-orange">รหัส</button> <?php echo $row[hospcode];?> <?php echo $row[pid];?> 
+      </div>
+      
+      <div class="col-lg-3">
+      <button class="btn bg-orange">ชื่อ - สกุล </button> <?php echo mb_substr($row[name],0,4,"UTF-8");?>... <?php echo mb_substr($row[lname],0,4,"UTF-8");?>...
+      </div>
+      
+      <div class="col-lg-2">
+      <button class="btn bg-orange">เพศ</button> <?php echo $sex[$row[sex]];?>
+      </div>
+      
+      <div class="col-lg-3">
+      <button class="btn bg-orange">อายุ</button> <?php echo $row[age];?> ปี
+      </div>
+      
     </div>
   </div>
   
