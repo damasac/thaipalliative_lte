@@ -23,7 +23,7 @@
   <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
     <div class="info-box-content">
-      <span class="info-box-text"><h4>ลงทะเบียน</h4></span>
+      <span class="info-box-text"><h4>การให้บริการ Palliative Care</h4></span>
       <span class="info-box-text">
           <a class="btn btn-default" id="user" href="search.php"><i class="fa fa-fw fa-bed"></i>  <strong>เพิ่มข้อมูลผู้ป่วยใหม่</strong></a>
       </span>

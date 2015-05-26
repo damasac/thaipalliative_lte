@@ -33,7 +33,7 @@
         <div class="col-sm-2">
             
                 <div class="small-box bg-green">
-                    <div class="inner" style="height: 175px;">
+                    <div class="inner" style="height: 120px;">
                       <h3>Info</h3>
                       <p>Activity Record</p>
                     </div>
@@ -56,10 +56,16 @@
               </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
-                <h3>รหัส : <?php echo $row['hospcode'];?> <?php echo $row['pid'];?> </h3>   
-                <h4>ชื่อ - สกุล <?php echo mb_substr($row['name'],0,4,"UTF-8");?>... <?php echo mb_substr($row['lname'],0,4,"UTF-8");?>...</h4>
-                <h4>เพศ : <?php echo $sex[$row['sex']];?> </h4>
-                <h4>อายุ : <?php echo $row['age'];?> </h4> 
+                <div class="col-sm-3"><button class="btn btn-block btn-primary btn-sm">รหัสผู้ป่วย</button></div>
+                <div class="col-sm-5"><h4><?php echo $row['hospcode'];?> <?php echo $row['pid'];?> </h4></div>
+                <div class="col-sm-2"><button class="btn btn-block btn-primary btn-sm">เพศ</button></div>
+                <div class="col-sm-2"><h4><?php echo $sex[$row['sex']];?> </h4></div>                
+
+                <div class="col-sm-3"><button class="btn btn-block btn-primary btn-sm">ชื่อ - สกุล</button></div>
+                <div class="col-sm-5"><h4><?php echo mb_substr($row['name'],0,4,"UTF-8");?>... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo mb_substr($row['lname'],0,4,"UTF-8");?>...</h4></div>
+                <div class="col-sm-2"><button class="btn btn-block btn-primary btn-sm">อายุ</button></div>
+                <div class="col-sm-2"><h4><?php echo $row['age'];?>&nbsp;&nbsp;&nbsp; ปี</h4></div>                     
+
             </div><!-- /.box-body -->
           </div>
 
