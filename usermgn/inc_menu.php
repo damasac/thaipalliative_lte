@@ -6,8 +6,6 @@
     <span class="info-box-text">
         <?php if($MenuSetting=="user"){ $menuKey="success";}else{$menuKey="default";}?>
         <button class='btn btn-<?php echo $menuKey;?>' id="user" onclick="location.href='index.php'">จัดการสมาชิก</button>
-        <?php if($MenuSetting=="department"){ $menuKey="success";}else{$menuKey="default";}?>
-        <button class='btn btn-<?php echo $menuKey;?>' id="department" onclick="location.href='department.php'">รายละเอียดหน่วยงาน</button>
     </span>
   </div><!-- /.info-box-content -->
 </div><!-- /.info-box -->

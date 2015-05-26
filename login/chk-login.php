@@ -7,22 +7,23 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 
 $user_login = (($_POST['username']));
 $pwd_login = sha1(md5($_POST['password']));
-//$remember_me = $_POST['remember_me'];
 
-//echo $user_login; exit;
 
 if(isset($user_login) and isset($pwd_login)) {
     include_once "../_connection/db.php";
-
+    
     $sql="SELECT * FROM puser WHERE username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
+    echo $sql;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 	$dbarr = $res->fetch_assoc(); 
-	//print_r($dbarr); exit;
+
 	if(empty($_POST['username'])) {
+
 		echo "Error : กรุณากรอกรหัสผู้ใช้งาน";
 		exit();
 	}
 	else if(empty($_POST['password'])) {
+	    
 		echo "Error : กรุณากรอกรหัสผ่าน";
 		exit();
 	}
@@ -36,6 +37,7 @@ if(isset($user_login) and isset($pwd_login)) {
 	}
 	else if(($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
         //-----------------------
+
         $Ss_prefix = 'tpc_';
 	$_SESSION[$Ss_prefix.'puser_id'] = $dbarr['id'];
         $_SESSION[$Ss_prefix.'puser_username'] = $dbarr['username'];

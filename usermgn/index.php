@@ -68,7 +68,7 @@
                 closeByKeyboard: false,
 		size:'size-wide',
 		draggable: false,
-		message: $('<div></div>').load("ajax-adduser-data.php?id=", function(data){
+		message: $('<div></div>').load("form_adduser.php?id=", function(data){
 		}),
 		onshown: function(dialogRef){ 
 		},

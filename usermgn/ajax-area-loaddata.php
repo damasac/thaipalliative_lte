@@ -21,7 +21,8 @@
 	CONCAT(a.provincecode,a.amphurcode) AS amphurcode,
 	a.amphur,
 	CONCAT(a.provincecode,a.amphurcode,a.tamboncode) AS tamboncode,
-	a.tambon
+	a.tambon,
+	b.zone_code
 	FROM
 		all_hospital_thai AS a
 	INNER JOIN all_hospital_zone AS b ON a.provincecode = b.provincecode

@@ -17,23 +17,36 @@
     $date = date("Y-m-d H:i:s");
     //echo $password."<br>".$date;
     if($task=="addUser"){
-        $sql = "INSERT INTO
-        `puser`
-        (`username`,`password`,`email`,`fname`,`lname`,`status`,`area`,`hcode`,`district`,`amphur`,`province`,`createdate`)
-        VALUES(
-            '".$username."',
-            '".$password."',
-            '".$email."',
-            '".$fname."',
-            '".$lname."',
-            '".$status."'
-            '".$area."',
-            '".$site."',
-            '".$district."',
-            '".$amphur."',
-            '".$province."',
-            '".$date."'
-        );
+        $sql = "INSERT INTO `thaipalliative_lte`.`puser` (
+	`username`,
+	`password`,
+	`email`,
+	`fname`,
+	`lname`,
+	`status`,
+	`hcode`,
+	`area`,
+	`district`,
+	`amphur`,
+	`province`,
+	`createdate`
+        )
+        VALUES
+                (
+		'".$username."',
+		'".$password."',
+		'".$email."',
+		'".$fname."',
+		'".$lname."',
+		'".$status."',
+		'".$site."',
+		'".$area."',
+		'".$district."',
+		'".$amphur."',
+		'".$province."',
+		'".$date."'
+	);
+
         ";
         echo $sql;
         $mysqli->query($sql) or die(mysqli_error($mysqli));

@@ -76,21 +76,25 @@
   <div class="col-lg-4" >
     <label>จังหวัด</label>
     <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
+    <input type="hidden" id="province" name="province">
   </div>
     <div class="col-lg-4" >
     <label>อำเภอ</label>
-    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
+    <input type="text" class="form-control" id="amphurSelect" name="amphurSelect" readonly>
+    <input type="hidden" id="amphur" name="amphur">
   </div>
   <div class="col-lg-4" >
     <label>ตำบล</label>
-    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
+    <input type="text" class="form-control" id="tambonSelect" name="tambonSelect" readonly>
+    <input type="hidden" id="tambon" name="tambon">
   </div>
 
 </div>
 <div class="row">
   <div class="col-lg-12">
     <label>เขตบริการ</label>
-    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
+    <input type="text" class="form-control" id="areaSelect" name="areaSelect" readonly>
+    <input type="hidden" id="area" name="area">
   </div>
 </div>
 <br>
@@ -127,8 +131,17 @@
   $("#hospitalSelect").on("change",function(){
       var hcode = $(this).val();
                   $.getJSON("ajax-area-loaddata.php?task=getdetailaddress&hcode="+hcode+"",function(result){
-                    console.log(result);
-          });
+                    $.each(result, function(i, field){
+                        $("#provinceSelect").attr("value",field.province);
+                        $("#province").attr("value",field.provincecode);
+                        $("#amphurSelect").attr("value",field.amphur);
+                        $("#amphur").attr("value",field.amphurcode);
+                        $("#tambonSelect").attr("value",field.tambon);
+                        $("#tambon").attr("value",field.tamboncode);
+                        $("#area").attr("value","เขตบริการสุขภาพที่"+field.zone_code);
+                        $("#areaSelect").attr("value",field.zone_code);
+                      });
+                  });
     });
   function saveUser() {
     //code
@@ -138,11 +151,11 @@
     var fname = $("#fname").val();
     var lname = $("#lname").val();
     var status = $("#status").val();
-    var area = $("#mophSelect").val();
+    var area = $("#areaSelect").val();
     var site = $("#hospitalSelect").val();
-    var province = $("#provinceSelect").val();
-    var amphur = $("#amphurSelect").val();
-    var district = $("#tambonSelect").val();
+    var province = $("#province").val();
+    var amphur = $("#amphur").val();
+    var district = $("#tambon").val();
     if (username=="") {
       $("#valUsername").show();
       $("#valUsername").html("กรุณากรอกชื่อผู้ใช้งาน");
@@ -191,29 +204,12 @@
       $("#valStatus").html("กรุณาระบุสถานะ");
       return ;
     }else{
-      $("#valEmail").hide();
+      $("#valStatus").hide();
     }
-    if (status==2 && area==0) {
-        //code
-         $("#valArea").show();
-        $("#valArea").html("กรุณเขตบริการ");
-        return ;
-    }else{
-      $("#valArea").hide();
-    }
-    if (status==3 && area==0) {
+    if (site==0) {
       //code
-       $("#valArea").show();
-        $("#valArea").html("กรุณเขตบริการ");
-        return ;
-    }else{
-      $("#valArea").hide();
-    }
-    if (status==3 && site==0) {
-      //code
-       $("#valHospital").show();
-        $("#valHospital").html("กรุณาเลือกหน่วยบริการ");
-        return ;
+      $("#valHospital").show();
+      $("#valHospital").html("กรุณาระบโรงพยาบาล");
     }else{
       $("#valHospital").hide();
     }
