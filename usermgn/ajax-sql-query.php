@@ -17,38 +17,55 @@
     $date = date("Y-m-d H:i:s");
     //echo $password."<br>".$date;
     if($task=="addUser"){
-        $sql = "INSERT INTO `thaipalliative_lte`.`puser` (
-	`username`,
-	`password`,
-	`email`,
-	`fname`,
-	`lname`,
-	`status`,
-	`hcode`,
-	`area`,
-	`district`,
-	`amphur`,
-	`province`,
-	`createdate`
-        )
-        VALUES
-                (
-		'".$username."',
-		'".$password."',
-		'".$email."',
-		'".$fname."',
-		'".$lname."',
-		'".$status."',
-		'".$site."',
-		'".$area."',
-		'".$district."',
-		'".$amphur."',
-		'".$province."',
-		'".$date."'
-	);
-
-        ";
-        echo $sql;
-        $mysqli->query($sql) or die(mysqli_error($mysqli));
+        $sqlUser = "SELECT * FROM `puser` WHERE `username`='".$username."' ";
+        $queryUser = $mysqli->query($sqlUser);
+        $numUser = $queryUser->num_rows;
+        $sqlEmail = "SELECT * FROM `puser` WHERE `email`='".$email."' ";
+        $queryEmail = $mysqli->query($sqlEmail);
+        $numEmail = $queryEmail->num_rows;
+        if($numUser==1){
+             echo "userDenied";
+             exit;
+        }else if($numEmail==1){
+            echo "emailDenied";
+            exit;
+        }else{
+    
+                $sql = "INSERT INTO `thaipalliative_lte`.`puser` (
+                `username`,
+                `password`,
+                `email`,
+                `fname`,
+                `lname`,
+                `status`,
+                `hcode`,
+                `area`,
+                `district`,
+                `amphur`,
+                `province`,
+                `createdate`
+                )
+                VALUES
+                        (
+                        '".$username."',
+                        '".$password."',
+                        '".$email."',
+                        '".$fname."',
+                        '".$lname."',
+                        '".$status."',
+                        '".$site."',
+                        '".$area."',
+                        '".$district."',
+                        '".$amphur."',
+                        '".$province."',
+                        '".$date."'
+                );
+        
+                ";
+       $query =   $mysqli->query($sql) or die(mysqli_error($mysqli));
+            if($query){
+             echo "Success";
+            }
+        }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
  include_once("../_connection/db_sql.php");
- $sqlProvince = mysqli_query($con,"SELECT * FROM province ") or die(mysql_error());
+ $sqlProvince = mysqli_query($con,"SELECT * FROM const_province ") or die(mysql_error());
 ?>
 <div class="row">
     <div class="col-lg-3">    
@@ -9,7 +9,7 @@
         <?php
             while($dataProvince = mysqli_fetch_assoc($sqlProvince)){
                     
-                    echo "<option value='".$dataProvince["PROVINCE_ID"]."'>".$dataProvince["PROVINCE_NAME"]."</option>";
+                    echo "<option value='".$dataProvince["PROVINCE_CODE"]."'>".$dataProvince["PROVINCE_NAME"]."</option>";
                     
                 }
         ?>
@@ -32,7 +32,7 @@
            var province_id = $(this).val();
            $.getJSON("ajax-area-loaddata.php?task=amphur&province_id="+province_id,function(result){
                     $.each(result, function(i, field){
-                            $("#amphur").append("<option value="+field.AMPHUR_ID+" >"+field.AMPHUR_NAME+"</option>");
+                            $("#amphur").append("<option value="+field.AMPHUR_CODE+" >"+field.AMPHUR_NAME+"</option>");
                     });
                   });
         });
@@ -42,7 +42,7 @@
        $.getJSON("ajax-area-loaddata.php?task=tumbon&amphur_id="+amphur_id,function(result){
                 $.each(result, function(i, field){
 
-                        $("#tumbon").append("<option value="+field.DISTRICT_ID+" >"+field.DISTRICT_NAME+"</option>");
+                        $("#tumbon").append("<option value="+field.DISTRICT_CODE+" >"+field.DISTRICT_NAME+"</option>");
                 });
               });
     });

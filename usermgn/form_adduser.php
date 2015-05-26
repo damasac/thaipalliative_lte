@@ -4,7 +4,26 @@
   $status = $_SESSION["tpc_puser_status"];
   $area = $_SESSION["tpc_puser_area"];
   $site = $_SESSION["tpc_puser_hcode"];
+  $hcode = $_GET["hcode"];
   $status=1;
+  $sqlSelectAddress =  "SELECT
+        a.`name` AS hname,
+	a.provincecode,
+	a.province,
+	CONCAT(a.provincecode,a.amphurcode) AS amphurcode,
+	a.amphur,
+	CONCAT(a.provincecode,a.amphurcode,a.tamboncode) AS tamboncode,
+	a.tambon,
+	b.zone_code
+	FROM
+		all_hospital_thai AS a
+	INNER JOIN all_hospital_zone AS b ON a.provincecode = b.provincecode
+	WHERE
+		`hcode` = '".$hcode."'
+	";
+    $querySelectAddress = $mysqli->query($sqlSelectAddress);
+    $dataAddr = $querySelectAddress->fetch_assoc();
+
 ?>
 <div class="row">
 <div class="col-lg-6">
@@ -63,46 +82,35 @@
       </div>
     </div>
 </div>
-<div class="row" id="moreSelect">
-    <div class="col-lg-12" >
-      <label>โรงพยาบาล</label><code id="valHospital" ></code>
-      <select class="form-control" id="hospitalSelect" name="hospitalSelect">
-        <option value="0">- ค้นหาจากชื่อโรงพยาบาล หรือ รหัสโรงพยาบาล -</option>
-      </select>
-    </div>
-</div>
-<br>
-<div class="row" id="provinceZone" >
-  <div class="col-lg-4" >
-    <label>จังหวัด</label>
-    <input type="text" class="form-control" id="provinceSelect" name="provinceSelect" readonly>
-    <input type="hidden" id="province" name="province">
-  </div>
-    <div class="col-lg-4" >
-    <label>อำเภอ</label>
-    <input type="text" class="form-control" id="amphurSelect" name="amphurSelect" readonly>
-    <input type="hidden" id="amphur" name="amphur">
-  </div>
-  <div class="col-lg-4" >
-    <label>ตำบล</label>
-    <input type="text" class="form-control" id="tambonSelect" name="tambonSelect" readonly>
-    <input type="hidden" id="tambon" name="tambon">
-  </div>
-
-</div>
-<div class="row">
-  <div class="col-lg-12">
+    <p>
     <label>เขตบริการ</label>
-    <input type="text" class="form-control" id="areaSelect" name="areaSelect" readonly>
-    <input type="hidden" id="area" name="area">
-  </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-lg-12">
-      <button class="btn btn-success btn-block" onclick="saveUser();">บันทึก</button>
-  </div>
-</div>
+    <span class="text">เขตบริการสุขภาพที่ <?php echo $dataAddr["zone_code"];?></span>
+    </p>
+      <p>
+      <label>โรงพยาบาล</label><code id="valHospital" ></code>
+      <span class="text"><?php echo $dataAddr["hname"];?></span>
+      </p>
+
+
+
+    <label>จังหวัด</label>
+    <span class="text"><?php echo $dataAddr["province"];?></span>
+
+
+    <label>อำเภอ</label>
+    <span class="text"><?php echo $dataAddr["amphur"];?></span>
+
+
+    <label>ตำบล</label>
+    <span class="text"><?php echo $dataAddr["tambon"];?></span>
+    <input type="hidden" id="tambon" name="tambon">
+   
+    <div class="row">
+      <div class="col-lg-12">
+         <br>
+          <button class="btn btn-success btn-block" onclick="saveUser();">บันทึก</button>
+      </div>
+    </div>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <?php ?>
@@ -111,7 +119,6 @@
   $(".select2-input").attr("id","textSearch");
   $("#status").change(function(){
       var status = $(this).val();
-
     });
   $(function(){
       $(".select2-input").attr("id","textSearch");
@@ -233,7 +240,22 @@
                       district:district
                       },
 		    success: function(data){
-			//location.href="index.php?";
+                      console.log(data)
+                      if (data=="userDenied") {
+                        //code
+                        $("#valUsername").show();
+                        $("#valUsername").html("ชื่อนี้มีผู้ใช้งานแล้วกรุณาระบุใหม่");
+                      }
+                      if (data=="emailDenied") {
+                        //code
+                        $("#valEmail").show();
+                        $("#valEmail").html("อีเมล์นี้มีผู้ใช้งานแล้วกรุณาระบุใหม่");
+                      }
+                      if (data=="Success") {
+                        //code
+                        location.href="index.php";
+                      }
+
 		    },
 		    error:function(){
 			alert("failure");
