@@ -27,15 +27,100 @@ function calAge(o){
 <?php
 include_once "../_connection/db.php";
 
+/** Connect CASCAP database. */
+include_once "../_connection/db_cascap.php";
+
 $res = $mysqli->query("SELECT * FROM palliative_register")or die('[' . $mysqli->error . ']');
 $numGroup = $res->num_rows;
 $fields = $res->fetch_fields();
 
 //echo "<pre>"; echo $fields[1]->name; echo "</pre>";
-$sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as birthdb FROM palliative_register WHERE ptid = '$_GET[dataid]';";
-$res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
-$dbarr = $res->fetch_array();
-  
+$cascap = 0;
+$insert = 0;
+isset($_GET['cascap'])? $cascap = $_GET['cascap'] : '';
+isset($_GET['insert'])? $insert = $_GET['insert'] : '';
+
+//echo $cascap.":".$insert;
+
+if(0 == $cascap && $insert != 1){
+  /** CRUD register. */
+  $dataid = '';
+  isset($_GET['dataid'])? $dataid = $_GET['dataid'] : '';
+  $sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as birthdb FROM palliative_register WHERE ptid = '".$dataid."';";
+  $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+  $dbarr = $res->fetch_array();
+}else{
+  if(0 == $cascap){
+    $dataid = '';
+    isset($_GET['dataid'])? $dataid = $_GET['dataid'] : '';
+    $sql = "SELECT *, floor(datediff(curdate(),birth)/365.25) as birthdb FROM palliative_register WHERE ptid = '".$dataid."';";
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $dbarr = $res->fetch_array();
+
+    //echo '<pre>';
+    //print_r($dbarr);
+
+    $dbarr['ptid'] = 0;
+    $dbarr['2'] = $_SESSION['tpc_puser_hcode'];
+    $dbarr['3'] = '';
+    $dbarr['4'] = '';
+  }else{
+    echo $cascap;
+    $stmt = $mysqli_cascap->prepare('SELECT c, o, d, e, e,
+                                        regdate AS createdate,
+                                        cid AS ssn,
+                                        bdatedb AS birth,
+                                        age AS age,
+                                        title AS prename,
+                                        name AS name,
+                                        surname AS lname,
+                                        v3 AS sex,
+                                        AS nation,
+                                        AS nationx,
+                                        AS race,
+                                        AS racex,
+                                        AS religion,
+                                        AS religionx,
+                                        AS house,
+                                        AS moo,
+                                        AS village,
+                                        AS lane,
+                                        AS road,
+                                        AS tambon,
+                                        AS ampur,
+                                        AS changwat,
+                                        AS zipcode,
+                                        AS tel,
+                                        AS mstatus,
+                                        AS mstatusx,
+                                        AS privilege,
+                                        AS privilegex,
+                                        AS occupa,
+                                        AS occupax,
+                                        AS congenital_disease,
+                                        AS congenital_disease2,
+                                        AS congenital_disease3,
+                                        AS congenital_disease4,
+                                        AS congenital_disease5,
+                                        AS congenital_diseasex,
+                                        AS history,
+                                        AS historyx,
+                                        AS update_by,
+                                        AS create_by,
+                                        AS update_time
+                                      FROM patient
+                                      WHERE cid LIKE ? AND ptid = ptid_key');
+    $stmt->bind_param('s', $param);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $dbarr = $result->fetch_array();
+
+    $dbarr['ptid'] = 0;
+    $dbarr['2'] = $_SESSION['tpc_puser_hcode'];
+    $dbarr['3'] = '';
+    $dbarr['4'] = '';
+  }
+}
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
 if($dbarr['ptid']){
     $task = 'update';
@@ -43,7 +128,7 @@ if($dbarr['ptid']){
     $task = 'save';
 }
 ?>
-    
+
     <div class="info-box">
     <span class="info-box-icon btn-foursquare" style="background-color: #3C8DBC;"><i class="fa fa-user-plus"></i></span>
     <div class="info-box-content">
@@ -59,13 +144,13 @@ if($dbarr['ptid']){
 
     <form id="frm-register" onsubmit="frm_register(); return false;" action="#">
         <div class="row" style="padding: 25px 25px 25px 25px;">
-            
+
         <div class="form-group col-lg-6">
           <label>HOSPCODE: </label>
           <input type="hidden" id="task" name="task" value="<?php echo $task; ?>" />
           <input type="text" name="<?php $i=2; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" minlength=5 maxlength=5 required>
         </div>
-        
+
         <div class="form-group col-lg-6">
           <label>PID: </label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" minlength=5 maxlength=5 required>
@@ -75,43 +160,43 @@ if($dbarr['ptid']){
           <label>1. HN: </label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" date>
         </div>
-        
+
         <div class="form-group col-lg-12">
           <label>3. เลขที่บัตรประจำตัวประชาชน: </label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" minlength=13 maxlength=13 required>
         </div>
-                
+
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" onchange="calAge(this);" required>
         </div>
-        
+
         <div class="form-group col-lg-2">
           <label>5. อายุ</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="age" value="<?php echo $dbarr[$i]; ?>" required>
-        </div>      
-        
+        </div>
+
         <div class="form-group col-lg-3">
           <label>6.1 คำนำหน้า</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control" required>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>6.1 ชื่อ</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control" required>
         </div>
-        
+
         <div class="form-group col-lg-5">
           <label>6.3 นามสกุล</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control" required>
         </div>
 
-               
+
         <div class="form-group col-lg-5">
           <div class='showForm'><label>7. เพศ</label><br>
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1' required>ชาย</label></div>
@@ -194,7 +279,7 @@ if($dbarr['ptid']){
               </div>
               </div>
             </div>
-      
+
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>13. สถานภาพ</label><br>
@@ -241,14 +326,14 @@ if($dbarr['ptid']){
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>ความดันโลหิตสูง</label></div>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
-        </div>  
+        </div>
 
         <div  class="form-group col-lg-12">
           <div class='showForm'><label>17. ประวัติการรักษาด้วยแพทย์ทางเลือก/สมุนไพร</label><br>
           <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>ไม่มี</label></div>
           <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>มี</label>&nbsp;&nbsp;
             <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div></div>
-        </div>    
+        </div>
 
             <div class="form-group col-lg-12">
               <label></label>
@@ -264,15 +349,15 @@ if($dbarr['ptid']){
               </div>
               </div><hr>
             </div>
-            
-            
+
+
             <div class="form-group col-lg-6">
                 <button class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
                 <button class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
-            
+
         </div>
         </form>
 
@@ -288,7 +373,7 @@ if($dbarr['ptid']){
     function frm_register() {
         var ptid = '<?php echo $_GET['dataid']; ?>';
         var datalist=$('#frm-register').serialize();
-        
+
         $('#frm-group').hide();
         $('#div-onsave').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
         $.ajax({
@@ -299,7 +384,7 @@ if($dbarr['ptid']){
                     $("#div-onsave").html(returndata);
                 },
                 error : function(xhr, statusText, error) {
-                    System_Notice("Error! Could not retrieve the data.",'danger');     
+                    System_Notice("Error! Could not retrieve the data.",'danger');
                 }
         });
     }
@@ -308,5 +393,5 @@ if($dbarr['ptid']){
 <?php eb();?>
 
 <?php $mysqli->close(); ?>
- 
+
 <?php render($MasterPage);?>

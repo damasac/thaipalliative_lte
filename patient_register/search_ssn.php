@@ -45,14 +45,14 @@
 
   }
 
-  if(!valid_citizen_id($_POST['ssn'])){
+  /*if(!valid_citizen_id($_POST['ssn'])){
     echo '<div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-ban"></i> เลขบัตรประจำตัวประชาชนไม่ถูกต้อง</h4>
                     กรุณาตรวจสอบเลขบัตรประจำตัวประชาชนหรือลองอีกครั้ง
                   </div>';
     exit;
-  }
+  }*/
 
   /** Constant */
   $sex[1]="ชาย";
@@ -144,7 +144,7 @@
                     <td>'.$sex[$row['sex']].'</td>
                     <td>'.$row['age'].'</td>
                     <td>
-                      <a type="button" href="create_oth_pt.php?ssn='.$row['ssn'].'" class="btn btn-default" title="นำเข้าข้อมูล">
+                      <a type="button" href="../form/register.php?dataid='.$row['ptid'].'&insert=1" class="btn btn-default" title="นำเข้าข้อมูล">
                         <i class="fa fa-arrow-down">
                         </i>
                       </a>
@@ -186,7 +186,7 @@
                       <td>'.$gender.'</td>
                       <td>'.$row['age'].'</td>
                       <td>
-                        <a type="button" href="create_cascap_pt.php?ssn='.$row['ssn'].'" class="btn btn-primary" title="นำเข้าข้อมูล">
+                        <a type="button" href="../form/register.php?dataid='.$row['pid'].'&insert=1&cascap=1" class="btn btn-primary" title="นำเข้าข้อมูล">
                           <i class="fa fa-arrow-down">
                           </i>
                         </a>
