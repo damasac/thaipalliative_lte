@@ -19,6 +19,11 @@
 </ol>
       
 <?php
+  $sql = "SELECT ptid_key, hospcode, pid from palliative_register where ptid='".$_GET['ptid']."';";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+  $_GET['ptid_key'] = $row['ptid_key'];
+  $ptcode = $row['hospcode'] . " " .$row['pid'];
   $sex[1]="ชาย";
   $sex[2]="หญิง";
   $sql="select *,floor(datediff(curdate(),birth)/365.25) as age from palliative_register where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
@@ -58,7 +63,7 @@
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="col-sm-3"><button class="btn btn-block btn-primary btn-sm">รหัสผู้ป่วย</button></div>
-                <div class="col-sm-5"><h4><?php echo $row['hospcode'];?> <?php echo $row['pid'];?> </h4></div>
+                <div class="col-sm-5"><h4><?php echo $ptcode;?> </h4></div>
                 <div class="col-sm-2"><button class="btn btn-block btn-primary btn-sm">เพศ</button></div>
                 <div class="col-sm-2"><h4><?php echo $sex[$row['sex']];?> </h4></div>                
 
@@ -184,7 +189,7 @@
             </thead>
             <tbody>
 <?php
-  $sql="select * from tb_substudy where pidadd = '".$_SESSION['tpc_puser_id']."' AND ptid_key = '".$_GET['ptid_key']."';";
+  $sql="select * from tb_substudy where ptid_key = '".$_GET['ptid_key']."';";
   $rst=$mysqli->query($sql);
   while($row=$rst->fetch_assoc()) {
 ?>

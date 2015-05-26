@@ -15,7 +15,40 @@
     $district = $_POST["district"];
     $hcode = $_GET["hcode"];
     $date = date("Y-m-d H:i:s");
-    //echo $password."<br>".$date;
+    if($task=="getData"){
+        if($_GET["status"]==1){
+            if($_GET["province"]==0){
+            $condition = "WHERE area='".$_GET["area"]."'";
+            }
+            if($_GET["province"]!=0){
+                $condition = "WHERE area='".$_GET["area"]."' AND province='".$_GET["province"]."' ";
+            }
+            if($_GET["hcode"]!=0){
+                $condition = "WHERE area='".$_GET["area"]."' AND province='".$_GET["province"]."' AND hcode='".$_GET["hcode"]."' ";
+            }
+        }
+        else if($_GET["status"]==2 || $_GET["status"]==3){
+             if($_GET["province"]==0){
+            $condition = "";
+            }
+            if($_GET["province"]!=0){
+                $condition = "WHERE   province='".$_GET["province"]."' ";
+            }
+            if($_GET["hcode"]!=0){
+                $condition = "WHERE  province='".$_GET["province"]."' AND hcode='".$_GET["hcode"]."' ";
+            }
+        }
+        else if($_GET["status"]==4){
+            $condition = "WHERE hcode='".$_GET["hcode"]."'  AND status NOT IN (1,2,3)";
+        }
+        
+        $sql = "SELECT * FROM `puser`  ".$condition." ";
+        $query = $mysqli->query($sql);
+	while($data = $query->fetch_assoc()){
+	    $array[] = $data;
+	}
+	print json_encode($array);
+    }
     if($task=="addUser"){
         $sqlUser = "SELECT * FROM `puser` WHERE `username`='".$username."' ";
         $queryUser = $mysqli->query($sqlUser);

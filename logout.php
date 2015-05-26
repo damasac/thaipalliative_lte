@@ -62,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
      <!-- Automatic element centering -->
     <div class="lockscreen-wrapper">
         <!-- Content Header (Page header) -->
-        <meta http-equiv="refresh" content="3;URL=index.php">
+        <meta http-equiv="refresh" content="1;URL=index.php">
         
         <div class="lockscreen-logo">
         <b>Logout</b></a>

@@ -18,14 +18,28 @@
   </ol>
         <div class="info-box">
           <span class="info-box-icon bg-blue"><i class="fa fa-home"></i></span>
+          
           <div class="info-box-content">
             <span class="info-box-text"><h4>Thai Palliative Care Cloud</h4></span>
             <span class="info-box-text">
-
+              <div id="address-bar">
+                      
+                      <div class="address-box">
+                              <span> ตึก สว.1 ชั้น 18 รพ.ศรีนครินทร์ คณะแพทยศาสตร์ ม.ขอนแก่น 40002</span>
+                      </div>
+                      <div class="phone-box">
+                              <span class="top-email"><i class="fa fa-phone"></i> 084-4099935, (043)366-656</span>&nbsp;&nbsp;&nbsp;
+                              <span class="top-email"><i class="fa fa-envelope"></i><a href="mailto:info@karunruk.com"> info@karunruk.com</a></span>
+                      </div>
+              </div><!---address-bar-->
             </span>
           </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
         <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <center><img src="ss1.png" class="img-responsive img-rounded" border=0></center><br>
+          <center><img src="ss2.png" class="img-responsive img-rounded" border=0></center>
+        </section>
         <section class="content-header">
           <h1>
             $_SESSION

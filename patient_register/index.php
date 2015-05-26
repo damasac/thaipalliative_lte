@@ -63,7 +63,7 @@
                 <td><?php echo $row['lname'];?></td>
                 <td align="center"><?php echo $sex[$row['sex']];?></td>
                 <td><?php echo $row['age'];?> <?php if ($row['age']+0>0) echo "ปี";?></td>
-                <td><a href="../emr/?ptid_key=<?php echo $row['ptid_key'];?>" class="btn btn-block btn-success">EMR</a></td>
+                <td><a href="../emr/?ptid=<?php echo $row['ptid'];?>" class="btn btn-block btn-success">EMR</a></td>
               </tr>
 <?php
   }

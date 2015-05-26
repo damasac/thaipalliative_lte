@@ -62,7 +62,7 @@
 <div class="box">
 <div class="box-header">
     <span style="float: right">
-        <button class="btn btn-info btn-flat" ><i class="fa fa-plus"></i> โหลดข้อมูล</button>
+        <button class="btn btn-info btn-flat" onclick="refresh_data();"><i class="fa fa-refresh"></i> โหลดข้อมูลใหม่</button>
         <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</button>
     </span>
 <span >
@@ -113,7 +113,10 @@
         <?php }?>
     </div>
 </span>
-
+<input type="hidden" id="areaVal" name="areaVal" value="<?php echo $_SESSION["tpc_puser_area"]?>">
+<input type="hidden" id="provinceVal" name="provinceVal" value="<?php echo $_SESSION["tpc_puser_province"]?>">
+<input type="hidden" id="hospitalVal" name="hospitalVal" value="<?php echo $_SESSION["tpc_puser_hcode"]?>">
+<input type="hidden" id="statusVal" name="statusVal" value="<?php echo $_SESSION["tpc_puser_status"]?>">
   <?php  //echo "<pre>"; print_r($_SESSION);?>
 <!--<div class="box-title">จัดการสมาชิก-->
 
@@ -130,7 +133,7 @@
                 <th>วันที่สร้าง</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="dataSelectUser">
             <?php while($dataSelectUser = $querySelectUser->fetch_assoc()){?>
             <tr>
                 <td><?php echo $dataSelectUser["username"];?></td>
@@ -154,6 +157,10 @@
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
+    $("#area").on("change",function(){
+            $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
+            $("#hospital").select2();
+        });
     $("#hospital").select2();
     function popup_custom(hcode) {
         var hcode = $("#hospital").val();
@@ -193,6 +200,40 @@
     } );
 </script>
 <script>
+        function refresh_data(){
+            var area = $("#area").val();
+            var province = $("#province").val();
+            var hcode = $("#hospital").val();
+            var status = $("#statusVal").val();
+            $.getJSON("ajax-sql-query.php?task=getData",{status:status,area:area,province:province,hcode:hcode},function(result){
+                    if (result==null) {
+                        $("#dataSelectUser").html("<tr><td>ไม่มีข้อมูล</td></tr>");
+                        return ;
+                    }else{
+                        $("#dataSelectUser").html("");
+                        $.each(result, function(i, field){
+                            console.log(field);
+                            $("#dataSelectUser").html();
+                            if (field.status==1) {
+                                //code
+                                var statusName = "Super Admin";
+                            }else if (field.status==2){
+                                var statusName = "Admin Area";
+                            }else if (field.status==3) {
+                                //code
+                                var statusName = "Admin Province";
+                            }else if (field.status==4) {
+                                //code
+                                var statusName = "Admin Site";
+                            }else{
+                                var statusName = "User Site";
+                            }
+                              $("#dataSelectUser").append("<tr><td>"+field.username+"</td><td>"+field.email+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+statusName+"</td><td>"+field.createdate+"</td></tr>");
+                    });
+                    }
+            });
+
+        }
             $("#area").on("change",function(){
                 var area = $(this).val();
                     $.getJSON("ajax-area-loaddata.php?task=areaProvince&area="+area+"",function(result){
