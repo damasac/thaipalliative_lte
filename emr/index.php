@@ -3,22 +3,23 @@
 <?php sb('title');?> EMR <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<link rel="stylesheet" href="../_plugins/js/jquery.datetimepicker.css">
+<link rel="stylesheet" href="../eform/style/style.css">
 <?php eb();?>
 
 <?php sb('content_header');?>
 <?php include "../_connection/db.php"; ?>
-  <h1>
-    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">EMR</a></li>
-  </ol>
+<ol class="breadcrumb">
+   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+   <li><a href="#">EMR</a></li>
+</ol>
 <?php eb();?>
 
 <?php sb('content');?>
-
-  <!-- Main content -->
+  
+<h3><b><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</b></h3><br>
+      
 <?php
   $sex[1]="ชาย";
   $sex[2]="หญิง";
@@ -26,7 +27,8 @@
   $rst=$mysqli->query($sql);
   $row=$rst->fetch_assoc();
 ?>  
-  
+
+<!-- Main content -->
     <div class="box box-warning">
     <div class="box-body">
       <div class="row">
@@ -99,6 +101,7 @@
         <div class="h3">Electronic Medical Record (EMR)</div>
         <hr>
         
+        <div class="table-responsive">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
               <tr style="background-color: #c9c9c9;">
@@ -138,7 +141,8 @@
 ?>
             </tbody>
           </table>
-          
+        </div>  
+        
         </div>
       </div>
     </div>
@@ -157,9 +161,9 @@
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#"><span class="fa fa-plus-circle"></span> My Form</a></li>
+                  <li><a style="cursor: pointer;" onclick="popup_ezform('myform', '<?php echo $_GET["ptid_key"]; ?>');"><span class="fa fa-plus-circle"></span> My Form</a></li>
                   <li class="divider"></li>
-                  <li><a href="#"><span class="fa fa-plus-circle"></span> Public Form</a></li>
+                  <li><a style="cursor: pointer;" onclick="popup_ezform('public', '<?php echo $_GET["ptid_key"]; ?>');"><span class="fa fa-plus-circle"></span> Public Form</a></li>
                 </ul>
               </div>
             
@@ -167,6 +171,8 @@
         <div class="h3">Sub-study by Easy Form (EZ-Form)</div>
         <hr>
         
+        <a name="ezform"></a>
+        <div id="div-ezform" class="table-responsive">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
               <tr style="background-color: #c9c9c9;">
@@ -178,22 +184,33 @@
             </thead>
             <tbody>
 <?php
-  //$sql="select dadd, formname, hcode from tb_emr where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
-  //$rst=$mysqli->query($sql);
-  //while($row=$rst->fetch_assoc()) {
+  $sql="select * from tb_substudy where pidadd = '".$_SESSION['tpc_puser_id']."' AND ptid_key = '".$_GET['ptid_key']."';";
+  $rst=$mysqli->query($sql);
+  while($row=$rst->fetch_assoc()) {
 ?>
               <tr>
                 <td><?php $date = new DateTime($row['dadd']); echo $date->format('d/m/Y');?></td>
                 <td><?php echo $row['formname'];?></td>
-                <td><?php echo $row['hcode'];?></td>
-                <td> </td>
+                <td><?php echo hospitalname($row['hcode']);?></td>
+                <?php
+if ($_SESSION['tpc_puser_hcode'] == $row['hcode']) {
+?>
+                <td><a onclick="load_ezform('<?php echo $row['formid']; ?>', '<?php echo $row['id']; ?>', '<?php echo $row['ptid_key']; ?>');" class="btn btn-block btn-success"><i class="fa fa-fw fa-edit"></i> Edit</a></td>
+<?php
+  }else{
+?>
+                <td><a  class="btn btn-block btn-warning"><i class="fa fa-fw fa-file-text-o"></i> View</a></td>
+<?php
+  }
+?>
               </tr>
 <?php
-  //}
+  }
 ?>
             </tbody>
           </table>
-          
+        </div>
+        
         </div>
       </div>
     </div>
@@ -202,7 +219,67 @@
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
-  <!-- Data table script -->
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+
+<script>
+function popup_ezform(task, ptid_key) {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: 'Easy Form (EZ-Form)',
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: $('<div></div>').load("../substudy/ajax-load-ezform.php?task="+task+"&ptid_key="+ptid_key+"&uid="+'<?php echo $_SESSION['tpc_puser_id']; ?>', function(data){
+			//runSomeScript();
+		}),
+		onshown: function(dialogRef){ 
+            $("#ezfrom").select2();
+            //(".select2-input").attr("id","ezfrom");
+		},
+		onhidden: function(dialogRef){ 
+			//alert('onhidden');
+		}
+	});
+}
+
+function load_ezform(formid, id, ptid_key) {
+    $('#div-ezform').html('<br><br><p class="text-center"><img width="50" hight="20" src="../img/ajax-loading.gif"></p><br><br>');
+    $.ajax({
+         url : "../substudy/ezform.php?ptid_key="+ptid_key+"&idFormMain="+formid+"&id="+id,
+        success : function(returndata) {
+            $("#div-ezform").html(returndata);
+            $('html,body').animate({scrollTop: $("a[name='ezform']").offset().top},'slow');
+        },
+        error : function(xhr, statusText, error) {
+            //
+        }
+    });
+   
+}
+    
+</script>
+
+<script type="text/javascript" src="../_plugins/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script language="javascript" src="../eform/script/scriptGoogleForm.js"></script>
+<script>
+        $("select[data-attr]").select2();  
+	$('input[data-attr=date]').datetimepicker({
+		timepicker:false
+	      });
+    	$('input[data-attr=time]').datetimepicker({
+		datepicker:false
+	      });
+    	$('input[data-attr=datetime]').datetimepicker({
+
+	      });
+</script>
+
 <?php eb();?>
  
 <?php render($MasterPage);?>
