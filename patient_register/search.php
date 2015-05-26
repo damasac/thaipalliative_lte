@@ -11,13 +11,10 @@
 <?php include "../_connection/db.php"; ?>
 
 <?php sb('content_header');?>
-          <h4>
+          <h1>
             <small>
-            	<h4>
-            		<?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)
-            	</h4>
             </small>
-           </h4>
+           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Register</a></li>

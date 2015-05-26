@@ -186,7 +186,7 @@
                       <td>'.$gender.'</td>
                       <td>'.$row['age'].'</td>
                       <td>
-                        <a type="button" href="../form/register.php?dataid='.$row['pid'].'&insert=1&cascap=1" class="btn btn-primary" title="นำเข้าข้อมูล">
+                        <a type="button" href="../form/register.php?dataid='.$row['ssn'].'&insert=1&cascap=1" class="btn btn-primary" title="นำเข้าข้อมูล">
                           <i class="fa fa-arrow-down">
                           </i>
                         </a>

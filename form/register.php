@@ -43,6 +43,11 @@ $insert = 0;
 isset($_GET['cascap'])? $cascap = $_GET['cascap'] : '';
 isset($_GET['insert'])? $insert = $_GET['insert'] : '';
 
+$sql = "SELECT pid FROM palliative_register WHERE hospcode = ".$_SESSION['tpc_puser_hcode']." ORDER BY pid DESC LIMIT 1";
+$res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+$pidarr = $res->fetch_assoc();
+
+$pid_str = str_pad($pidarr['pid'] + 1, 4, '0', STR_PAD_LEFT);
 //echo $cascap.":".$insert;
 
 if(0 == $cascap && $insert != 1){
@@ -60,16 +65,36 @@ if(0 == $cascap && $insert != 1){
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $dbarr = $res->fetch_array();
 
-    //echo '<pre>';
+    //echo $pid_str;
     //print_r($dbarr);
 
     $dbarr['ptid'] = 0;
     $dbarr['2'] = $_SESSION['tpc_puser_hcode'];
-    $dbarr['3'] = '';
+    $dbarr['3'] = $pid_str;
     $dbarr['4'] = '';
+    $dbarr['5'] = date("d/m/Y");
   }else{
-    echo $cascap;
-    $stmt = $mysqli_cascap->prepare('SELECT c, o, d, e, e,
+    function tis620_to_utf8($tis) {
+      $utf8 = '';
+      for( $i=0 ; $i< strlen($tis) ; $i++ ){
+        $s = substr($tis, $i, 1);
+        $val = ord($s);
+        if( $val < 0x80 ){
+          $utf8 .= $s;
+        } elseif ((0xA1 <= $val and $val <= 0xDA)
+        or (0xDF <= $val and $val <= 0xFB)) {
+          $unicode = 0x0E00 + $val - 0xA0;
+          $utf8 .= chr( 0xE0 | ($unicode >> 12) );
+          $utf8 .= chr( 0x80 | (($unicode >> 6) & 0x3F) );
+          $utf8 .= chr( 0x80 | ($unicode & 0x3F) );
+        }
+      }
+      return $utf8;
+    }
+
+    $dataid = '';
+    isset($_GET['dataid'])? $dataid = $_GET['dataid'] : '';
+    $stmt = $mysqli_cascap->prepare("SELECT ptid, sitecode, ptcode, ptid_key, cid,
                                         regdate AS createdate,
                                         cid AS ssn,
                                         bdatedb AS birth,
@@ -77,51 +102,60 @@ if(0 == $cascap && $insert != 1){
                                         title AS prename,
                                         name AS name,
                                         surname AS lname,
-                                        v3 AS sex,
-                                        AS nation,
-                                        AS nationx,
-                                        AS race,
-                                        AS racex,
-                                        AS religion,
-                                        AS religionx,
-                                        AS house,
-                                        AS moo,
-                                        AS village,
-                                        AS lane,
-                                        AS road,
-                                        AS tambon,
-                                        AS ampur,
-                                        AS changwat,
-                                        AS zipcode,
-                                        AS tel,
-                                        AS mstatus,
-                                        AS mstatusx,
-                                        AS privilege,
-                                        AS privilegex,
-                                        AS occupa,
-                                        AS occupax,
-                                        AS congenital_disease,
-                                        AS congenital_disease2,
-                                        AS congenital_disease3,
-                                        AS congenital_disease4,
-                                        AS congenital_disease5,
-                                        AS congenital_diseasex,
-                                        AS history,
-                                        AS historyx,
-                                        AS update_by,
-                                        AS create_by,
-                                        AS update_time
+                                        '' AS sex,
+                                        '' AS nation,
+                                        '' AS nationx,
+                                        '' AS race,
+                                        '' AS racex,
+                                        '' AS religion,
+                                        '' AS religionx,
+                                        '' AS house,
+                                        '' AS moo,
+                                        '' AS village,
+                                        '' AS lane,
+                                        '' AS road,
+                                        add1n6code AS tambon,
+                                        add1n7code AS ampur,
+                                        add1n8code AS changwat,
+                                        '' AS zipcode,
+                                        '' AS tel,
+                                        '' AS mstatus,
+                                        '' AS mstatusx,
+                                        '' AS privilege,
+                                        '' AS privilegex,
+                                        '' AS occupa,
+                                        '' AS occupax,
+                                        '' AS congenital_disease,
+                                        '' AS congenital_disease2,
+                                        '' AS congenital_disease3,
+                                        '' AS congenital_disease4,
+                                        '' AS congenital_disease5,
+                                        '' AS congenital_diseasex,
+                                        '' AS history,
+                                        '' AS historyx,
+                                        '' AS update_by,
+                                        '' AS create_by,
+                                        '' AS update_time,
+                                        floor(datediff(curdate(),bdatedb)/365.25) as birthdb
                                       FROM patient
-                                      WHERE cid LIKE ? AND ptid = ptid_key');
-    $stmt->bind_param('s', $param);
+                                      WHERE cid LIKE ? AND ptid = ptid_key");
+    $stmt->bind_param('s', $dataid);
     $stmt->execute();
     $result = $stmt->get_result();
     $dbarr = $result->fetch_array();
 
+    //echo "<pre>";
+    //print_r($dbarr);
+    //exit;
+
     $dbarr['ptid'] = 0;
     $dbarr['2'] = $_SESSION['tpc_puser_hcode'];
-    $dbarr['3'] = '';
+    $dbarr['3'] = $pid_str;
     $dbarr['4'] = '';
+    $dbarr['5'] = date("d/m/Y");
+    $dbarr['9'] = tis620_to_utf8($dbarr['9']);
+    $dbarr['10'] = tis620_to_utf8($dbarr['10']);
+    $dbarr['11'] = tis620_to_utf8($dbarr['11']);
   }
 }
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
@@ -258,7 +292,7 @@ if($dbarr['ptid']){
           <option value="0">- ค้นจากชื่อตำบล -</option>
      </select>
               </div>
-           
+
                <div class="col-lg-3">
                 อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required></select>
               </div>
