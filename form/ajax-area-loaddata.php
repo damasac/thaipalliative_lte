@@ -20,6 +20,14 @@
 	    $data2 = $query2->fetch_assoc();
 	    //array_push($data2["PROVINCE_NAME"],$data);
 	    $data['PROVINCE_NAME']=$data2['PROVINCE_NAME'];
+	    
+	    $sql2 = "SELECT * FROM `const_amphur` WHERE `AMPHUR_ID` = '".$data["AMPHUR_ID"]."'  ";
+
+	    $query2 = $mysqli->query($sql2);
+	    $data2 = $query2->fetch_assoc();
+	    //array_push($data2["PROVINCE_NAME"],$data);
+	    $data['AMPHUR_NAME']=$data2['AMPHUR_NAME'];
+	    
 	    $array[] = $data;
 	}
 	//print_r($array);
@@ -27,7 +35,7 @@
    }
    if($task=="getaddress2"){
 	$amphursub = substr($tambon,0,4);
-	$provincesub = substr($province,0,2);
+	$provincesub = substr($tambon,0,2);
 	$sqlAmphur = "SELECT * FROM const_amphur WHERE AMPHUR_CODE LIKE '%".$amphursub."%'";
 
 	$sqlProvince = "SELECT * FROM const_province WHERE PROVINCE_CODE LIKE '%".$provincesub."%' ";

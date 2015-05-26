@@ -14,9 +14,11 @@ function calAge(o){
 <?php eb();?>
 
 <?php sb('content_header');?>
+<?php include "../_connection/db.php"; ?>
   <h1>
-    <small></small>
+    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
   </h1>
+
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="#">Register</a></li>
@@ -25,7 +27,6 @@ function calAge(o){
 
 <?php sb('content');?>
 <?php
-include_once "../_connection/db.php";
 
 $res = $mysqli->query("SELECT * FROM palliative_register")or die('[' . $mysqli->error . ']');
 $numGroup = $res->num_rows;
@@ -78,7 +79,7 @@ if($dbarr['ptid']){
         
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" date>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" data-provide="datepicker" data-date-language="th-th" date>
         </div>
         
         <div class="form-group col-lg-12">
@@ -172,13 +173,13 @@ if($dbarr['ptid']){
               </div>
            
                <div class="col-lg-3">
-                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly required></select>
+                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required></select>
               </div>
               <div class="col-lg-3">
-                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly required></select>
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly=true required></select>
               </div>
               <div class="col-lg-3">
-                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control" readonly>
+                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control">
               </div>
             </div>
         </div>
@@ -288,6 +289,10 @@ if($dbarr['ptid']){
 
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/bootstrap-datepicker-thai.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker-th/locales/bootstrap-datepicker.th.js"></script>
+<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">
 <link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
@@ -314,6 +319,7 @@ if($dbarr['ptid']){
 </script>
 <!--Query province amphur tambon By Ball-->
 <script>
+     $('.datepicker').datepicker();
      $("#tambonSelect").select2();
      $(function(){
           $(".select2-input").attr("id","textSearch");
@@ -324,7 +330,7 @@ if($dbarr['ptid']){
                     console.log(result);
                        $("#tambonSelect").html("<option value='0'>- ค้นหาตำบล -</option>");
                        $.each(result, function(i, field){
-                             $("#tambonSelect").append("<option value="+field.DISTRICT_CODE+" >ต. "+field.DISTRICT_NAME+" : จ."+field.PROVINCE_NAME+"</option>");
+                             $("#tambonSelect").append("<option value="+field.DISTRICT_CODE+" >ต. "+field.DISTRICT_NAME+" : อ."+field.AMPHUR_NAME+" : จ."+field.PROVINCE_NAME+"</option>");
 
                        });
                     });

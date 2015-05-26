@@ -42,7 +42,7 @@
                 <th>HN</th>
                 <th>ชื่อ</th>
                 <th>สกุล</th>
-                <th>เพศ</th>
+                <th align="center">เพศ</th>
                 <th>อายุ</th>
                 <th>เข้าดูข้อมูล</th>
               </tr>
@@ -61,8 +61,8 @@
                 <td><?php echo $row['hn'];?></td>
                 <td><?php echo $row['name'];?></td>
                 <td><?php echo $row['lname'];?></td>
-                <td><?php echo $sex[$row['sex']];?></td>
-                <td><?php echo $row['age'];?></td>
+                <td align="center"><?php echo $sex[$row['sex']];?></td>
+                <td><?php echo $row['age'];?> <?php if ($row['age']+0>0) echo "ปี";?></td>
                 <td><a href="../emr/?ptid_key=<?php echo $row['ptid_key'];?>" class="btn btn-block btn-success">EMR</a></td>
               </tr>
 <?php

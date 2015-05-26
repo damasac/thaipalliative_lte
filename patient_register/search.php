@@ -87,6 +87,7 @@
       $('#ssn').keydown(function(e) {
 		    if (e.keyCode == 13) {
 		        $('#btnssn').click();
+			return false;
 		    }
 		});
     </script>
