@@ -7,16 +7,15 @@
 
 <?php sb('content_header');?>
 <?php include "_connection/db.php"; ?>
-  <h1>
-    <small><h4><?php echo hospitalname($_SESSION['tpc_puser_hcode']);?> (<?php echo $_SESSION['tpc_puser_hcode'];?>)</h4></small>
-  </h1>
 
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-  </ol>
+
+
 <?php eb();?>
 
 <?php sb('content');?>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  </ol>
         <div class="info-box">
           <span class="info-box-icon bg-blue"><i class="fa fa-home"></i></span>
           <div class="info-box-content">
