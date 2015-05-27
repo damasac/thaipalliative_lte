@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-05-26 22:17:21
+Date: 2015-05-27 08:07:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `formmain` (
   `public_edit` int(11) DEFAULT NULL,
   `public_delete` int(11) DEFAULT NULL,
   PRIMARY KEY (`formid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of formmain

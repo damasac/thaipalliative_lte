@@ -354,7 +354,7 @@
                                 },
 		    success: function(data){
                         //console.log(data);
-			//location.href="eform.php?idFormMain="+formid+"";
+			location.href="eform.php?idFormMain="+formid+"";
 		    },
 		    error:function(){
 			alert("failure");
