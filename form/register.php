@@ -5,10 +5,10 @@
 <?php sb('js_and_css_head'); ?>
 <script language="javascript">
 function calAge(o){
-     var tmp = o.value.split("-");
+     var tmp = o.value.split("/");
      var current = new Date();
      var current_year = current.getFullYear();
-     document.getElementById("age").value = current_year - tmp[0];
+     document.getElementById("age").value = current_year + 543 - tmp[2];
 }
 </script>
 <link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">
@@ -166,11 +166,19 @@ if($dbarr['ptid']){
 
 list($yy,$mm,$dd)=explode("-",$dbarr['birth']);
 $yy=$yy+543;
-$dbarr['7']="$dd-$mm-$yy";
+if ($yy != 543) {
+     $dbarr['7']="$dd-$mm-$yy";
+}else{
+     $dbarr['7']="";
+}
 list($yy,$mm,$dd)=explode("-",substr($dbarr['createdate'],0,10));
 $yy=$yy+543;
-$dbarr['5']="$dd-$mm-$yy";
-print_r($dbarr);
+if ($yy != 543) {
+     $dbarr['5']="$dd-$mm-$yy";
+}else{
+     $dbarr['5']="";
+}
+//print_r($dbarr);
 ?>
 
     <div class="info-box">
@@ -223,7 +231,7 @@ print_r($dbarr);
 
         <div class="form-group col-lg-2">
           <label>5. อายุ</label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="age" value="<?php echo $dbarr[$i]; ?>" required>
+          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="age" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-3">
