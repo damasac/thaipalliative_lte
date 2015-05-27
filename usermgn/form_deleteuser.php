@@ -17,7 +17,7 @@
 <script>
     function doDelete(id) {
         //
-        alert(id);
+        //alert(id);
                      $.ajax({
 		    url: "ajax-sql-query.php?task=doDelete",
 		    type: "post",
