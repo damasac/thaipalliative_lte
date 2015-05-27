@@ -248,6 +248,7 @@
             var hcode = $("#hospital").val();
             var status = $("#statusVal").val();
             $.getJSON("ajax-sql-query.php?task=getData",{status:status,area:area,province:province,hcode:hcode},function(result){
+                    $('#userTable').dataTable();
                     if (result==null) {
                         $("#dataSelectUser").html("<tr><td>ไม่มีข้อมูล</td></tr>");
                         return ;
@@ -270,7 +271,8 @@
                             }else{
                                 var statusName = "User Site";
                             }
-                              $("#dataSelectUser").append("<tr><td>"+field.username+"</td><td>"+field.email+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+statusName+"</td><td>"+field.createdate+"</td><td><button class='btn btn-warning btn-xs' onclick='editUser("+field.id+","+field.hcode+")'>แก้ไข</button><button class='btn btn-danger btn-xs' onclick='deleteUser("+field.id+")'>ลบ</button></td></tr>");
+                              $("#dataSelectUser").append("<tr><td>"+field.username+"</td><td>"+field.email+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+statusName+"</td><td>"+field.createdate+"</td><td><button class='btn btn-warning btn-xs' onclick='editUser("+field.id+","+field.hcode+")'>แก้ไข</button>&nbsp;<button class='btn btn-danger btn-xs' onclick='deleteUser("+field.id+")'>ลบ</button></td></tr>");
+                         
                     });
                     }
             });
