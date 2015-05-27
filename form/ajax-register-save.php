@@ -8,6 +8,13 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 ## System Start ############################################################
 include_once "../_connection/db.php";
 //-----------------------------------------------------------
+
+list($dd,$mm,$yy)=explode("/",$_POST['birth']);
+$yy=$yy-543;
+$_POST['birth']="$yy-$mm-$dd";
+list($dd,$mm,$yy)=explode("/",$_POST['createdate']);
+$yy=$yy-543;
+$_POST['createdate']="$yy-$mm-$dd";
 //echo '<pre>'; print_r($_POST); exit;
 if($_POST['task']=='save'){
     
@@ -40,7 +47,7 @@ if($_POST['task']=='save'){
     $sql = "INSERT INTO `palliative_register` (".$fields.") VALUES (".$values.");";
     //echo $sql; exit;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
-    $ptid = $mysqli->insert_id;
+    //$ptid = $mysqli->insert_id;
     echo $ptid;
     $sql = "UPDATE palliative_register SET ptid_key = ptid WHERE ptid_key = 0 AND ptid ='$ptid'";
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');    
@@ -57,12 +64,13 @@ if($_POST['task']=='save'){
     $values = substr($values, 0, -2); // remove back string eg. , 2 string
     //insert data form
     $sql = "UPDATE `palliative_register` SET ". $values. " WHERE ptid = '$ptid';";
+    //echo $sql;exit;
     echo $ptid;
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 }
 function nextpid ($hcode) {
     global $mysqli;
-    $sql="SELECT lpad(max(ifnull(pid,'0'))+1,5,'0') as pid from palliative_register where hospcode='{$hcode}'";
+    $sql="SELECT lpad(ifnull(max(pid),0)+1,5,'0') as pid from palliative_register where hospcode='{$hcode}'";
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $dbarr = $res->fetch_array();
     return $dbarr['pid'];

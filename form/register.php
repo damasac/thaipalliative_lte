@@ -145,6 +145,7 @@ if(0 == $cascap && $insert != 1){
     //exit;
 
     $dbarr['ptid'] = 0;
+    $dbarr['ptid_key'] = 0;
     $dbarr['2'] = $_SESSION['tpc_puser_hcode'];
     $dbarr['3'] = $pid_str;
     $dbarr['4'] = '';
@@ -161,10 +162,15 @@ if($dbarr['ptid']){
     $task = 'save';
 }
 
-  if ($dbarr['createdate']!="0000-00-00 00:00:00") {
-     $dbarr['createdate']=substr($dbarr['createdate'],8,2).substr($dbarr['createdate'],5,2).substr($dbarr['createdate'],0,4);
-  }
-//print_r($dbarr);
+
+
+list($yy,$mm,$dd)=explode("-",$dbarr['birth']);
+$yy=$yy+543;
+$dbarr['7']="$dd-$mm-$yy";
+list($yy,$mm,$dd)=explode("-",substr($dbarr['createdate'],0,10));
+$yy=$yy+543;
+$dbarr['5']="$dd-$mm-$yy";
+print_r($dbarr);
 ?>
 
     <div class="info-box">

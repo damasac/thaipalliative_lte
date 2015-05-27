@@ -24,6 +24,13 @@
   $row=$rst->fetch_assoc();
   $_GET['ptid_key'] = $row['ptid_key'];
   $ptcode = $row['hospcode'] . " " .$row['pid'];
+
+  $sql = "SELECT ptid_key, hospcode, pid from palliative_register where hospcode='{$_SESSION['tpc_puser_hcode']}' AND ptid_key='".$_GET['ptid_key']."';";
+  $rst=$mysqli->query($sql);
+  $row=$rst->fetch_assoc();
+  
+  $ptcode = $row['hospcode'] . " " .$row['pid'];
+  
   $sex[1]="ชาย";
   $sex[2]="หญิง";
   $sql="select *,floor(datediff(curdate(),birth)/365.25) as age from palliative_register where ptid_key = '".$mysqli->real_escape_string($_GET['ptid_key'])."';";
