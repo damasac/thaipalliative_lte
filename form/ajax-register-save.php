@@ -50,7 +50,12 @@ if($_POST['task']=='save'){
     //$ptid = $mysqli->insert_id;
     echo $ptid;
     $sql = "UPDATE palliative_register SET ptid_key = ptid WHERE ptid_key = 0 AND ptid ='$ptid'";
-    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');    
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $sql = "SELECT ptid_key FROM palliative_register WHERE ptid ='$ptid'";
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $pidarr = $res->fetch_assoc();
+    $sql = "UPDATE tb_emr SET ptid_key = '$ptid' WHERE id ='$ptid'";
+    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     //$pgroup = $mysqli->insert_id;
 } else  if($_POST['task']=='update'){
     $ptid =$_GET['ptid'];
