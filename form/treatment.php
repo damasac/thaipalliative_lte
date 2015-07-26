@@ -975,10 +975,10 @@ if($dbarr['ptid']){
             
             
             <div class="form-group col-lg-6">
-                <button class="btn btn-block btn-success btn-lg">Submit</button>
+                <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
-                <button class="btn btn-block btn-danger btn-lg">Cancel</button>
+                <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
         
         
