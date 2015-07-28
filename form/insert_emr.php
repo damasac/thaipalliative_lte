@@ -1,8 +1,9 @@
 <?php
+ob_start();
 session_start();
 
-header("Content-type:text/html; charset=UTF-8");          
-header("Cache-Control: no-store, no-cache, must-revalidate");         
+header("Content-type:text/html; charset=UTF-8");
+header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 
 ## System Start ############################################################
@@ -26,7 +27,7 @@ if($_GET['task']=='followup'){
 }
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $ptid = $mysqli->insert_id;
-    
+
     header("Location: ../form/".$_GET['task'].".php?dataid=".$ptid);
-    
+
 ?>
