@@ -33,7 +33,7 @@ $fields = $res->fetch_fields();
 $sql = "SELECT * FROM palliative_treatment WHERE ptid = '$_GET[dataid]';";
 $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 $dbarr = $res->fetch_array();
-  
+
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
 if($dbarr['ptid']){
     $task = 'update';
@@ -54,7 +54,7 @@ if($dbarr['ptid']){
 
     <div class="box">
     <div class="box-body">
-    
+
     <form id="frm-treatment" onsubmit="frm_treatment(); return false;">
     <div class="row" style="padding: 25px 25px 25px 25px;">
         <div class="form-group col-lg-6">
@@ -63,48 +63,48 @@ if($dbarr['ptid']){
           <input type="hidden"name="ptid" value="<?php echo $_GET['dataid']; ?>" />
           <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['hospcode']; ?>">
         </div>
-        
+
         <div class="form-group col-lg-6">
           <label>PID: </label>
           <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['pid']; ?>">
         </div>
-        
+
         <div class="form-group col-lg-12">
           <h4>ส่วนที่ 1 ข้อมูลการรักษาประคับประคอง</h4>
         </div>
-          
+
         <div class="form-group col-lg-8">
           <label>1. วันที่เข้ารับการรักษาตัว: </label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-8">
           <label>2. วันที่ปรึกษา: </label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>3. หอผู้ป่วยที่ปรึกษา: </label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-                
+
         <div class="form-group col-lg-8">
           <label>4. วันที่จำหน่ายออก</label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <label>5. วันที่ส่งต่อ</label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
-        </div>      
-        
+        </div>
+
         <div class="form-group col-lg-4">
           <label>เหตุผล</label><br>
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;อาการดีขึ้น</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='2' ? 'checked' : ''; ?> value='2'>เสียชีวิต</label></div>
         </div>
 
-               
+
      <div class="form-group col-lg-12">
           <label>6. โรงพยาบาลที่ส่งต่อ </label>
             <div class="row">
@@ -156,7 +156,7 @@ if($dbarr['ptid']){
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='7' ? 'checked' : ''; ?>" id="" value='7'>&nbsp;&nbsp;อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>"/></div>
           </div>
-        
+
 
         <div class="form-group col-lg-12">
           <h4>ส่วนที่ 2 ประวัติการเจ็บป่วยในปัจจุบัน</h4>
@@ -166,7 +166,7 @@ if($dbarr['ptid']){
           <label>วันที่/เดือน/ปี (พ.ศ.) </label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <label>ประวัติการเจ็บป่วย </label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -176,7 +176,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
          <!--  <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -186,7 +186,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <!-- <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -196,7 +196,7 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <!-- <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -206,7 +206,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
          <!--  <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -216,7 +216,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <!-- <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -226,7 +226,7 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <!-- <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -236,7 +236,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
          <!--  <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -246,7 +246,7 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-8">
           <!-- <label>ประวัติการเจ็บป่วย </label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
@@ -260,12 +260,12 @@ if($dbarr['ptid']){
           <label>วันที่/เดือน/ปี</label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>&nbsp;&nbsp;BUN</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>ผลการตรวจ</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -276,12 +276,12 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>&nbsp;&nbsp;Cr</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -292,12 +292,12 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>Alb</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -308,12 +308,12 @@ if($dbarr['ptid']){
         <!--   <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>Ca</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -324,12 +324,12 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>&nbsp;&nbsp;Hct</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -340,12 +340,12 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
-        
+
         <div class="form-group col-lg-4">
          <!--  <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?>" id="" value='1'>&nbsp;&nbsp;INR</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
@@ -363,10 +363,10 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-6">
           <div class="text-center"><label>General</label></div>
         </div>
-        
+
         <div class="form-group col-lg-6">
            <div class="text-center"><label>SKIN</label></div>
-        </div>   
+        </div>
 
         <div class="form-group col-lg-3">
             <label>1. Fatigue</label>
@@ -376,15 +376,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>&nbsp;&nbsp;No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>17. Rash</label>
-        </div>  
+        </div>
 
          <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div>    
+        </div>
 
         <div class="form-group col-lg-3">
             <label>2. Sleep problems</label>
@@ -394,28 +394,28 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>18. Ulcer/fistula</label>
-        </div>  
+        </div>
 
          <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
              <label>3. Cachexia</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div>    
+        </div>
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>CNS</label></div>
-        </div>   
+        </div>
 
         <div class="form-group col-lg-3">
             <label>4. Lymphedema</label>
@@ -425,28 +425,28 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>19. Headaches</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>GIT</label></div>
-        </div>   
+        </div>
 
         <div class="form-group col-lg-3">
              <label>20. Selzure</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>5. Anorexia</label>
@@ -456,15 +456,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>21. Limb weakness</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>6. Oral symptoms</label>
@@ -474,15 +474,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>22. Drowsiness</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>7. Weight loss</label>
@@ -492,15 +492,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>23. Cognitive impairment</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>8. Dysphagia</label>
@@ -510,15 +510,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>24. Dellirium</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>9. Nauses</label>
@@ -531,7 +531,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>OTHERS</label></div>
-        </div>   
+        </div>
 
         <div class="form-group col-lg-3">
             <label>10. Vomitting</label>
@@ -541,15 +541,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>25. Dyspnea</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>11. Constipation</label>
@@ -559,10 +559,10 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>26. Cough</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
@@ -577,15 +577,15 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-3">
              <label>27. Pain</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <label>13. Ostomy</label>
@@ -595,18 +595,18 @@ if($dbarr['ptid']){
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
         </div>
-          
+
         <div class="form-group col-lg-6">
            <label>&nbsp;&nbsp;</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>GUS</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-6">
            <label>&nbsp;&nbsp;</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <label>14. Urinary prob</label>
@@ -619,7 +619,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-6">
            <label>&nbsp;&nbsp;</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <label>15. Gynae prob</label>
@@ -632,7 +632,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-6">
            <label>&nbsp;&nbsp;</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-3">
             <label>16. Catheter</label>
@@ -645,7 +645,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-6">
            <label>&nbsp;&nbsp;</label>
-        </div>  
+        </div>
 
         <div class="form-group col-lg-12">
           <div class="heading-form"><h4>ส่วนที่ 5 Psychosocial and spiritual assessment</h4></div>
@@ -657,7 +657,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>การประเมินด้านจิตวิญญาณ</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>ปัญหาด้านเศรษฐกิจ</label>
@@ -666,7 +666,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>Hope (false hope)</label>
@@ -675,7 +675,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>ปัญหาด้านจิตใจ</label>
@@ -684,7 +684,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>Fear</label>
@@ -693,7 +693,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>ปัญหาด้านสังคม</label>
@@ -702,7 +702,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>Unfinished business</label>
@@ -711,11 +711,11 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-6">
            <div class="text-center"><label>ความรับรู้และการมีส่วนร่วมในการตัดสินใจ</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>​Connectness</label>
@@ -724,7 +724,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-3">
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Yes</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='2'>No</label></div>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-2">
           <div class="text-center"><label>&nbsp;&nbsp;</label></div>
@@ -736,7 +736,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-2">
          <label>ครอบครัว</label>
-        </div> 
+        </div>
 
         <div class="form-group col-lg-3">
             <label>Control helplessness</label>
@@ -820,12 +820,12 @@ if($dbarr['ptid']){
           <label>วันที่/เดือน/ปี</label>
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>อุปกรณ์การแพทย์</label><br>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;เครื่องผลิตออกซิเจน</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <label>รุ่น/No.</label>
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -836,12 +836,12 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;suringe driver</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -852,12 +852,12 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;เตียง</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -868,12 +868,12 @@ if($dbarr['ptid']){
         <!--   <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;ที่นอนลม</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -884,12 +884,12 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;เครื่องพ่นยา</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -900,12 +900,12 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
          <!--  <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;ออกซิเจน tank</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -915,12 +915,12 @@ if($dbarr['ptid']){
         <!--   <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;เครื่องดูดเสมหะ</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -931,12 +931,12 @@ if($dbarr['ptid']){
           <!-- <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;Monkey bar</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -947,12 +947,12 @@ if($dbarr['ptid']){
          <!--  <label>วันที่/เดือน/ปี</label> -->
           <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
-        
+
         <div class="form-group col-lg-4">
          <!--  <label>ผลตรวจทางห้องปฏิบัติการและการตรวจพิเศษ</label><br> -->
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;รถเข็น</label></div>
         </div>
-        
+
         <div class="form-group col-lg-4">
           <!-- <label>ผลการตรวจ</label> -->
           <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
@@ -972,23 +972,24 @@ if($dbarr['ptid']){
               </div>
               </div><hr>
             </div>
-            
-            
+
+            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
             <div class="form-group col-lg-6">
                 <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
                 <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
-        
-        
-   </div> 
+            <?php } ?>
+
+
+   </div>
 
     </form>
 
     </div>
   </div>
-    
+
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
@@ -1028,11 +1029,11 @@ $(document).ready(function(){
                     }
                 },
                 error : function(xhr, statusText, error) {
-                    
+
                 }
         });
     }
-    
+
 function popup_save(ptid) {
 
 	dialogPopWindow = BootstrapDialog.show({
@@ -1041,11 +1042,11 @@ function popup_save(ptid) {
 		size:'size-wide',
 		draggable: false,
 		message: '<hr><h1 class="text-center"><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1><div class="form-group"><hr><div class="col-md-12"><a role="button" href="../emr/?ptid='+ptid+'" class="btn btn-lg btn-primary btn-block"><li class="fa fa-book"></li> ไปที่หน้า EMR</a></div></div>&nbsp;',
-		onshown: function(dialogRef){ 
+		onshown: function(dialogRef){
             $("#ezfrom").select2();
             //(".select2-input").attr("id","ezfrom");
 		},
-		onhidden: function(dialogRef){ 
+		onhidden: function(dialogRef){
 			//alert('onhidden');
 		}
 	});
@@ -1054,5 +1055,5 @@ function popup_save(ptid) {
 </script>
 
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>

@@ -334,7 +334,7 @@ if ($yy != 543) {
 ?>
           <option value="<?php echo $dbarr['ampur'];?>">
 <?php
-     
+
      $sql="select AMPHUR_NAME from const_amphur where AMPHUR_CODE like '{$dbarr['ampur']}'";
     $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $amphur = $res2->fetch_array();
@@ -343,7 +343,7 @@ if ($yy != 543) {
           </option>
 <?php
      }
-?>                    
+?>
                 </select>
               </div>
               <div class="col-lg-3">
@@ -353,7 +353,7 @@ if ($yy != 543) {
 ?>
           <option value="<?php echo $dbarr['changwat'];?>">
 <?php
-     
+
      $sql="select PROVINCE_NAME from const_province where PROVINCE_CODE like '{$dbarr['changwat']}'";
     $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $amphur = $res2->fetch_array();
@@ -362,7 +362,7 @@ if ($yy != 543) {
           </option>
 <?php
      }
-?>                                        
+?>
                 </select>
               </div>
               <div class="col-lg-3">
@@ -456,13 +456,14 @@ if ($yy != 543) {
               </div><hr>
             </div>
 
-
+            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
             <div class="form-group col-lg-6">
                 <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
                 <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
+            <?php } ?>
 
         </div>
         </form>
@@ -470,7 +471,7 @@ if ($yy != 543) {
     </div>
   </div>
 
- 
+
 
 <?php eb();?>
 
@@ -494,7 +495,7 @@ $(document).ready(function(){
   });
   $("#createdate").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
   $("#birth").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
-  
+
 });
 </script>
 <script>
@@ -517,7 +518,7 @@ $(document).ready(function(){
                 }
         });
     }
-    
+
 function popup_save(ptid) {
 
 	dialogPopWindow = BootstrapDialog.show({
@@ -526,11 +527,11 @@ function popup_save(ptid) {
 		size:'size-wide',
 		draggable: false,
 		message: '<hr><h1 class="text-center"><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1><div class="form-group"><hr><div class="col-md-12"><a role="button" href="../emr/?ptid='+ptid+'" class="btn btn-lg btn-primary btn-block"><li class="fa fa-book"></li> ไปที่หน้า EMR</a></div></div>&nbsp;',
-		onshown: function(dialogRef){ 
+		onshown: function(dialogRef){
             $("#ezfrom").select2();
             //(".select2-input").attr("id","ezfrom");
 		},
-		onhidden: function(dialogRef){ 
+		onhidden: function(dialogRef){
 			//alert('onhidden');
 		}
 	});
@@ -540,7 +541,7 @@ function popup_save(ptid) {
 
 <!--Query province amphur tambon By Ball-->
 <script>
-     
+
      $("#tambonSelect").select2();
      $(function(){
           $(".select2-input").attr("id","textSearch");

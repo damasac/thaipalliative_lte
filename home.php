@@ -18,12 +18,12 @@
   </ol>
         <div class="info-box">
           <span class="info-box-icon bg-blue"><i class="fa fa-home"></i></span>
-          
+
           <div class="info-box-content">
             <span class="info-box-text"><h4>Thai Palliative Care Cloud</h4></span>
             <span class="info-box-text">
               <div id="address-bar">
-                      
+
                       <div class="address-box">
                               <span> ตึก สว.1 ชั้น 18 รพ.ศรีนครินทร์ คณะแพทยศาสตร์ ม.ขอนแก่น 40002</span>
                       </div>
@@ -36,27 +36,26 @@
           </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <center><img src="ss1.png" class="img-responsive img-rounded" border=0></center><br>
+        <section class="content">
+		  <center><img src="ss1.png" class="img-responsive img-rounded" border=0></center><br>
           <center><img src="ss2.png" class="img-responsive img-rounded" border=0></center>
-        </section>
-        <section class="content-header">
+		</section>
+        <!-- <section class="content-header">
           <h1>
             $_SESSION
             <small>Development mode</small>
           </h1>
-          
+
         </section>
 
-        <!-- Main content -->
+
         <section class="content">
             <pre>
-            <?php print_r($_SESSION); ?>
+            <?php //print_r($_SESSION); ?>
             </pre>
-          <!-- Your Page Content Here -->
 
-        </section><!-- /.content -->
-        
+        </section>--><!-- /.content -->
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="color: #000;">
   <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="headingOne">
@@ -200,7 +199,7 @@
 			<td class="textvaluesmall text-right">487</td>
 			<td class="textvaluesmall text-right">96</td>
 			</tr>
-			
+
 			</tbody>
 			</table>
 			</div>
@@ -210,11 +209,11 @@
   </div>
 </div>
 
-			        
+
 <?php eb();?>
 
 
 <?php sb('js_and_css_footer');?>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>

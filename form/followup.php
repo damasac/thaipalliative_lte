@@ -32,7 +32,7 @@ $fields = $res->fetch_fields();
 $sql = "SELECT * FROM palliative_followup WHERE ptid = '$_GET[dataid]';";
 $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
 $dbarr = $res->fetch_array();
-  
+
 //echo "<pre>".$sql; print_r($dbarr); echo "</pre>";
 if($dbarr['ptid']){
     $task = 'update';
@@ -53,7 +53,7 @@ if($dbarr['ptid']){
 
     <div class="box">
     <div class="box-body">
-    
+
     <form id="frm-followup" onsubmit="frm_followup(); return false;">
         <div class="row" style="padding: 25px 25px 25px 25px;">
 
@@ -63,7 +63,7 @@ if($dbarr['ptid']){
           <input type="hidden"name="ptid" value="<?php echo $_GET['dataid']; ?>" />
           <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['hospcode']; ?>">
         </div>
-        
+
         <div class="form-group col-lg-6">
           <label>PID: </label>
           <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['pid']; ?>">
@@ -72,7 +72,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-12">
           <label>กิจกรรมการดูแล</label>
         </div>
-        
+
         <div class="form-group col-lg-12">
           <div class='showForm'><label>1. กิจกรรมการดูแล (เลือกได้มากกว่า 1 ตัวเลือก)</label><br>
             <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i=1; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>การจัดการอาการด้วย Morphine</label></div>
@@ -83,7 +83,7 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-12">
           <label>การวางแผนดูแลล่วงหน้า</label>
         </div>
-        
+
         <div class="form-group col-lg-12">
           <div class='showForm'><label>2. การพูดคุยเรื่องสถานที่ดูแล</label><br>
             <div class='radio-inline'><label><input type='radio' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='1' ? 'checked' : ''; ?> value='1'>บ้าน</label></div>
@@ -171,14 +171,15 @@ if($dbarr['ptid']){
               </div>
               </div><hr>
         </div>
-            
-            
+
+            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
             <div class="form-group col-lg-6">
                 <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
                 <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
+            <?php } ?>
 
         </div>
         </form>
@@ -186,7 +187,7 @@ if($dbarr['ptid']){
     </div>
   </div>
 
-   
+
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
@@ -208,11 +209,11 @@ if($dbarr['ptid']){
                     }
                 },
                 error : function(xhr, statusText, error) {
-                    
+
                 }
         });
     }
-    
+
 function popup_save(ptid) {
 
 	dialogPopWindow = BootstrapDialog.show({
@@ -221,11 +222,11 @@ function popup_save(ptid) {
 		size:'size-wide',
 		draggable: false,
 		message: '<hr><h1 class="text-center"><b<span class="fa fa-check-circle"></span> บันทึกข้อมูลเรียบร้อย</b></h1><div class="form-group"><hr><div class="col-md-12"><a role="button" href="../emr/?ptid='+ptid+'" class="btn btn-lg btn-primary btn-block"><li class="fa fa-book"></li> ไปที่หน้า EMR</a></div></div>&nbsp;',
-		onshown: function(dialogRef){ 
+		onshown: function(dialogRef){
             $("#ezfrom").select2();
             //(".select2-input").attr("id","ezfrom");
 		},
-		onhidden: function(dialogRef){ 
+		onhidden: function(dialogRef){
 			//alert('onhidden');
 		}
 	});
@@ -233,5 +234,5 @@ function popup_save(ptid) {
 
 </script>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
