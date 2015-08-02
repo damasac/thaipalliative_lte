@@ -456,7 +456,7 @@ if ($yy != 543) {
               </div><hr>
             </div>
 
-            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
+            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']|($_GET['insert']==1)) { ?>
             <div class="form-group col-lg-6">
                 <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
