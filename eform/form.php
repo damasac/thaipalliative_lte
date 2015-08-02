@@ -94,7 +94,7 @@ include_once("function/function_eform.php");
 			<input type="hidden" name="useradd" id="useradd" value="<?php echo $useradd;?>">
 			<input type="hidden" name="tablename" id="tablename" value="<?php echo $dataFormMain["tablename"];?>">
 			<input type="hidden" name="formid" id="formid" value="<?php echo $dataFormMain["formid"];?>">
-			<input type="submit" class="btn btn-primary" value="ส่งข้อมูล" >
+			<!--<input type="submit" class="btn btn-primary" value="ส่งข้อมูล" >-->
                     </form>
 		
                 </div>

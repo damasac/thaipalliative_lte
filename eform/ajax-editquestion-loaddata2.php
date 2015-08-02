@@ -54,14 +54,11 @@
 						<option value="text" selected>Text</option>
 						<option value="heading">Heading Text</option>
 						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox" >Multiple choice</option>
-						<option value="checkbox" >Checkbox</option>
 						<option value="select" >Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-					    </select>
+						</select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -128,14 +125,11 @@
 						<option value="text" >Text</option>
 						<option value="heading">Heading Text</option>
 						<option value="textarea" selected >Paragraph text</option>
-						<option value="radiobox" >Multiple choice</option>
-						<option value="checkbox" >Checkbox</option>
 						<option value="select" >Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-					    </select>
+					 </select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -202,15 +196,12 @@
 						<option value="text" >Text</option>
 						<option value="heading">Heading Text</option>
 						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox" selected>Multiple choice</option>
-						<option value="checkbox" >Checkbox</option>
+                                                <option value="radiobox" selected>Multiple choice</option>
 						<option value="select" >Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-
-					    </select>
+                                            </select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -306,7 +297,7 @@
 					    <input type="text" class="form-control" id="helpQuestion2" value="<?php  echo $dataField["fieldhelp"]?>">
 					</div>
 				    </div><br>
-				    <div class="row">
+<!--				    <div class="row">
 					<div class="col-lg-2">
 					    <p>ประเภทคำถาม</p>
 					</div>
@@ -325,7 +316,8 @@
 						<option value="dbthailand">Province/ District/ Subdistrict</option>
 					    </select>
 					</div>
-				    </div>
+				    </div>-->
+                                    <input type='hidden' id='typeQuestion2' name="typeQuestion2" value="<?php echo $dataField["fieldtype"];?>">
 				    <div class="row"  id="exampleEform">
 					<br>
 					<div class="col-lg-6 col-lg-offset-2" >
@@ -421,15 +413,13 @@
 						<option value="0" >- กรุณาเลือกประเภทคำถาม -</option>
 						<option value="text" >Text</option>
 						<option value="heading">Heading Text</option>
+						<option value="radiobox" >Multiple choice</option>
 						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox">Multiple choice</option>
-						<option value="checkbox">Checkbox</option>
 						<option value="select" selected>Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-					    </select>
+					</select>
 					</div>
 				    </div>
 				    <br>
@@ -515,15 +505,12 @@
 						<option value="0" >- กรุณาเลือกประเภทคำถาม -</option>
 						<option value="text" >Text</option>
 						<option value="heading">Heading Text</option>
-						<option value="textarea" >Paragraph text</option>
 						<option value="radiobox">Multiple choice</option>
-						<option value="checkbox">Checkbox</option>
 						<option value="select">Choose from list</option>
 						<option value="date" selected>Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-					    </select>
+                                            </select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -603,14 +590,11 @@
 						<option value="0" >- กรุณาเลือกประเภทคำถาม -</option>
 						<option value="text" >Text</option>
 						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox">Multiple choice</option>
-						<option value="checkbox">Checkbox</option>
 						<option value="select">Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time" selected>Time</option>
 						<option value="datetime">Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-					    </select>
+                                            </select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -683,15 +667,11 @@
 						<option value="text" >Text</option>
 						<option value="heading">Heading Text</option>
 						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox">Multiple choice</option>
-						<option value="checkbox">Checkbox</option>
 						<option value="select">Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>
 						<option value="datetime" selected>Date & Time</option>
-						<option value="dbthailand">Province/ District/ Subdistrict</option>
-						
-					    </select>
+                                            </select>
 					</div>
 				    </div>
 				    <div class="row">
@@ -752,26 +732,7 @@
 					    <input type="text" class="form-control" id="helpQuestion2" value="<?php echo $dataField["fieldhelp"]?>">
 					</div>
 				    </div><br>
-				    <div class="row">
-					<div class="col-lg-2">
-					    <p>ประเภทคำถาม</p>
-					</div>
-					<div class="col-lg-4">
-					    <select class="form-control" id="typeQuestion2" onchange="selectTypeQuestion($(this).val());">
-						<option value="0" >- กรุณาเลือกประเภทคำถาม -</option>
-						<option value="text" >Text</option>
-						<option value="heading">Heading Text</option>
-						<option value="textarea" >Paragraph text</option>
-						<option value="radiobox">Multiple choice</option>
-						<option value="checkbox">Checkbox</option>
-						<option value="select">Choose from list</option>
-						<option value="date">Date</option>
-						<option value="time">Time</option>
-						<option value="datetime" >Date & Time</option>
-						<option value="dbthailand" selected>Province/ District/ Subdistrict</option>
-					    </select>
-					</div>
-				    </div>
+                                    <input type='hidden' id='typeQuestion2' name="typeQuestion2" value="<?php echo $dataField["fieldtype"];?>">
 				    <div class="row">
 					<br>
 					<div id="exampleEform">

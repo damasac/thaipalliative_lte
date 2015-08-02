@@ -75,27 +75,36 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-8">
           <label>1. วันที่เข้ารับการรักษาตัว: </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-8">
           <label>2. วันที่ปรึกษา: </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
           <label>3. หอผู้ป่วยที่ปรึกษา: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type="text" 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
           <label>4. วันที่จำหน่ายออก</label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
           <label>5. วันที่ส่งต่อ</label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -108,21 +117,80 @@ if($dbarr['ptid']){
      <div class="form-group col-lg-12">
           <label>6. โรงพยาบาลที่ส่งต่อ </label>
             <div class="row">
-              <div class="col-lg-8">
+              <div class="col-lg-12">
                 โรงพยาบาล<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
               </div>
-              <div class="col-lg-4">
-                ตำบล่<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
+        <div class="form-group col-lg-12">
+            <div class="row">
+               <div class="col-lg-3">
+     ตำบล<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" required id="tambonSelect">
+<?php
+     if ($dbarr['tambon'] != "") {
+?>
+          <option value="<?php echo $dbarr['tambon'];?>">
+<?php
+     $sql="select DISTRICT_NAME from const_district where DISTRICT_CODE like '{$dbarr['tambon']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $tambon = $res2->fetch_array();
+    echo $tambon['DISTRICT_NAME'];
+?>
+          </option>
+<?php
+     }else{
+?>
+          <option value="0">- ค้นจากชื่อตำบล -</option>
+<?php
+     }
+?>
+
+     </select>
               </div>
-              <div class="col-lg-4">
-                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
+
+               <div class="col-lg-3">
+                อำเภอ<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" id="amphurSelect" class="form-control" readonly=true required>
+<?php
+     if ($dbarr['ampur'] != "") {
+?>
+          <option value="<?php echo $dbarr['ampur'];?>">
+<?php
+
+     $sql="select AMPHUR_NAME from const_amphur where AMPHUR_CODE like '{$dbarr['ampur']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $amphur = $res2->fetch_array();
+    echo $amphur['AMPHUR_NAME'];
+?>
+          </option>
+<?php
+     }
+?>
+                </select>
               </div>
-               <div class="col-lg-4">
-                จังหวัด<select type="dropdown" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control"></select>
+              <div class="col-lg-3">
+                จังหวัด<select type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="provinceSelect" class="form-control" readonly=true required>
+<?php
+     if ($dbarr['changwat'] != "") {
+?>
+          <option value="<?php echo $dbarr['changwat'];?>">
+<?php
+
+     $sql="select PROVINCE_NAME from const_province where PROVINCE_CODE like '{$dbarr['changwat']}'";
+    $res2 = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
+    $amphur = $res2->fetch_array();
+    echo $amphur['PROVINCE_NAME'];
+?>
+          </option>
+<?php
+     }
+?>
+                </select>
+              </div>
+              <div class="col-lg-3">
+                รหัสไปรษณีย์<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" id="postcodeSelect" class="form-control">
               </div>
             </div>
         </div>
-
+        </div>
+          <div class='row'>
         <div class="form-group col-lg-12">
           <div class='showForm'><label>7. แผนกแพทย์ที่ขอปรึกษา</label><br>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='1' ? 'checked' : ''; ?> value='1'>&nbsp;&nbsp;อายุ</label></div>
@@ -133,8 +201,9 @@ if($dbarr['ptid']){
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='6' ? 'checked' : ''; ?> value='6'>&nbsp;&nbsp;ศัลย์</label></div>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='7' ? 'checked' : ''; ?> value='7'>&nbsp;&nbsp;โสตฯ</label></div>
           <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='8' ? 'checked' : ''; ?> value='8'>&nbsp;&nbsp;OPD</label></div>
-          <div class='checkbox-inline'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='9' ? 'checked' : ''; ?> value='9'>&nbsp;&nbsp;อื่นๆ</label>&nbsp;&nbsp;
-            <input type='text' class='' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>"/></div></div>
+          <div class='checkbox'><label><input type='checkbox' name="<?php $i++; echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i] =='9' ? 'checked' : ''; ?> value='9'>&nbsp;&nbsp;อื่นๆ</label>&nbsp;&nbsp;
+          <input type='text' class='' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>"/></div></div>
+          
         </div>
 
         <div class="form-group col-lg-12">
@@ -164,17 +233,22 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <label>วันที่/เดือน/ปี (พ.ศ.) </label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type="text" 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
           <label>ประวัติการเจ็บป่วย </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type="text" 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -184,7 +258,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -194,7 +271,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -204,7 +284,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text'
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -214,7 +297,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -224,7 +310,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -234,7 +323,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -244,7 +336,10 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี (พ.ศ.) </label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-8">
@@ -258,7 +353,8 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <label>วันที่/เดือน/ปี</label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -274,7 +370,9 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -290,7 +388,9 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -306,7 +406,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
         <!--   <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' data-type='date'  name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -322,7 +422,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' data-type='date'  name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -338,7 +438,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
+          <input type='text' data-type='date'  name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" >
         </div>
 
         <div class="form-group col-lg-4">
@@ -818,7 +918,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <label>วันที่/เดือน/ปี</label>
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -834,7 +934,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -850,7 +950,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -866,7 +966,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
         <!--   <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -882,7 +982,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -898,7 +998,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -913,7 +1013,7 @@ if($dbarr['ptid']){
 
            <div class="form-group col-lg-4">
         <!--   <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -929,7 +1029,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
           <!-- <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -945,7 +1045,7 @@ if($dbarr['ptid']){
 
         <div class="form-group col-lg-4">
          <!--  <label>วันที่/เดือน/ปี</label> -->
-          <input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
+          <input type='text'  data-type='date' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-4">
@@ -968,7 +1068,7 @@ if($dbarr['ptid']){
                 รหัสที่ได้จากระบบ<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                Date<input type="date" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                Date<input type='text' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo date('Y-m-d H:i:s'); ?>">
               </div>
               </div><hr>
             </div>
@@ -981,7 +1081,7 @@ if($dbarr['ptid']){
                 <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
             <?php } ?>
-
+          </div>
 
    </div>
 
@@ -998,11 +1098,14 @@ if($dbarr['ptid']){
 <script src="../_plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-
+<!--<script src="../_plugins/datepicker-th/bootstrap-datepicker.js" type="text/javascript"></script>-->
+<!--<script src="../_plugins/datepicker-th/locales/bootstrap-datepicker.th.js" type="text/javascript"></script>-->
+<!--<script src="../_plugins/datepicker-th/bootstrap-datepicker-thai.js" type="text/javascript"></script>-->
+<!--<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">-->
 <script src="../_plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
-<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
-<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -1053,7 +1156,58 @@ function popup_save(ptid) {
 }
 
 </script>
+<!--Query province amphur tambon By Ball-->
+<script>
+  $("[data-type='date']").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
 
+    $("#tambonSelect").select2({
+        ajax: {
+        url: "ajax-area-loaddata.php?task=getaddress",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, page) {
+          // parse the results into the format expected by Select2.
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data
+//          console.log(data);
+          return {
+            results: data.items
+          };
+        },
+        cache: true
+      },
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 1,
+    //  templateResult: formatRepo, // omitted for brevity, see the source of this page
+    //  templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+
+          //code
+          $("#tambonSelect").on("change",function(){
+              var tambon = $("#tambonSelect").val();
+              var tambontext = $("#tambonSelect option:selected").text();
+              var splittambon = tambontext.split(" : ");
+              var tambontext = splittambon[0];
+              var splittambon2 = tambontext.split(".");
+              var tambontext2 = splittambon2[1];
+              console.log(tambontext);
+               $(".select2-chosen").html("<option >"+tambontext2+"</option");
+               $.getJSON("ajax-area-loaddata.php?task=getaddress2&tambon="+tambon+"",function(result){
+                       $.each(result, function(i, field){
+                              $("#provinceSelect").html("<option value="+field.PROVINCE_CODE+">"+field.PROVINCE_NAME+"</option>");
+                              $("#amphurSelect").html("<option value="+field.AMPHUR_CODE+">"+field.AMPHUR_NAME+"</option>");
+                              $("#postcodeSelect").attr("value",field.POSTCODE);
+                       });
+               });
+          });
+
+</script>
 <?php eb();?>
 
 <?php render($MasterPage);?>

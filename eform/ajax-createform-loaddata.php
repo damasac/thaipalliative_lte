@@ -1,8 +1,11 @@
 <?php
    include "../_connection/db_sql.php";
+   include "/function/function_genid.php";
+    
    error_reporting(0);
    $task = $_GET["task"];
-   $id =  $_POST["id"];
+   $id = $_POST["id"];
+   $genid = getMillisecTime();
    $field = $_POST["field"];
    $value = $_POST["val"];
    $formid = mysqli_real_escape_string($con,$_POST["formid"]);
@@ -48,7 +51,7 @@
    }
  if($_GET["task"]=="createForm"){
     $sqlCreateDB = "
-      CREATE TABLE `tbdata_".$id."`(
+      CREATE TABLE `tbdata_".$genid."`(
          `id` int(11) NOT NULL,
          `rstat` int(11) DEFAULT NULL,
          `useradd` VARCHAR(50) DEFAULT  NULL,
@@ -60,12 +63,12 @@
     ";
     $datenow = date("Y-m-d H:i:s");
     $queryCreateDB = mysqli_query($con,$sqlCreateDB);
-    $sqlCreateForm = "INSERT INTO formmain(databaseid,formname,formdesc,tablename,pid,createdate,status_share,public_add,public_edit,public_delete)
-    VALUES('".$id."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$id."','".$useradd."','".$datenow."','0','1','1','1')";
+    $sqlCreateForm = "INSERT INTO formmain(formid,databaseid,formname,formdesc,tablename,pid,createdate,status_share,public_add,public_edit,public_delete)
+    VALUES('".$genid."','tbdata_".$genid."','ฟอร์มไม่มีชื่อ','คำอธิบายฟอร์ม','tbdata_".$genid."','".$useradd."','".$datenow."','0','1','1','1')";
  
     $queryCreateForm = mysqli_query($con,$sqlCreateForm) or die(mysqli_error()."$datenow");
     $sqlCreateFormId = mysqli_insert_id($con);
-    echo $sqlCreateFormId;
+    echo $genid;
     
  }
  if($task=="delDatabase"){
@@ -353,7 +356,7 @@
    if($_POST["choiceRadio"]!=""){
       $alter = mysqli_query($con,"ALTER TABLE `".$dbname."` ADD ".$fieldvalue." VARCHAR(50)");
       $sqlDeleteRadio = mysqli_query($con,"DELETE FROM `formchoice` WHERE fieldid='".$_POST["fieldid"]."' ");
-      
+
       $valueRadio = $_POST["choiceRadio"][0];
       $labelRadio = $_POST["choiceRadio"][1];
       $etcRadio = $_POST["choiceRadio"][2];

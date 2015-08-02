@@ -216,7 +216,9 @@ if ($yy != 543) {
 
         <div class="form-group col-lg-8">
           <label>2. วันที่ลงทะเบียน: </label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo str_replace("0000-00-00","",substr($dbarr[$i],0,10)); ?>">
+          <input type="text" 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php $dbarr[$i]; ?>">
         </div>
 
         <div class="form-group col-lg-12">
@@ -226,7 +228,9 @@ if ($yy != 543) {
 
         <div class="form-group col-lg-10">
           <label>4. วันเดือนปีเกิด</label>
-          <input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo str_replace("0000-00-00","",$dbarr[$i]); ?>" onchange="calAge(this);" required>
+          <input type="text" 
+                 data-type='date' 
+                 name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo str_replace("0000-00-00","",$dbarr[$i]); ?>" onchange="calAge(this);" required>
         </div>
 
         <div class="form-group col-lg-2">
@@ -283,20 +287,21 @@ if ($yy != 543) {
         <div class="form-group col-lg-12">
           <label>11. </label>
             <div class="row">
+                
               <div class="col-lg-2">
-                บ้านเลขที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                บ้านเลขที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-2">
-                หมู่ที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                หมู่ที่<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
                <div class="col-lg-2">
-                หมู่บ้าน<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                หมู่บ้าน<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
                <div class="col-lg-3">
-                ซอย<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                ซอย<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
                <div class="col-lg-3">
-                ถนน<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" class="form-control">
+                ถนน<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
             </div>
         </div>
@@ -378,10 +383,10 @@ if ($yy != 543) {
                 หมายเลขโทรศัพท์ 1.<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                หมายเลขโทรศัพท์ 2.<input type="text" name="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+                หมายเลขโทรศัพท์ 2.<input type="text" name="<?php $i++;echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               <div class="col-lg-4">
-                หมายเลขโทรศัพท์ 3.<input type="text" name="<?php echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+                หมายเลขโทรศัพท์ 3.<input type="text" name="<?php $i++;echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
               </div>
               </div>
             </div>
@@ -418,8 +423,9 @@ if ($yy != 543) {
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='4' ? 'checked' : ''; ?> value='4'>&nbsp;&nbsp;รับจ้าง</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='5' ? 'checked' : ''; ?> value='5'>&nbsp;&nbsp;เกษตรกร</label></div>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='6' ? 'checked' : ''; ?> value='6'>&nbsp;&nbsp;นักบวช</label></div>
+            <br>
             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='7' ? 'checked' : ''; ?> value='7'>&nbsp;&nbsp;ไม่ได้ประกอบอาชีพ</label></div><br>
-             <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='8' ? 'checked' : ''; ?> value='8'>&nbsp;&nbsp;อื่นๆ</label>&nbsp;&nbsp;
+            <div class='radio-inline'><label><input type='radio' name="<?php echo $fields[$i]->name;?>" id="<?php echo $fields[$i]->name;?>" <?php echo $dbarr[$i]  =='8' ? 'checked' : ''; ?> value='8'>&nbsp;&nbsp;อื่นๆ</label>&nbsp;&nbsp;
             <input type='text' class='' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php echo $fields[$i]->name;?>' value='<?php echo $dbarr[$i]; ?>'/></div>
           </div>
         </div>
@@ -444,14 +450,14 @@ if ($yy != 543) {
             <div class="form-group col-lg-12">
               <label></label>
             <div class="row">
-              <div class="col-lg-4">
-                Form completed by<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+                <?php 
+                ?>
+              <div class="col-lg-6">
+                  Form completed by<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $_SESSION["tpc_puser_username"]; ?>" class="form-control" readonly=""> 
               </div>
+                <input type='hidden' name='<?php $i++; echo $fields[$i]->name;?>' id='<?php $i++; echo $fields[$i]->name;?>'>
               <div class="col-lg-4">
-                รหัสที่ได้จากระบบ<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
-              </div>
-              <div class="col-lg-4">
-                Date<input type="date" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+                Date<input type='text' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo date('Y-m-d H:i:s'); ?>">
               </div>
               </div><hr>
             </div>
@@ -481,11 +487,14 @@ if ($yy != 543) {
 <script src="../_plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-
+<!--<script src="../_plugins/datepicker-th/bootstrap-datepicker.js" type="text/javascript"></script>-->
+<!--<script src="../_plugins/datepicker-th/locales/bootstrap-datepicker.th.js" type="text/javascript"></script>-->
+<!--<script src="../_plugins/datepicker-th/bootstrap-datepicker-thai.js" type="text/javascript"></script>-->
+<!--<link rel="stylesheet" href="../_plugins/datepicker-th/datepicker.css">-->
 <script src="../_plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
-<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
-<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
   $('input').iCheck({
@@ -493,9 +502,7 @@ $(document).ready(function(){
      radioClass: 'iradio_minimal-blue',
      increaseArea: '20%' // optional
   });
-  $("#createdate").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
-  $("#birth").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
-
+  $("[data-type='date']").inputmask("d/m/9999", {"placeholder": "dd/mm/yyyy"});
 });
 </script>
 <script>
@@ -542,23 +549,35 @@ function popup_save(ptid) {
 <!--Query province amphur tambon By Ball-->
 <script>
 
-     $("#tambonSelect").select2();
-     $(function(){
-          $(".select2-input").attr("id","textSearch");
-      $("#textSearch").on('keyup', function(e){
-          if (e.keyCode>3) {
-            var txtSearch = $(this).val();
-               $.getJSON("ajax-area-loaddata.php?task=getaddress&txtSearch="+txtSearch+"",function(result){
-                    console.log(result);
-                       $("#tambonSelect").html("<option value='0'>- ค้นหาตำบล -</option>");
-                       $.each(result, function(i, field){
-                             $("#tambonSelect").append("<option value="+field.DISTRICT_CODE+" >ต. "+field.DISTRICT_NAME+" : อ."+field.AMPHUR_NAME+" : จ."+field.PROVINCE_NAME+"</option>");
 
-                       });
-                    });
-                 }
-             });
-         });
+    $("#tambonSelect").select2({
+        ajax: {
+        url: "ajax-area-loaddata.php?task=getaddress",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, page) {
+          // parse the results into the format expected by Select2.
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data
+//          console.log(data);
+          return {
+            results: data.items
+          };
+        },
+        cache: true
+      },
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 1,
+    //  templateResult: formatRepo, // omitted for brevity, see the source of this page
+    //  templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+
           //code
           $("#tambonSelect").on("change",function(){
               var tambon = $("#tambonSelect").val();

@@ -8,30 +8,26 @@
     $province = $_GET["province"];
     $tambon = $_GET["tambon"];
    if($task=="getaddress"){
-	
-	$sql = "SELECT  * FROM `const_district` WHERE `DISTRICT_NAME` LIKE '%".$txtSearch."%'  LIMIT 1,100";
-	
+        $q =  $_GET["q"];
+	$sql = "SELECT  * FROM `const_district` WHERE `DISTRICT_NAME` LIKE '%".$q."%'  LIMIT 0,100";
 	$query = $mysqli->query($sql);
-	
+        $i=0;
+        $json='';
 	while($data = $query->fetch_assoc()){
-	    $sql2 = "SELECT * FROM `const_province` WHERE `PROVINCE_ID` = '".$data["PROVINCE_ID"]."'  ";
-
-	    $query2 = $mysqli->query($sql2);
-	    $data2 = $query2->fetch_assoc();
-	    //array_push($data2["PROVINCE_NAME"],$data);
-	    $data['PROVINCE_NAME']=$data2['PROVINCE_NAME'];
-	    
-	    $sql2 = "SELECT * FROM `const_amphur` WHERE `AMPHUR_ID` = '".$data["AMPHUR_ID"]."'  ";
-
-	    $query2 = $mysqli->query($sql2);
-	    $data2 = $query2->fetch_assoc();
-	    //array_push($data2["PROVINCE_NAME"],$data);
-	    $data['AMPHUR_NAME']=$data2['AMPHUR_NAME'];
-	    
-	    $array[] = $data;
+            $district = substr($data["DISTRICT_CODE"],0,4);
+            $amphur = "SELECT * FROM `const_amphur` WHERE AMPHUR_CODE = '".$district."' ";
+            $queryAmphur = $mysqli->query($amphur);
+            $dataAmphur = $queryAmphur->fetch_assoc();
+            $province = substr($dataAmphur["AMPHUR_CODE"],0,2);
+            $sqlProvince = "SELECT * FROM const_province WHERE PROVINCE_CODE = '".$province."' ";
+            $queryProvicne = $mysqli->query($sqlProvince);
+            $dataProvince = $queryProvicne->fetch_assoc();
+            $json["items"][$i] = ['id'=>$data['DISTRICT_CODE'],
+                        'text'=>"ต. ".$data["DISTRICT_NAME"]." : อ. ".$dataAmphur["AMPHUR_NAME"]." : จ. ".$dataProvince["PROVINCE_NAME"]];
+            $i++;
 	}
-	//print_r($array);
-	print json_encode($array);
+
+	print json_encode($json);
    }
    if($task=="getaddress2"){
 	$amphursub = substr($tambon,0,4);

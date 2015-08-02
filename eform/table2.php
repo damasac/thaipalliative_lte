@@ -28,18 +28,18 @@
 	$MenuSetting="dataform";
 	include("inc_menu.php");
 	$sqlFormMain = "SELECT * FROM formmain WHERE formid='".$_GET["idFormMain"]."' ";
-	
+
 	$queryFormMain = mysqli_query($con,$sqlFormMain) or die(mysqli_error());
 	$dataFormMain = mysqli_fetch_assoc($queryFormMain);
 	$dataFormMain["status_share"];
-	if($dataFormMain["status_share"]==1 && $dataFormMain["public_view"]==1){
-	    $condition = "";
-	}else if($dataFormMain["public_view"]=="0"){
-	    $condition = "WHERE useradd='".$useradd."' ";
-	}
+            if($dataFormMain["status_share"]==1 && $dataFormMain["public_view"]==1){
+                $condition = "";
+            }else if($dataFormMain["public_view"]=="0"){
+                $condition = "WHERE useradd='".$useradd."' ";
+            }
 	//print_r($dataFormMain);
         $sqlColumn = "desc `".$dataFormMain["tablename"]."`";
-	
+
         $queryColumn = mysqli_query($con,$sqlColumn);
 	$numColumn = mysqli_num_rows($queryColumn) or die(mysqli_error());
 
