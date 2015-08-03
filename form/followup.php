@@ -69,9 +69,9 @@ if($dbarr['ptid']){
           <input type="text" readonly class="form-control" value="<?php echo $dbarr_reg['pid']; ?>">
         </div>
 
-        <div class="form-group col-lg-12">
-          <label>กิจกรรมการดูแล</label>
-        </div>
+<!--        <div class="form-group col-lg-12">
+            <label><h5>กิจกรรมการดูแล</h5></label><hr>
+        </div>-->
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>1. กิจกรรมการดูแล (เลือกได้มากกว่า 1 ตัวเลือก)</label><br>
@@ -80,9 +80,9 @@ if($dbarr['ptid']){
           </div>
         </div>
 
-        <div class="form-group col-lg-12">
+<!--        <div class="form-group col-lg-12">
           <label>การวางแผนดูแลล่วงหน้า</label>
-        </div>
+        </div>-->
 
         <div class="form-group col-lg-12">
           <div class='showForm'><label>2. การพูดคุยเรื่องสถานที่ดูแล</label><br>

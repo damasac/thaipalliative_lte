@@ -1,6 +1,6 @@
 <?php
-    error_reporting(0);
     session_start();
+    error_reporting(0);
     include "../_connection/db.php";
     $task = $_GET["task"];
     $username = $_POST["username"];
