@@ -79,7 +79,7 @@
         </select>
         </div>
         <?php }else {}?>
-        <?php if($_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==1){?>
+        <?php if($_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==1){?>
         <div class="col-lg-2">
         <?php
                     $sqlProvince = "SELECT * FROM `all_hospital_zone` WHERE zone_code='".$_SESSION["tpc_puser_area"]."' ";
@@ -95,7 +95,8 @@
         </select>
         </div>
         <?php }?>
-        <?php if($_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==1 || $_SESSION["tpc_puser_status"]==4){?>
+        <?php if($_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==1){?>
+        
         <div class="col-lg-3">
         <?php
                     $sqlHospital = "SELECT `hcode`,`name` FROM `all_hospital_thai` WHERE provincecode='".$_SESSION["tpc_puser_province"]."' ORDER BY hcode";
@@ -110,6 +111,9 @@
                 <?php }?>
             </select>
         </div>
+        <?php }?>
+        <?php if($_SESSION["tpc_puser_status"]==4){?>
+            <input type="hidden" id="hospital" name="hospital" value="<?php echo $_SESSION["tpc_puser_hcode"]?>">
         <?php }?>
     </div>
 </span>
@@ -201,9 +205,13 @@
     }
     $("#area").on("change",function(){
             $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
+            
             $("#hospital").select2();
+
         });
-    $("#hospital").select2();
+        <?php if($_SESSION["tpc_puser_status"]!="4"){?>
+            $("#hospital").select2();
+        <?php }?>
     function popup_custom(hcode) {
         var hcode = $("#hospital").val();
         var area = $("#area").val();
