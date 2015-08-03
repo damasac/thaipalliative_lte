@@ -1061,13 +1061,14 @@ if($dbarr['ptid']){
         <div class="form-group col-lg-12">
           <label></label>
             <div class="row">
-              <div class="col-lg-4">
-                Form completed by<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+              <div class="col-lg-6">
+                Form completed by<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $_SESSION["tpc_puser_username"]; ?>" class="form-control" readonly>
               </div>
-              <div class="col-lg-4">
-                รหัสที่ได้จากระบบ<input type="text" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
-              </div>
-              <div class="col-lg-4">
+              <!--<div class="col-lg-4">-->
+                  <!--รหัสที่ได้จากระบบ-->
+                  <input type="hidden" name="<?php $i++; echo $fields[$i]->name;?>" value="<?php echo $dbarr[$i]; ?>" class="form-control">
+              <!--</div>-->
+              <div class="col-lg-6">
                 Date<input type='text' name="<?php $i++; echo $fields[$i]->name;?>" class="form-control" id="<?php echo $fields[$i]->name;?>" value="<?php echo date('Y-m-d H:i:s'); ?>">
               </div>
               </div><hr>
