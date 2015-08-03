@@ -1,4 +1,5 @@
-<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php 
+require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Ez Form <?php eb();?>
 
@@ -105,9 +106,8 @@ $MenuSetting="manageform";
 						<option value="text" selected>Text</option>
 						<option value="heading">Heading Text</option>
 						<option value="textarea">Paragraph text</option>
-						<option value="radiobox">Multiple choice</option>
-						<option value="radiotextbox">Multiple text choice</option>
 						<option value="checkbox">Checkbox</option>
+						<option value="radiobox">Multiple choice</option>
 						<option value="select">Choose from list</option>
 						<option value="date">Date</option>
 						<option value="time">Time</option>

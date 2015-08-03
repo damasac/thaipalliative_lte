@@ -1074,14 +1074,14 @@ if($dbarr['ptid']){
               </div><hr>
             </div>
 
-            <?php if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
+            <?php //if($dbarr_reg['hospcode'] == $_SESSION['tpc_puser_hcode']) { ?>
             <div class="form-group col-lg-6">
                 <button type="submit" class="btn btn-block btn-success btn-lg">Submit</button>
             </div>
             <div class="form-group col-lg-6">
                 <button type="reset" class="btn btn-block btn-danger btn-lg">Cancel</button>
             </div>
-            <?php } ?>
+            <?php //} ?>
           </div>
 
    </div>

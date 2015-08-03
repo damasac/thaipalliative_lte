@@ -1,5 +1,6 @@
 <?php
     error_reporting(0);
+    session_start();
     include "../_connection/db.php";
     $task = $_GET["task"];
     $username = $_POST["username"];
@@ -65,7 +66,7 @@
             exit;
         }else{
     
-                $sql = "INSERT INTO `thaipalliative_lte`.`puser` (
+                $sql = "INSERT INTO `thaipalliative`.`puser` (
                 `username`,
                 `password`,
                 `email`,
@@ -96,7 +97,8 @@
                 );
         
                 ";
-       $query =   $mysqli->query($sql) or die(mysqli_error($mysqli));
+            $query =   $mysqli->query($sql) or die(mysqli_error($mysqli));
+             $_SESSION["tpc_puser_hcode"] = $_POST["site"];
             if($query){
              echo "0";
             }
@@ -126,7 +128,7 @@
             $password = sha1(md5($_POST["password"]));
         }
         $sqlUpdate = "
-        UPDATE `thaipalliative_lte`.`puser`
+        UPDATE `thaipalliative`.`puser`
         SET
          `username` = '".$username."',
          `password` = '".$password."',
@@ -144,7 +146,7 @@
         ";
         $queryUpdate = $mysqli->query($sqlUpdate);
         if($queryUpdate==1){
-            //echo $sqlUpdate;
+            $_SESSION["tpc_puser_hcode"] = $site;
             echo "0";
             exit;
         }

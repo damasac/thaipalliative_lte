@@ -61,7 +61,6 @@
 </div>
 </div>
 </div>
-<?php echo $status;?>
 <div class="row">
     <div class="col-lg-12">
       <div class="form-group">
@@ -75,16 +74,14 @@
               <option value="4">Admin Site</option>
               <option value="5">User Site</option>
              
-              <?php }if($status==2) {?>
+              <?php }else if($status==2) {?>
               <option value="3">Admin Province</option>
               <option value="4">Admin Site</option>
               <option value="5">User Site</option>
-              <?php }?>
-              <?php if($status==3){?>
+              <?php }else if($status==3){?>
               <option value="4">Admin Site</option>
               <option value="5">User Site</option>
-              <?php }?>
-              <?php if($stauts==4){?>
+              <?php }else{?>
               <option value="5">User Site</option>
               <?php }?>
           </select>
