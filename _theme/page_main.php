@@ -21,7 +21,7 @@
     <!--Page Load Progress Bar [ OPTIONAL ]-->
 	<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/pace/pace.css" rel="stylesheet">
 	<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/pace/pace.js"></script>
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -246,22 +246,28 @@
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-		  
+
             <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><i class='fa fa-home'></i> <span>Home</span></a></li>
             <li>
               <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>patient_register">
-              <i class='fa fa-life-bouy'></i> 
+              <i class='fa fa-life-bouy'></i>
                 <span>การให้บริการ</span>
               </a>
             </li>
             <li>
+              <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>map">
+              <i class='fa fa-globe'></i>
+                <span>แผนที่</span>
+              </a>
+            </li>
+            <li>
               <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>report">
-              <i class='fa fa-book'></i> 
+              <i class='fa fa-book'></i>
                 <span>รายงาน</span>
               </a>
-            </li>	    
+            </li>
             <!--<li class="treeview">
               <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
@@ -269,24 +275,24 @@
                 <li><a href="#">Link in level 2</a></li>
               </ul>
             </li>-->
-            
+
             <li class="header">Setting Menu</li>
             <!-- Optionally, you can add icons to the links -->
 	    <?php if($_SESSION["tpc_puser_status"]!=5){?>
             <li ><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn"><i class='fa fa-gear'></i> <span>User Management</span></a></li>
 	    <?php }?>
 	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>eform"><i class='fa fa-file-o'></i> <span>Ez Form</span></a></li>
-         
+
 	   <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><i class='fa fa-sign-out'></i> <span>Logout</span></a></li>
 
-            
+
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">	
+      <div class="content-wrapper">
       <section class="content-header">
         {$content_header}
       </section>
@@ -294,9 +300,9 @@
 		{$content}
 	</section>
       </div><!-- /.content-wrapper -->
-      
-      <!-- Control Sidebar -->      
-      <aside class="control-sidebar control-sidebar-dark">                
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
           <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -316,29 +322,29 @@
                     <p>Will be 23 on April 24th</p>
                   </div>
                 </a>
-              </li>              
+              </li>
             </ul><!-- /.control-sidebar-menu -->
 
-            <h3 class="control-sidebar-heading">Tasks Progress</h3> 
+            <h3 class="control-sidebar-heading">Tasks Progress</h3>
             <ul class='control-sidebar-menu'>
               <li>
-                <a href='javascript::;'>               
+                <a href='javascript::;'>
                   <h4 class="control-sidebar-subheading">
                     Custom Template Design
                     <span class="label label-danger pull-right">70%</span>
                   </h4>
                   <div class="progress progress-xxs">
                     <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                  </div>                                    
+                  </div>
                 </a>
-              </li>                         
-            </ul><!-- /.control-sidebar-menu -->         
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
 
           </div><!-- /.tab-pane -->
           <!-- Stats tab content -->
           <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
           <!-- Settings tab content -->
-          <div class="tab-pane" id="control-sidebar-settings-tab">            
+          <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
               <h3 class="control-sidebar-heading">General Settings</h3>
               <div class="form-group">
@@ -364,7 +370,7 @@
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery Validation -->
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQueryValidate/jquery.validate.js"></script>    
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQueryValidate/jquery.validate.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
