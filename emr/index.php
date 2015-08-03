@@ -165,7 +165,7 @@
         
         <div class="pull-right">
             <div class="btn-group">
-                <button type="button" class="btn btn-lg btn-danger"><span class="fa fa-plus-circle"></span>  EZ-Form</button>
+                <button type="button" class="btn btn-lg btn-danger" onclick="location.href='../eform/'"><span class="fa fa-plus-circle"></span>  EZ-Form</button>
                 <button type="button" class="btn btn-lg btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <span class="caret"></span>
                   <span class="sr-only">Toggle Dropdown</span>
